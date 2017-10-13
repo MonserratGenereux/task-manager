@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+message Habit {
+  string id = 1;
+}

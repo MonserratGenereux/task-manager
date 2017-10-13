@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Task Manager backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ISC-ITESM-GDA/task-manager.git"
+  },
+  "keywords": [
+    "task",
+    "manager",
+    "backend"
+  ],
+  "author": "Diego Toledo, Fernanda Lopez, Monserrat Sanches, Toatzin Padilla, Victor Garcia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ISC-ITESM-GDA/task-manager/issues"
+  },
+  "homepage": "https://github.com/ISC-ITESM-GDA/task-manager#readme"
+}
