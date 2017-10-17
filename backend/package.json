@@ -2,8 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Task Manager backend",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/ISC-ITESM-GDA/task-manager/issues"
   },
-  "homepage": "https://github.com/ISC-ITESM-GDA/task-manager#readme"
+  "homepage": "https://github.com/ISC-ITESM-GDA/task-manager#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "http-status-codes": "^1.3.0",
+    "swagger-jsdoc": "^1.9.7",
+    "swagger-ui-express": "^2.0.8"
+  }
 }
