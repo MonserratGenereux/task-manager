@@ -26,7 +26,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         type: string
  *     responses:
  *       200:
- *         description: user id
+ *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/account"
  *       400:
  *         description: invalid username
  */
@@ -47,19 +49,15 @@ router.get('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: username
- *         description: Username to use for login.
+ *       - name: account
+ *         description: Account information
  *         in: body
  *         required: true
- *         type: string
- *       - name: password
- *         description: User's password.
- *         in: body
- *         required: true
- *         type: string
+ *         schema:
+ *           $ref: "#/definitions/account"
  *     responses:
  *       200:
- *         description: user created
+ *         description: OK
  *       500:
  *         description: server error
  */
@@ -80,16 +78,12 @@ router.post('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: username
- *         description: Username to use for login.
+ *       - name: account
+ *         description: Account information
  *         in: body
  *         required: true
- *         type: string
- *       - name: password
- *         description: User's password.
- *         in: body
- *         required: true
- *         type: string
+ *         schema:
+ *           $ref: "#/definitions/account"
  *     responses:
  *       200:
  *         description: user created
@@ -113,8 +107,8 @@ router.patch('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: username
- *         description: Username of the account to delete
+ *       - name: id
+ *         description: Id of the account to be deleted
  *         in: body
  *         required: true
  *         type: string

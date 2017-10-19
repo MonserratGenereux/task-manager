@@ -1,5 +1,7 @@
 const swaggerJSDoc = require('swagger-jsdoc');
 
+const schemaDefinitions = require('../schemas');
+
 const swaggerDefinition = {
   info: {
     title: 'Task Manager',
@@ -11,6 +13,7 @@ const swaggerDefinition = {
   ],
   host: 'localhost:3000',
   basePath: '/',
+  definitions: schemaDefinitions,
   tags: [
     { name: 'account', description: 'Operations about your User accounts' },
     { name: 'habit', description: 'Everything about habits' },
