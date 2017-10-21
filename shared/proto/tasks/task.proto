@@ -1,5 +1,39 @@
 syntax = "proto3";
 
-message Task {
-  string id = 1;
+service Tasks{
+  rpc GetTsks (emptyInput) returns (TasksResponse) {}
+  rpc CreateTask (InputTask) returns (OutputTask) {}
+  rpc DeleteTask (taskId) returns (response) {}
+  rpc GetTaskById (taskId) returns (OutputTask) {}
+  rpc UpdateTask (taskId) returns (OutputTask) {}
 }
+
+message OutputTask {
+    string  id = 1;
+    string  name = 2;
+    int32  type = 3;
+    int32  difficulty = 4;
+    float   score = 5;
+}
+
+message InputTask {
+    string  name = 1;
+    int32  type = 2;
+    int32  difficulty = 3;
+}
+
+message TasksResponse{
+    repeated OutputTask tasks = 1;
+}
+
+message taskId{
+    string id = 1;
+}
+
+message response{
+    string message = 1;
+}
+
+message emptyInput{
+    string input = 1;
+ }
