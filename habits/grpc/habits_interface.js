@@ -1,5 +1,5 @@
-var PROTO_PATH = __dirname + '/habits.proto';
-
+const PROTO_PATH = __dirname + '/habits.proto';
+const GRPC_PORT = '0.0.0.0:50051';
 var grpc = require('grpc');
 var habits_proto = grpc.load(PROTO_PATH).habits;
 
@@ -39,7 +39,7 @@ function main() {
                             getHabitById:getHabitById,
                             updateHabit:updateHabit
                         });
-  server.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
+  server.bind(GRPC_PORT, grpc.ServerCredentials.createInsecure());
   server.start();
 }
 
