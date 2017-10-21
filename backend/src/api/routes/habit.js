@@ -24,7 +24,12 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         type: string
  *     responses:
  *       200:
- *         description: list of habits
+ *         description: OK
+ *         schema:
+ *           type: "array"
+ *           items: {
+ *              $ref: "#/definitions/habit"
+ *           }
  *       400:
  *         description: invalid username
  */
@@ -43,14 +48,21 @@ router.get('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user Id
  *         description: id of the user
  *         in: header
  *         required: true
  *         type: string
+ *       - name: habitId
+ *         description: id of the habit
+ *         in: path
+ *         required: true
+ *         type: string
  *     responses:
  *       200:
- *         description: single habit
+ *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/habit"
  *       400:
  *         description: invalid habit
  */
@@ -78,12 +90,13 @@ router.get('/:habitId', (req, res) => {
  *         description: info of the newly create habit
  *         in: body
  *         required: true
- *         type: object
+ *         schema:
+ *           $ref: "#/definitions/habit"
  *     responses:
  *       200:
- *         description: single habit
+ *         description: OK
  *       400:
- *         description: invalid username
+ *         description: server error
  */
 router.post('/', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
@@ -109,12 +122,13 @@ router.post('/', (req, res) => {
  *         description: info of the habit to modify
  *         in: body
  *         required: true
- *         type: object
+ *         schema:
+ *           $ref: "#/definitions/habit"
  *     responses:
  *       200:
- *         description: single habit
+ *         description: habit created
  *       400:
- *         description: invalid username
+ *         description: server error
  */
 router.patch('/', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
@@ -143,9 +157,9 @@ router.patch('/', (req, res) => {
  *         type: string
  *     responses:
  *       200:
- *         description: single habit
+ *         description: habit deleted
  *       400:
- *         description: invalid username
+ *         description: server error
  */
 router.delete('/', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
@@ -174,9 +188,9 @@ router.delete('/', (req, res) => {
  *         type: string
  *     responses:
  *       200:
- *         description: single habit
+ *         description: OK
  *       400:
- *         description: invalid username
+ *         description: server error
  */
 router.post('/done', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
