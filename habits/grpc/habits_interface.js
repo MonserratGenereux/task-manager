@@ -1,13 +1,14 @@
-const PROTO_PATH = __dirname + '/habits.proto';
+const path = require('path');
 const GRPC_PORT = '0.0.0.0:50051';
+var PROTO_PATH = path.join(__dirname, '/../../shared/proto/habits/habit.proto');
 var grpc = require('grpc');
 var habits_proto = grpc.load(PROTO_PATH).habits;
 
-var getHabitsHandler = require('./../src/get-habits.js');
-var createHabitHandler = require('./../src/create-habits.js');
-var deleteHabitHandler = require('./../src/delete-habits.js');
-var getHabitByIdHandler = require('./../src/get-by-id-habits.js');
-var updateHabitHandler = require('./../src/update-habits.js');
+var getHabitsHandler =      require('./../src/get-habits.js');
+var createHabitHandler =    require('./../src/create-habits.js');
+var deleteHabitHandler =    require('./../src/delete-habits.js');
+var getHabitByIdHandler =   require('./../src/get-by-id-habits.js');
+var updateHabitHandler =    require('./../src/update-habits.js');
 
 //rpc GetHabits (emptyInput) returns (HabitsResponse)
 function getHabits(call, callback) {
