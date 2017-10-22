@@ -19,9 +19,8 @@ message OutputTask {
 }
 
 message InputTask {
-    string  name = 1;
-    string  dueDate = 6;
-    bool    completed = 7;
+    string  id = 1;
+    string  name = 2;
 }
 
 message TaskResponse{
