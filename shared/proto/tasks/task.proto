@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 service Tasks{
-  rpc GetTsks (emptyInput) returns (TasksResponse) {}
+  rpc GetTask (emptyInput) returns (TaskResponse) {}
   rpc CreateTask (InputTask) returns (OutputTask) {}
   rpc DeleteTask (taskId) returns (response) {}
   rpc GetTaskById (taskId) returns (OutputTask) {}
@@ -11,18 +11,20 @@ service Tasks{
 message OutputTask {
     string  id = 1;
     string  name = 2;
-    int32  type = 3;
-    int32  difficulty = 4;
-    float   score = 5;
+    string  created = 3;
+    string  completedOnTime = 4;
+    string  completedBeforeTime = 5;
+    string   dueDate = 6;
+    bool    completed = 7;
 }
 
 message InputTask {
     string  name = 1;
-    int32  type = 2;
-    int32  difficulty = 3;
+    string  dueDate = 6;
+    bool    completed = 7;
 }
 
-message TasksResponse{
+message TaskResponse{
     repeated OutputTask tasks = 1;
 }
 
