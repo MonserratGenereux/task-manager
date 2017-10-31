@@ -24,7 +24,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         type: string
  *     responses:
  *       200:
- *         description: report
+ *         description: OK
+ *         schema:
+ *              $ref: "#/definitions/general_report"
  *       400:
  *         description: invalid username
  */
@@ -40,17 +42,24 @@ router.get('/', (req, res) => {
  *       - "report"
  *     summary: Fetch task report
  *     description: Returns report of the task of all users
+ *     consumes:
+ *       - application/json
  *     produces:
  *       - application/json
  *     parameters:
  *       - name: userId
- *         description: id of the user admin
+ *         description: id of the user
  *         in: header
  *         required: true
  *         type: string
  *     responses:
  *       200:
- *         description: report
+ *         description: OK
+ *         schema:
+ *           type: "array"
+ *           items: {
+ *              $ref: "#/definitions/task_report"
+ *           }
  *       400:
  *         description: invalid user
  */
@@ -76,7 +85,12 @@ router.get('/task', (req, res) => {
  *         type: string
  *     responses:
  *       200:
- *         description: report
+ *         description: OK
+ *         schema:
+ *           type: "array"
+ *           items: {
+ *              $ref: "#/definitions/habit_report"
+ *           }
  *       400:
  *         description: invalid user
  */

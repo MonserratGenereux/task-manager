@@ -18,7 +18,7 @@ const swaggerDefinition = {
     { name: 'account', description: 'Operations about your User accounts' },
     { name: 'habit', description: 'Everything about habits' },
     { name: 'task', description: 'Everything about tasks' },
-    { name: 'report', description: 'Acess to user and admin reports' },
+    { name: 'report', description: 'Access to user and admin reports' },
     { name: 'status', description: '' },
   ],
 };

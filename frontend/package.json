@@ -14,7 +14,11 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "nuxt": "^1.0.0-rc11"
+    "jquery": "^3.2.1",
+    "materializecss-vuejs-component": "^2.1.1",
+    "nuxt": "^1.0.0-rc11",
+    "vue-materials": "^1.0.7-rc.7",
+    "vue-server-renderer": "^2.5.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

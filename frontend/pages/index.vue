@@ -1,8 +1,8 @@
 <template>
-<section>
-Pagina de landing
+
+
 <p>{{cuerpo}}</p>
-</section>
+
 </template>
 
 <script>
