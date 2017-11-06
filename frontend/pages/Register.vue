@@ -1,7 +1,7 @@
 <template>
   <v-row>
-    <h1>Task Manager</h1>
-    <h2>Register</h2>
+
+    <h2>Sign Up</h2>
     <v-grid s12 m6 l6 >
 
       <div class="input-field">
@@ -70,4 +70,40 @@ export default{
 </script>
 
 <style>
+h2 {
+  font-family: "Poppins", Sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 70px;
+  text-shadow: 4px 5px #e6e6d8, 6px 7px #c6a39a;
+  text-align:center;
+
+}
+
+h2 span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+span.star {
+  font-size: 20px;
+}
+
+.btn{
+  background-color:white;
+  color:black;
+  border-radius:20px;
+  border-color:black;
+  outline: 2px;
+}
+.btn:hover{
+  background-color: #C6A39A;
+}
+.row{
+ background-color: white;
+    width: 800px;
+    border: 3px solid black;
+    padding: 25px;
+    margin: 25px;
+}
 </style>
