@@ -21,8 +21,9 @@ module.exports = {
     ]
   },
   plugins: [
-    {src: '~/plugins/materialize.js', ssr: false},
 
+    {src: '~/plugins/materialize.js', ssr: false},
+    {src: '~/plugins/modals.js', ssr: false}
   ],
   /*
   ** Customize the progress bar color
@@ -31,12 +32,17 @@ module.exports = {
   /*
   ** Build configuration
   */
+  router:{
+    base: '/'
+  },
   build: {
     /*
     ** Run ESLint on save
     */
     plugins: [
       new webpack.ProvidePlugin({
+
+        '$': 'jquery',
         $: 'jquery',
         jQuery: 'jquery',
         'window.jQuery': 'jquery'
