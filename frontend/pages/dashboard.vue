@@ -1,27 +1,13 @@
 <template>
+
   <v-row>
       <v-grid s12 m6 l4>
-        <i class="large material-icons">person</i>
-        <i>Monserrat Sánchez</i>
+      <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200' rel='stylesheet' type='text/css'>
+        <div class="profile"><div class="hello"> Hello!<br>Montserrat Generaux</div></div>
       </v-grid>
       <v-grid s12 m6 l8>
-        <h5>Tasks</h5>
-         <div class="icon">
-    <div class="calendar">
-      25
-      <div class="holes"></div>
-      <div class="flip"></div>
-    </div>
-  </div>
-
-      
-         <div class="icon">
-    <div class="clock">
-      <div class="circle"></div>
-      <div class="clockwise"></div>
-      <div class="shadows"></div>
-    </div>
-  </div>
+       <h1>Current Progress</h1>
+        <h5>&nbsp;</h5>
         <div class="progress">
           <div class="determinate" style="width: 90.8%">
           </div>
@@ -102,241 +88,79 @@ export default{
 
 
 <style>
-.add{
-  background-color: rgb(32,145,135);
-  margin-left: 400px;
-}
-.card{
-  width: 400px;
-  background-color: rgb(32,145,135,0.5) !important;
-}
-.right{
-  border-right: black;
-}
-.card-title{
-  text-align: center;
-}
-.fixed-action-btn{
-  top: 40px;
-}
-p{
-  text-align: right;
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Patrick+Hand');
+
+
+.profile {
+  position: relative;
+  border-radius: 50%;
+  width: 150px;
+	height: 150px;
+  background: url('https://res.cloudinary.com/dd3gauh9w/image/upload/v1473497735/IMG_1494_a6suhl.jpg') 0 0 no-repeat;
+  background-repeat: no-repeat;
+  -webkit-animation: focus ease-in-out infinite 7s;
+  -moz-animation: focus ease-in-out infinite 7s;
+  animation: focus ease-in-out infinite 7s;
+  -webkit-filter: grayscale(70%);
+  filter: grayscale(70%);
 }
 
-.clock{
-  width:40px;
-  height:40px;
-  background:#45c1ae;
-  border-radius:50%;
-  box-shadow: 0 2px 0 0px rgba(0,0,0,0.25), inset 0 1px 0 0 rgba(255,255,255,0.2);
-  position:absolute;
-  left:50%;
-  margin-left:-209px;
-  top:35%;
-  margin-top:-54px;
-  cursor:pointer;
+.hello {
+  position: absolute;
+  top: -60px;
+  left: -60%;
+  margin-right: -0.1em;
+  padding: 10px 15px;
+  border-radius: 7px;
+  background: #ddd;
+  color: #555;
+  font-size: 0.8em;
+  line-height: 1.5em;
+  letter-spacing: 0.1em;
 }
 
-.clock .circle{
-  content:"";
-  width:44px;
-  height:44px;
-  background:#cccabf;
-  border-radius:50%;
-  position:absolute;
-  left:50%;
-  margin-left:-22px;
-  overflow:hidden;
-  top:100%;
-  margin-top:-42px;
+.hello::before {
+  content: ' ';
+  position: absolute;
+  bottom: -10px;
+  right: 20px;
+  border-left: 20px solid transparent;
+  border-right: 0px solid transparent;
+  border-top: 15px solid #ddd;
+  width: 0; 
+  height: 0; 
+  
 }
 
-.clock .circle:before{
-  content:"";
-  width:44px;
-  height:44px;
-  background:#edebde;
-  border-radius:50%;
-  position:absolute;
-  left:50%;
-  margin-left:-42px;
-  overflow:hidden;
-  top:50%;
-  margin-top:-37px;
-}
-
-.clock .circle:after {
-  content:"";
-  width:14px;
-  height:14px;
-  background:#4b494f;
-  position:absolute;
-  border-radius:50%;
-  left:50%;
-  margin-left:-7px;
-  top:50%;
-  margin-top:-7px;
-  z-index:5;
-}
-
-.clock .clockwise {
-  width:29px;
-  height:4px;
-  background:#4b494f;
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin-left:6px;
-  margin-top:-2px;
-  transform-origin:-5px 2px;
-  transition:transform 0.5s;
-}
-
-.clock .clockwise:after{
-  content:"";
-  width:21px;
-  height:4px;
-  background:#4b494f;
-  position:absolute;
-  left:-33px;
-  transform-origin:26px center;
-  transform:rotate(30deg);
-}
-
-.clock .clockwise:before{
-  content:"";
-  width:28px;
-  height:4px;
-  background:#9f9ba7;
-  position:absolute;
-  transform-origin:-6px center;
-  transform:rotate(-90deg);
-}
-
-.clock .shadows {
-  width:14px;
-  height:14px;
-  background:rgba(0,0,0,0.2);
-  position:absolute;
-  border-radius:50%;
-  left:50%;
-  margin-left:-7px;
-  top:50%;
-  margin-top:-3px;
-  z-index:3;
-  transition:transform 0.5s;
-}
-
-.clock .shadows:after {
-  content:"";
-  width:21px;
-  height:4px;
-  background:rgba(0,0,0,0.2);
-  position:absolute;
-  top:4px;
-  left:-21px;
-  transform-origin:26px center;
-  transform:rotate(30deg);
-}
-
-.clock .shadows:before {
-  content:"";
-  width:29px;
-  height:4px;
-  left:13px;
-  top:4px;
-  background:rgba(0,0,0,0.2);
-  position:absolute;
-}
-
-.clock:hover .clockwise, .clock:hover .shadows {
-  transform:rotate(1060deg);
-}
-.calendar {
-  width:108px;
-  height:96px;
-  background:#eeecdf;
-  position:absolute;
-  left:50%;
-  margin-left:-240px;
-  top:20%;
-  margin-top:-48px;
-  border-radius:6px;
-  box-shadow: 0 2px 0 0px rgba(0,0,0,0.25), inset 0 1px 0 0 rgba(255,255,255,0.2);
-  font-family:Arial, helvetica, 'sans';
-  font-size:45px;
-  line-height:112px;
-  text-align:center;
-}
-
-.calendar:after {
-  content:"";
-  width:108px;
-  height:27px;
-  box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.2);
-  background:#d64646;
-  position:absolute;
-  border-top-left-radius:6px;
-  border-top-right-radius:6px;
-  top:0; left:0;
-}
-
-.calendar:before {
-  content:"";
-  width:0;
-  height:0;
-  border-bottom: 23px solid #37353a;
-	border-left: 23px solid transparent;
-  position:absolute;
-  bottom:-2px;
-  right:0;
-}
-
-.calendar .flip {
-  position:absolute;
-  right:0;
-  bottom:0;
-  width: 0;
-	height: 0;
-	border-top: 23px solid #fff;
-	border-right: 23px solid transparent;
-}
-.calendar .flip:after {
-  content:"";
-  width:0;
-  height:0;
-  border-bottom: 23px solid rgba(0,0,0,0.25);
-	border-left: 23px solid transparent;
-  position:absolute;
-  top:-23px;
-  right:0;
+@keyframes focus {
+    0% { background-position: -1372px -444px; }
+    5% { background-position: -1372px -444px; }
+    10% { background-position: -310px -176px; }
+    15% { background-position: -310px -176px; }
+    20% { background-position: -1267px -189px; }
+    25% { background-position: -1267px -189px; }
+    30% { background-position: -417px -499px; }
+    35% { background-position: -417px -499px; }
+    40% { background-position: -1150px -193px; }
+    45% { background-position: -1150px -193px; }
+    50% { background-position: -606px -514px; }
+    55% { background-position: -606px -514px; }
+    60% { background-position: -1168px -492px; }
+    65% { background-position: -1168px -492px; }
+    60% { background-position: -410px -223px; }
+    65% { background-position: -410px -223px; }
+    70% { background-position: -1597px -207px; }
+    75% { background-position: -1597px -207px; }
+    80% { background-position: -977px -490px; }
+    85% { background-position: -977px -490px; }
+    90% { background-position: -935px -281px; }
+    95% { background-position: -935px -281px; }
+    100% { background-position: -1372px -444px; }
 }
 
 
-.calendar .holes {
-  width:8px;
-  height:8px;
-  position:absolute;
-  border-radius:50%;
-  background:#37353a;
-  left:22px;
-  top:10px;
-  z-index:10;
-  box-shadow: inset 0 2px 0 0px rgba(0,0,0,0.25), 0 1px 0 0 rgba(255,255,255,0.2);
+h1,h5 {
+font-family: 'Patrick Hand', cursive;
 }
-
-.calendar .holes:after {
-  content:"";
-  width:8px;
-  height:8px;
-  position:absolute;
-  border-radius:50%;
-  background:#37353a;
-  left:56px;
-  box-shadow: inset 0 2px 0 0px rgba(0,0,0,0.25), 0 1px 0 0 rgba(255,255,255,0.2);
-}
-
-
-
 
 </style>
