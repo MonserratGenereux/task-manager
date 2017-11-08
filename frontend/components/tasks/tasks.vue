@@ -1,7 +1,7 @@
 <template>
   <section>
     <h5>Tasks</h5>
-    <Task v-for="task in tasks"  v-bind:info="task"/>
+    <Task v-for="task in tasks"  v-bind:info="task" :key="task.nombre"/>
   </section>
 </template>
 
