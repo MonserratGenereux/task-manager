@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 
 const swaggerSpec = require('./swagger');
@@ -10,7 +11,7 @@ const statusController = require('./routes/status');
 
 
 const app = express();
-
+app.use(cors());
 app.use('/account', accountController);
 app.use('/habit', habitController);
 app.use('/report', reportController);
