@@ -35,7 +35,7 @@ export default{
   },
   methods: {
     loginAction: function () {
-      var api = 'localhost:3000/login'
+      var api = 'http://localhost:3000/api/zUsers/login'
       var data = {
         'email': this.login.email,
         'password': this.login.password

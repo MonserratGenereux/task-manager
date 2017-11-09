@@ -1,7 +1,7 @@
 <template>
   <section>
     <h5>Habits</h5>
-      <Habit v-for="habit in habits"  v-bind:info="habit"/>
+      <Habit v-for="habit in habits"  v-bind:info="habit" :key="habits.nombre"/>
   </section>
 
 </template>
