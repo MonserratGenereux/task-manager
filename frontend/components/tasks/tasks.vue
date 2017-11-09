@@ -6,11 +6,12 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Task from '~/components/tasks/task'
 export default {
   data () {
     return {
-      tasks: []
+      tasks: ['']
     }
   },
   components: {
@@ -21,8 +22,17 @@ export default {
   },
   methods: {
     getTasks: function () {
-      // cosa de axios
-      this.tasks = [{'nombre': 'one', 'puntos': '23'}, {'nombre': 'dos', 'puntos': '32'}, {'nombre': 'tres', 'puntos': '42'}]
+      axios.get('https://jsonplaceholder.typicode.com/posts', {
+        params: {
+          userId: 2
+        }
+      })
+        .then((response) => {
+          console.log('Respuesta', this.tasks = response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }

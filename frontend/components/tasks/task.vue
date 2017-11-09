@@ -1,8 +1,8 @@
 <template>
   <div class="card">
     <div class="card-content white-text">
-      <span class="card-title">Task {{info.nombre}}</span>
-      <p>Points: {{info.puntos}}</p>
+      <span class="card-title">Task {{info.id}}</span>
+      <p>Points: {{info.userId}}</p>
     </div>
     <div class="card-action">
       <a class="btn-floating btn-large waves-effect waves-light green" @click="success()">

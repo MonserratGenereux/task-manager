@@ -7,11 +7,12 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Habit from '~/components/habits/habit'
 export default {
   data () {
     return {
-      habits: []
+      habits: ['']
     }
   },
   components: {
@@ -22,8 +23,17 @@ export default {
   },
   methods: {
     getHabits: function () {
-      // cosa de axios
-      this.habits = [{'nombre': 'one', 'puntos': '23'}, {'nombre': 'dos', 'puntos': '32'}, {'nombre': 'tres', 'puntos': '42'}]
+      axios.get('https://jsonplaceholder.typicode.com/posts', {
+        params: {
+          userId: 1
+        }
+      })
+        .then((response) => {
+          console.log('Respuesta', this.habits = response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
