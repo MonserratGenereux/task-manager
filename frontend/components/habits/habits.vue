@@ -1,7 +1,7 @@
 <template>
   <section>
     <h5>Habits</h5>
-      <Habit v-for="habit in habits"  v-bind:info="habit" :key="habits.nombre"/>
+      <Habit v-for="habit in habits"  v-bind:info="habit" :key="habits.id"/>
   </section>
 
 </template>
@@ -23,13 +23,11 @@ export default {
   },
   methods: {
     getHabits: function () {
-      axios.get('https://jsonplaceholder.typicode.com/posts', {
-        params: {
-          userId: 1
-        }
+      axios.get('http://localhost:3000/habit', {
       })
         .then((response) => {
-          console.log('Respuesta', this.habits = response.data)
+          console.log('Respuesta', response)
+          this.habits = response.data
         })
         .catch((error) => {
           console.log(error)

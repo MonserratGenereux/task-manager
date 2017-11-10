@@ -12,33 +12,13 @@
           <input id="last_name" type="text" class="validate">
           <label>Description</label>
         </div>
-        <h5>Difficulty</h5>
-        <div class="col l4">
-          <p>
-            <input name="group2" type="radio" id="test4" />
-            <label for="test4">Easy</label>
-          </p>
-        </div>
-        <div class="col l4">
-          <p>
-            <input name="group2" type="radio" id="test5" />
-            <label for="test5">Medium</label>
-          </p>
-        </div>
-        <div class="col l4">
-          <p>
-            <input name="group2" type="radio" id="test6" />
-            <label for="test6">Hard</label>
-          </p>
-        </div>
-
-
       </v-grid>
       <v-grid s12 m6 l6 id="bp-left">
 
         <label>Due Date</label>
         <input type='text' name='customDate' placeholder='MM/DD/YYYY'
               pattern="\d{1,2}/\d{1,2}/\d{4}"class="validate">
+        <h5>Remind me</h5>
         <form action="#" id="radio-2">
           <p>
             <input name="group1" type="radio" id="test1" />
@@ -70,7 +50,7 @@
 <style scoped>
 h5{
   text-align: center;
-  padding-top: 20px;
+  margin-top: -7px !important;
 }
 h3{
   text-align: center;

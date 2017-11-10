@@ -29,7 +29,36 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         description: invalid username
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  res.status(HttpStatus.OK).send([
+    {
+      'id': 'el id',
+      'name': 'el nombre',
+      'type': 10,
+      'difficulty': 10,
+      'score': 10
+    },
+    {
+      'id': 'el id',
+      'name': 'el nombre',
+      'type': 10,
+      'difficulty': 10,
+      'score': 10
+    },
+    {
+      'id': 'el id',
+      'name': 'el nombre',
+      'type': 10,
+      'difficulty': 10,
+      'score': 10
+    },
+    {
+      'id': 'el id',
+      'name': 'el nombre',
+      'type': 10,
+      'difficulty': 10,
+      'score': 10
+    }
+  ]);
 });
 
 /**

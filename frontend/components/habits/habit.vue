@@ -2,8 +2,8 @@
   <section>
     <div class="card ">
       <div class="card-content white-text">
-        <span class="card-title">Habit {{info.userId}}</span>
-        <p>Points: {{info.id}}</p>
+        <span class="card-title">Habit {{info.name}}</span>
+        <p>Points: {{info.score}}</p>
       </div>
       <div class="card-action">
         <a class="btn-floating btn-large waves-effect waves-light green" @click="success()" ><i class="material-icons">exposure_plus_1</i></a>

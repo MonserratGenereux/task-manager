@@ -63,4 +63,55 @@ router.get('/', (req, res) => {
 router.get('/task', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
 });
+
+/**
+ * @swagger
+ * /report/habit:
+ *   get:
+ *     tags:
+ *       - "report"
+ *     summary: Fetch habit report
+ *     description: Returns report of the habit of all users
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         description: id of the user admin
+ *         in: header
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *           type: "array"
+ *           items: {
+ *              $ref: "#/definitions/habit_report"
+ *           }
+ *       400:
+ *         description: invalid user
+ */
+router.get('/habit', (req, res) => {
+  res.status(HttpStatus.OK).send([{
+    "bestHabit": {
+      "id": "best id",
+      "name": "best name",
+      "type": 9,
+      "difficulty": 90,
+      "score": 40
+    },
+    "worstHabit": {
+      "id": "worst id",
+      "name": "worst name",
+      "type": 9,
+      "difficulty": 90,
+      "score": 40
+    },
+    "id": "id",
+    "name": "name",
+    "type": "type",
+    "score": 19
+  }]);
+});
+
 module.exports = router;
