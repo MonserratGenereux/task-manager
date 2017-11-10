@@ -162,5 +162,10 @@ export default{
 h1,h5 {
 font-family: 'Patrick Hand', cursive;
 }
+.progress{
+  background-color:#FADB7D;
+  color: white !important;
+}
+
 
 </style>
