@@ -5,15 +5,20 @@ var grpc = require('grpc');
 var habits_proto = grpc.load(PROTO_PATH).habits;
 
 function main() {
-  var client = new habits_proto.Habits('localhost:50051',
+  var client = new habits_proto.HabitService('localhost:50051',
                                        grpc.credentials.createInsecure());
 
-  client.getHabits({input:''}, function(err, response) {
+  client.getHabits({id:'123'}, function(err, response) {
     console.log('getHabit:', response);
   });
 
-  client.createHabit({name: 'Juanchito', type: 1, difficulty: 2}, function(err, response) {
-    console.log('createHabit:', response);
+  client.createHabit({id: 'asd1', name: 'Juanchito', type: "1", difficulty: "1"}, function(err, response) {
+    console.log("Res: ", response);
+    if(err){
+      console.log("Create Habits Error:", err.message);
+    }else{
+      console.log('createHabit:', response);
+    }
   });
 
   client.deleteHabit({id: '1'}, function(err, response) {
@@ -24,7 +29,7 @@ function main() {
     console.log('getHabitById:', response);
   });
 
-  client.updateHabit({id: '3'}, function(err, response) {
+  client.updateHabit({id: 'asd1', name: 'Juanchito', type: "1", difficulty: "1"}, function(err, response) {
     console.log('updateHabit:', response);
   });
 

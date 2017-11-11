@@ -1,6 +1,10 @@
 var deleteHabitHandler = function(request){
     console.log("Delete Habit", request)
-    return {message: 'OK'};
+    return {
+      succeded: true,
+      habitId: "1",
+      error: ""
+    };
 }
 
 module.exports = deleteHabitHandler;

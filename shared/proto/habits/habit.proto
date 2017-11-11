@@ -2,40 +2,57 @@ syntax = "proto3";
 
 package habits;
 
-service Habits {
-  rpc GetHabits (emptyInput) returns (HabitsResponse) {}
-  rpc CreateHabit (InputHabit) returns (OutputHabit) {}
-  rpc DeleteHabit (habitId) returns (response) {}
-  rpc GetHabitById (habitId) returns (OutputHabit) {}
-  rpc UpdateHabit (habitId) returns (OutputHabit) {}
+service HabitService {
+  //Retrieve all habits from user
+  rpc GetHabits (UserId) returns (GetHabits) {}
+
+  //Creates new Habit, id not needed
+  rpc CreateHabit (Habit) returns (StatusResponse) {}
+
+  //Deletes a habit by id
+  rpc DeleteHabit (HabitId) returns (StatusResponse) {}
+
+  //Gets an habit by ID
+  rpc GetHabitById (HabitId) returns (GetHabit) {}
+
+  // Updates all fields in the given habit.
+  rpc UpdateHabit (Habit) returns (StatusResponse) {}
+
 }
 
-message OutputHabit {
-    string  id = 1;
-    string  name = 2;
-    int32  type = 3;
-    int32  difficulty = 4;
-    float   score = 5;
+message Habit {
+  //Unique in system
+  string id = 1;
+
+  //Attributes needed for Habits
+  string name = 2;
+  string  description = 3;
+  string  type = 4;
+  string  difficulty = 5;
+  float   score = 6;
+  string  color = 7;
 }
 
-message InputHabit {
-    string  name = 1;
-    int32  type = 2;
-    int32  difficulty = 3;
+message StatusResponse {
+  bool succeded = 1;
+  string habitId = 2;
+  string error = 3;
 }
 
-message HabitsResponse{
-    repeated OutputHabit habits = 1;
+message GetHabits{
+    bool succeded = 1;
+    repeated Habit habits = 2;
 }
 
-message habitId{
+message GetHabit{
+    bool succeded = 1;
+    Habit habit = 2;
+}
+
+message HabitId{
     string id = 1;
 }
 
-message response{
-    string message = 1;
-}
-
-message emptyInput{
-    string input = 1;
+message UserId{
+    string id = 1;
 }
