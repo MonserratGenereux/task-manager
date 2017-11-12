@@ -1,5 +1,46 @@
 syntax = "proto3";
 
+package com.tasks.app;
+
+service TasksService {
+    // Get a list of tasks from the User ID
+    rpc GetTasks (UserID) returns (Tasks){}
+
+    // Create a task based on the User ID
+    rpc CreateTask (Task) returns (StatusResponse){}
+
+    // Delete a task based on the User ID
+    rpc DeleteTask (TaskID) returns (StatusResponse){}
+
+    // Get a specific task based on the task ID
+    rpc GetTaskById (TaskID) returns (Task){}
+
+    // Update a specific task based on the task ID
+    rpc UpdateTask (Task) returns (StatusResponse){}
+}
+
 message Task {
-  string id = 1;
+    string  id = 1;
+    int64 user_id = 2;
+    string  name = 3;
+    int32  type = 4;
+    int64  date  = 5;
+    float   score = 6;
+}
+
+message StatusResponse {
+    bool succeeded = 1;
+    string error = 2;
+}
+
+message Tasks {
+    repeated Task tasks = 1;
+}
+
+message UserID {
+    string id = 1;
+}
+
+message TaskID {
+    string id = 1;
 }
