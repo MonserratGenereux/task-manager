@@ -8,12 +8,12 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 /**
  * @swagger
- * /task:
+ * /habits:
  *   get:
  *     tags:
- *       - "task"
- *     summary: Fetch tasks
- *     description: Returns all tasks available for the user
+ *       - "habits"
+ *     summary: Fetch habits
+ *     description: Returns all habits available for the user
  *     produces:
  *       - application/json
  *     parameters:
@@ -24,7 +24,12 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         type: string
  *     responses:
  *       200:
- *         description: list of tasks
+ *         description: OK
+ *         schema:
+ *           type: "array"
+ *           items: {
+ *              $ref: "#/definitions/habits"
+ *           }
  *       400:
  *         description: invalid username
  */
@@ -34,38 +39,45 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
- * /task/{taskId}:
+ * /habits/{habitId}:
  *   get:
  *     tags:
- *       - "task"
- *     summary: Fetch task
- *     description: Returns specified task
+ *       - "habits"
+ *     summary: Fetch habit
+ *     description: Returns specified habit
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user Id
  *         description: id of the user
  *         in: header
  *         required: true
  *         type: string
+ *       - name: habitId
+ *         description: id of the habit
+ *         in: path
+ *         required: true
+ *         type: string
  *     responses:
  *       200:
- *         description: single task
+ *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/habits"
  *       400:
- *         description: invalid task
+ *         description: invalid habit
  */
-router.get('/:taskId', (req, res) => {
+router.get('/:habitId', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
 });
 
 /**
  * @swagger
- * /task:
+ * /habits:
  *   post:
  *     tags:
- *       - "task"
- *     summary: Create new task
- *     description: Create new task
+ *       - "habits"
+ *     summary: Create new habit
+ *     description: Create new habit
  *     produces:
  *       - application/json
  *     parameters:
@@ -74,16 +86,17 @@ router.get('/:taskId', (req, res) => {
  *         in: header
  *         required: true
  *         type: string
- *       - name: task
- *         description: info of the newly create task
+ *       - name: habit
+ *         description: info of the newly create habit
  *         in: body
  *         required: true
- *         type: object
+ *         schema:
+ *           $ref: "#/definitions/habits"
  *     responses:
  *       200:
- *         description: single task
+ *         description: OK
  *       400:
- *         description: invalid username
+ *         description: server error
  */
 router.post('/', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
@@ -91,12 +104,12 @@ router.post('/', (req, res) => {
 
 /**
  * @swagger
- * /task:
+ * /habits:
  *   patch:
  *     tags:
- *       - "task"
- *     summary: Update existing task
- *     description: Update existing task
+ *       - "habits"
+ *     summary: Update existing habit
+ *     description: Update existing habit
  *     produces:
  *       - application/json
  *     parameters:
@@ -105,16 +118,17 @@ router.post('/', (req, res) => {
  *         in: header
  *         required: true
  *         type: string
- *       - name: task
- *         description: info of the task to be modified
+ *       - name: habit
+ *         description: info of the habit to modify
  *         in: body
  *         required: true
- *         type: object
+ *         schema:
+ *           $ref: "#/definitions/habits"
  *     responses:
  *       200:
- *         description: single task
+ *         description: habit created
  *       400:
- *         description: invalid username
+ *         description: server error
  */
 router.patch('/', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
@@ -122,12 +136,12 @@ router.patch('/', (req, res) => {
 
 /**
  * @swagger
- * /task:
+ * /habits:
  *   delete:
  *     tags:
- *       - "task"
- *     summary: Delete task
- *     description: Delete task
+ *       - "habits"
+ *     summary: Delete habit
+ *     description: Delete habit
  *     produces:
  *       - application/json
  *     parameters:
@@ -136,16 +150,16 @@ router.patch('/', (req, res) => {
  *         in: header
  *         required: true
  *         type: string
- *       - name: taskId
- *         description: id of the task to delete
+ *       - name: habitId
+ *         description: id of the habit to delete
  *         in: body
  *         required: true
  *         type: string
  *     responses:
  *       200:
- *         description: single task
+ *         description: habit deleted
  *       400:
- *         description: invalid username
+ *         description: server error
  */
 router.delete('/', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
@@ -153,12 +167,12 @@ router.delete('/', (req, res) => {
 
 /**
  * @swagger
- * /task/complete:
+ * /habits/done:
  *   post:
  *     tags:
- *       - "task"
- *     summary: Mark task as complete
- *     description: Mark task as complete
+ *       - "habits"
+ *     summary: Mark habit as done
+ *     description: Mark habit as done
  *     produces:
  *       - application/json
  *     parameters:
@@ -167,18 +181,18 @@ router.delete('/', (req, res) => {
  *         in: header
  *         required: true
  *         type: string
- *       - name: taskId
- *         description: id of the task to mark as complete
+ *       - name: habitId
+ *         description: id of the habit to mark as done
  *         in: body
  *         required: true
  *         type: string
  *     responses:
  *       200:
- *         description: single task
+ *         description: OK
  *       400:
- *         description: invalid username
+ *         description: server error
  */
-router.post('/complete', (req, res) => {
+router.post('/done', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
 });
 

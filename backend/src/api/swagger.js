@@ -15,10 +15,10 @@ const swaggerDefinition = {
   basePath: '/',
   definitions: schemaDefinitions,
   tags: [
-    { name: 'account', description: 'Operations about your User accounts' },
-    { name: 'habit', description: 'Everything about habits' },
-    { name: 'task', description: 'Everything about tasks' },
-    { name: 'report', description: 'Access to user and admin reports' },
+    { name: 'accounts', description: 'Operations about your User accounts' },
+    { name: 'habits', description: 'Everything about habits' },
+    { name: 'tasks', description: 'Everything about tasks' },
+    { name: 'reports', description: 'Access to user and admin reports' },
     { name: 'status', description: '' },
   ],
 };

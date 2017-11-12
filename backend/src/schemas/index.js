@@ -1,6 +1,6 @@
-const account = require('./account');
-const habit = require('./habit');
-const report = require('./report');
-const task = require('./task');
+const accounts = require('./accounts');
+const habits = require('./habits');
+const reports = require('./reports');
+const tasks = require('./tasks');
 
-module.exports = Object.assign({}, account, habit, report, task);
+module.exports = Object.assign({}, accounts, habits, reports, tasks);

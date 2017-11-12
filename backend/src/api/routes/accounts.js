@@ -8,10 +8,10 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 /**
  * @swagger
- * /account/{username}:
+ * /accounts/{username}:
  *   get:
  *     tags:
- *       - "account"
+ *       - "accounts"
  *     summary: Fetch user
  *     description: Returns the id of a existing user given the username
  *     consumes:
@@ -28,7 +28,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *       200:
  *         description: OK
  *         schema:
- *           $ref: "#/definitions/account"
+ *           $ref: "#/definitions/accounts"
  *       400:
  *         description: invalid username
  */
@@ -38,10 +38,10 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
- * /account:
+ * /accounts:
  *   post:
  *     tags:
- *       - "account"
+ *       - "accounts"
  *     summary: Create new account
  *     description: Create new account
  *     consumes:
@@ -54,7 +54,7 @@ router.get('/', (req, res) => {
  *         in: body
  *         required: true
  *         schema:
- *           $ref: "#/definitions/account"
+ *           $ref: "#/definitions/accounts"
  *     responses:
  *       200:
  *         description: OK
@@ -67,10 +67,10 @@ router.post('/', (req, res) => {
 
 /**
  * @swagger
- * /account:
+ * /accounts:
  *   patch:
  *     tags:
- *       - "account"
+ *       - "accounts"
  *     summary: Update existing account
  *     description: Update existing account
  *     consumes:
@@ -83,7 +83,7 @@ router.post('/', (req, res) => {
  *         in: body
  *         required: true
  *         schema:
- *           $ref: "#/definitions/account"
+ *           $ref: "#/definitions/accounts"
  *     responses:
  *       200:
  *         description: user created
@@ -96,10 +96,10 @@ router.patch('/', (req, res) => {
 
 /**
  * @swagger
- * /account:
+ * /accounts:
  *   delete:
  *     tags:
- *       - "account"
+ *       - "accounts"
  *     summary: Delete account
  *     description: Delete account
  *     consumes:
