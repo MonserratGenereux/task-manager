@@ -8,30 +8,33 @@ function main() {
   var client = new habits_proto.HabitService('localhost:50051',
                                        grpc.credentials.createInsecure());
 
-  client.getHabits({id:'123'}, function(err, response) {
-    console.log('getHabit:', response);
-  });
+  // client.getHabits({userId:'1'}, function(err, response) {
+  //   console.log('getHabit:', response, err);
+  // });
 
-  client.createHabit({id: 'asd1', name: 'Juanchito', type: "1", difficulty: "1"}, function(err, response) {
-    console.log("Res: ", response);
-    if(err){
-      console.log("Create Habits Error:", err.message);
-    }else{
-      console.log('createHabit:', response);
-    }
-  });
+  // client.createHabit({userId: '1', name: 'Juan', type: "0", difficulty: "1"}, function(err, response) {
+  //   console.log("createHabit: ", response, err);
+  // });
+  //
+  // client.createHabit({userId: '1', name: 'Paco', type: "1", difficulty: "2"}, function(err, response) {
+  //   console.log("createHabit: ", response, err);
+  // });
+  //
+  // client.createHabit({userId: '2', name: 'Pedro', type: "2", difficulty: "2"}, function(err, response) {
+  //   console.log("createHabit: ", response, err);
+  // });
 
-  client.deleteHabit({id: '1'}, function(err, response) {
-    console.log('deleteHabit:', response);
-  });
+  // client.deleteHabit({_id: '5a08a148336e1c04f49b75c9'}, function(err, response) {
+  //   console.log('deleteHabit:', response, err);
+  // });
 
-  client.getHabitById({id: '2'}, function(err, response) {
-    console.log('getHabitById:', response);
-  });
-
-  client.updateHabit({id: 'asd1', name: 'Juanchito', type: "1", difficulty: "1"}, function(err, response) {
-    console.log('updateHabit:', response);
-  });
+  // client.getHabitById({_id: '5a08a148336e1c04f49b75c9'}, function(err, response) {
+  //   console.log('getHabitById:', response, err);
+  // });
+  //
+  // client.updateHabit({_id: '5a08a148336e1c04f49b75c8', name: 'Pedro_update2', type: "1", difficulty: "1"}, function(err, response) {
+  //   console.log('updateHabit:', response, err);
+  // });
 
 }
 

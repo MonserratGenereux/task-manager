@@ -12,42 +12,54 @@ var updateHabitHandler =    require('./../src/controllers/update-habits.js');
 
 //rpc GetHabits (emptyInput) returns (HabitsResponse)
 function getHabits(call, callback) {
-  callback(null, getHabitsHandler(call.request));
+  getHabitsHandler(call.request)
+   .then((GetHabits)=>{
+     console.log("Exito GetHabits:", GetHabits);
+     return callback(null, GetHabits);
+   }).catch((GetHabits)=>{
+     console.log("Error GetHabits:", GetHabits);
+     return callback(GetHabits, null);
+   })
 }
 //rpc CreateHabit (InputHabits) returns (OutputHabits) {}
  function createHabit(call, callback) {
-   callback(null, createHabitHandler(call.request));
-  //  createHabitHandler(call.request)
-  //   .then((habit)=>{
-  //     var statusResponse = {
-  //       succeded: true,
-  //       habitId: habit._id,
-  //       error: null
-  //     }
-  //     console.log("HABITO", statusResponse);
-  //     return callback(null, statusResponse);
-  //   }).catch((err)=>{
-  //     console.log("Error",err);
-  //     var statusResponse = {
-  //       succeded: false,
-  //       habitId: null,
-  //       error: err
-  //     }
-  //     return callback(statusResponse, null);
-  //   })
-
+   createHabitHandler(call.request)
+    .then((statusResponse)=>{
+      return callback(null, statusResponse);
+    }).catch((statusResponse)=>{
+      return callback(statusResponse, null);
+    })
  }
 //rpc DeleteHabit (habitId) returns (response) {}
 function deleteHabit(call, callback) {
-  callback(null, deleteHabitHandler(call.request));
+  deleteHabitHandler(call.request)
+   .then((statusResponse)=>{
+     return callback(null, statusResponse);
+   }).catch((statusResponse)=>{
+     return callback(statusResponse, null);
+   })
 }
 // rpc GetHabitById (habitId) returns (OutputHabits) {}
 function getHabitById(call, callback) {
-  callback(null, getHabitByIdHandler(call.request));
+  getHabitByIdHandler(call.request)
+   .then((GetHabit)=>{
+     //console.log("YEA", GetHabit);
+     return callback(null, GetHabit);
+   }).catch((GetHabit)=>{
+     //console.log("NEL", GetHabit)
+     return callback(GetHabit, null);
+   })
 }
 // rpc UpdateHabit (habitId) returns (OutputHabits) {}
 function updateHabit(call, callback) {
-  callback(null, updateHabitHandler(call.request));
+  updateHabitHandler(call.request)
+   .then((UpdatedHabit)=>{
+     //console.log("YEA", GetHabit);
+     return callback(null, UpdatedHabit);
+   }).catch((UpdatedHabit)=>{
+     //console.log("NEL", GetHabit)
+     return callback(UpdatedHabit, null);
+   })
 }
 
 function main() {

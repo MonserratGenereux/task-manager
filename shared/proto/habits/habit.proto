@@ -6,31 +6,52 @@ service HabitService {
   //Retrieve all habits from user
   rpc GetHabits (UserId) returns (GetHabits) {}
 
-  //Creates new Habit, id not needed
-  rpc CreateHabit (Habit) returns (StatusResponse) {}
+  //Gets an habit by ID
+  rpc GetHabitById (HabitId) returns (GetHabit) {}
 
   //Deletes a habit by id
   rpc DeleteHabit (HabitId) returns (StatusResponse) {}
 
-  //Gets an habit by ID
-  rpc GetHabitById (HabitId) returns (GetHabit) {}
+  //Creates new Habit, id not needed
+  rpc CreateHabit (HabitCreate) returns (StatusResponse) {}
 
   // Updates all fields in the given habit.
-  rpc UpdateHabit (Habit) returns (StatusResponse) {}
+  rpc UpdateHabit (HabitUpdate) returns (StatusResponse) {}
+
+  // Set as done a habit by id
+  rpc isDone (CompleteResponse) returns (StatusResponse) {}
 
 }
 
 message Habit {
   //Unique in system
-  string id = 1;
+  string _id = 1;
+  string userId = 2;
 
   //Attributes needed for Habits
+  string name = 3;
+  string  description = 4;
+  string  type = 5;
+  string  difficulty = 6;
+  float   score = 7;
+  string  color = 8;
+}
+
+message HabitUpdate {
+  string _id = 1;
+  string userId = 2;
+  string name = 3;
+  string  description = 4;
+  string  type = 5;
+  string  difficulty = 6;
+}
+
+message HabitCreate {
+  string userId = 1;
   string name = 2;
   string  description = 3;
   string  type = 4;
   string  difficulty = 5;
-  float   score = 6;
-  string  color = 7;
 }
 
 message StatusResponse {
@@ -50,9 +71,14 @@ message GetHabit{
 }
 
 message HabitId{
-    string id = 1;
+    string _id = 1;
 }
 
 message UserId{
-    string id = 1;
+    string userId = 1;
+}
+
+message CompleteResponse{
+    string _id = 1;
+    bool  done = 2;
 }

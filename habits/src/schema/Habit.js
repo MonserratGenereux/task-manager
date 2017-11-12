@@ -4,29 +4,34 @@ const constants = require("./../constants");
 mongoose.connect("mongodb://localhost/habits");
 
 var HabitSchema = new Schema({
+    userId: {
+      type: String,
+      required: true
+    },
     name:{
       type: String,
       required: true
     },
     description:{
       type: String,
-      default: null
+      default: ""
     },
     type: {
       type: String,
       required: true,
-      enum: constants.TYPE
+      enum: Object.keys(constants.TYPE_NAME)
     },
     difficulty: {
       type: String,
       required: true,
-      enum: constants.DIFFICULTY
+      enum: Object.keys(constants.DIFFICULTY)
     },
     score: {
       type: Number,
-      default: 0
+      default: 0.0
     },
     color: String
-});
+},
+{ versionKey: false });
 
 module.exports = mongoose.model('habit', HabitSchema);
