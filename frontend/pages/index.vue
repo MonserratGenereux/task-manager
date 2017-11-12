@@ -2,7 +2,7 @@
   <v-row>
     <v-grid s12 m6 l4>
       <i class="large material-icons">person</i>
-      <i>Monserrat Sánchez</i>
+      <i>{{user.username}}</i>
     </v-grid>
     <v-grid s12 m6 l8>
       <h5 class="left">Tasks</h5>
@@ -44,19 +44,43 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Tasks from '~/components/tasks/tasks'
 import Habits from '~/components/habits/habits'
 import Actions from '~/components/utils/actions'
 
 export default{
+  data () {
+    return {
+      user: ['']
+    }
+  },
   components: {
     Tasks,
     Habits,
     Actions
+  },
+  mounted () {
+    this.getUser()
+  },
+  methods: {
+    getUser: function () {
+      axios.get('http://localhost:3000/account', {
+        params: {
+          password: 'password123'
+        }
+      })
+        .then((response) => {
+          console.log('respuesta', response.data)
+          this.user = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 }
 </script>
-
 
 <style scoped>
 h5.left{

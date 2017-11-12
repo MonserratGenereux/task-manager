@@ -36,5 +36,8 @@
 <style>
 .page-footer {
         background-color: rgb(38, 165, 153) !important;
-    }
+}
+li{
+  color: white;
+}
 </style>

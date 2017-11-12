@@ -40,28 +40,41 @@ router.get('/', (req, res) => {
       'name': 'el nombre',
       'type': 10,
       'difficulty': 10,
-      'score': 10
+      'score': 10,
+      'color': 'rgba(244, 119, 33, 0.5)'
     },
     {
       'id': 'el id',
       'name': 'el nombre',
       'type': 10,
       'difficulty': 10,
-      'score': 10
+      'score': 10,
+      'color': 'rgba(127, 187, 0, 0.5)'
     },
     {
       'id': 'el id',
       'name': 'el nombre',
       'type': 10,
       'difficulty': 10,
-      'score': 10
+      'score': 10,
+      'color': 'rgba(255, 217, 0, 0.5)'
     },
     {
       'id': 'el id',
       'name': 'el nombre',
       'type': 10,
       'difficulty': 10,
-      'score': 10
+      'score': 10,
+      'color': 'rgba(0, 153, 229, 0.5)'
+    }
+    ,
+    {
+      'id': 'el id',
+      'name': 'el nombre',
+      'type': 10,
+      'difficulty': 10,
+      'score': 10,
+      'color': 'rgba(255, 76, 76, 0.5)'
     }
   ]);
 });

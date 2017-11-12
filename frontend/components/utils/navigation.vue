@@ -13,6 +13,9 @@
       <li>
         <nuxt-link to="/login"><v-icon>lock</v-icon></nuxt-link>
       </li>
+      <li>
+        <nuxt-link to="/reports"><v-icon>show_chart</v-icon></nuxt-link>
+      </li>
     </ul>
     </div>
   </v-nav>

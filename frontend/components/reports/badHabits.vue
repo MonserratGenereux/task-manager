@@ -22,9 +22,9 @@ export default {
   },
   methods: {
     getBadHabits: function () {
-      axios.get('https://jsonplaceholder.typicode.com/posts', {
+      axios.get('http://localhost:3000/report/habit', {
         params: {
-          userId: 1
+          type: 2
         }
       })
         .then((response) => {

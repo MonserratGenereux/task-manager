@@ -33,7 +33,11 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         description: invalid username
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  res.status(HttpStatus.OK).send({
+    "username": "Monserrat",
+    "email": "monserratg@gmail.com",
+    "password": "password123"
+  });
 });
 
 /**

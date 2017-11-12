@@ -61,7 +61,24 @@ router.get('/', (req, res) => {
  *         description: invalid user
  */
 router.get('/task', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  res.status(HttpStatus.OK).send([{
+    "id": "bladwe",
+    "name": "delayed",
+    "created": "hoy",
+    "completedOnTime": "false",
+    "completedBeforeTime": "false",
+    "dueDate": "hoy",
+    "completed": false
+  },
+  {
+    "id": "bladwe",
+    "name": "today",
+    "created": "hoy",
+    "completedOnTime": true,
+    "completedBeforeTime": "false",
+    "dueDate": "10/11/2017",
+    "completed": false
+  }]);
 });
 
 /**
@@ -108,8 +125,8 @@ router.get('/habit', (req, res) => {
       "score": 40
     },
     "id": "id",
-    "name": "name",
-    "type": "type",
+    "name": "uno",
+    "type": "3",
     "score": 19
   }]);
 });

@@ -22,9 +22,9 @@ export default {
   },
   methods: {
     getDelayedTasks: function () {
-      axios.get('https://jsonplaceholder.typicode.com/posts', {
+      axios.get('http://localhost:3000/report/task', {
         params: {
-          userId: 1
+          completedOnTime: false
         }
       })
         .then((response) => {

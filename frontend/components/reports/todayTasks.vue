@@ -23,9 +23,9 @@ export default {
   },
   methods: {
     getTodayTasks: function () {
-      axios.get('https://jsonplaceholder.typicode.com/posts', {
+      axios.get('http://localhost:3000/report/task', {
         params: {
-          userId: 1
+          dueDate: '10/11/2017'
         }
       })
         .then((response) => {
