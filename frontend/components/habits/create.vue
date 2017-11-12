@@ -17,30 +17,34 @@
         <h5>Habit type</h5>
         <div class="type">
           <row s12 m6 l6 offset-l2>
-            <input name="group3" type="radio" id="test1" value=1 v-model="create.type"/>
-            <label for="test1">Good</label>
+
+            <input type="checkbox" id="good" value="true" v-model="create.good">
+            <label for="good">Good</label>
+
           </row>
           <row s12 m6 l6 style="padding-left:90px">
-            <input name="group3" type="radio" id="test2" value=2 v-model="create.type"/>
-            <label for="test2">Bad</label>
+            <input type="checkbox" id="bad" value="true" v-model="create.bad">
+            <label for="bad">Bad</label>
           </row>
+        <!--  <span>bad: {{ create.bad }}</span>
+          <span>good: {{ create.good }}</span>-->
         </div>
         <h5>Difficulty</h5>
         <div class="col l4">
           <p>
-            <input name="group2" type="radio" id="test4" value=1 v-model="create.difficulty"/>
+            <input name="group2" type="radio" id="test4" value=0 v-model="create.difficulty"/>
             <label for="test4">Easy</label>
           </p>
         </div>
         <div class="col l4">
           <p>
-            <input name="group2" type="radio" id="test5" value=2 v-model="create.difficulty"/>
+            <input name="group2" type="radio" id="test5" value=1 v-model="create.difficulty"/>
             <label for="test5">Medium</label>
           </p>
         </div>
         <div class="col l4">
           <p>
-            <input name="group2" type="radio" id="test6" value=3 v-model="create.difficulty"/>
+            <input name="group2" type="radio" id="test6" value=2 v-model="create.difficulty"/>
             <label for="test6">Hard</label>
           </p>
         </div>
@@ -49,7 +53,6 @@
 
 </div>
 <button class="btn waves-effect waves-light" id="buttonSubmit" type="submit" name="action" @click="createHabit()">Save
-
 </button>
   </section>
 </template>
@@ -62,13 +65,17 @@ export default{
       create: []
     }
   },
+  mounted () {
+    this.createHabit()
+  },
   methods: {
     createHabit: function () {
       var api = 'http://localhost:3000/habit'
       var data = {
         'name': this.create.name,
         'description': this.create.description,
-        'type': this.create.type,
+        'good': this.create.good,
+        'bad': this.create.bad,
         'difficulty': this.create.difficulty,
         'score': 0
       }
@@ -76,7 +83,6 @@ export default{
         .then((response) => {
           console.log(data)
           console.log(response.data)
-          // window.location = '/register'
         })
         .catch((error) => {
           console.log(error)

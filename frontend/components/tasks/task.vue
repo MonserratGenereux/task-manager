@@ -2,20 +2,18 @@
   <div class="card">
     <div class="card-content white-text">
       <span class="card-title">Task {{info.name}}</span>
-      <p>Points: {{info.score}}</p>
+      <p>Due date: {{info.score}}</p>
     </div>
     <div class="card-action">
-      <a class="btn-floating btn-large waves-effect waves-light green" @click="success()">
-        <i class="material-icons">exposure_plus_1</i>
-      </a>
-      <a class="btn-floating btn-large waves-effect waves-light red" id="negative" @click="failure()">
-        <i class="material-icons">exposure_neg_1</i>
+      <a class="btn-floating btn-large waves-effect waves-light green" @click="completed()">
+        <i class="material-icons">check</i>
       </a>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -23,11 +21,18 @@ export default {
   },
   props: ['info'],
   methods: {
-    success: function () {
-      alert('te amo mil')
-    },
-    failure: function () {
-      alert('que menso')
+    completed: function (id) {
+      this.info.score = this.info.score + 1
+      var data = {
+        'id': this.id
+      }
+      axios.patch('http://localhost:3000/task', data)
+        .then((response) => {
+          console.log('Respuesta', response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }

@@ -2,39 +2,31 @@
   <v-row>
     <v-grid s12 m6 l4>
       <i class="large material-icons">person</i>
-      <i>{{user.username}}</i>
-    </v-grid>
-    <v-grid s12 m6 l8>
-      <h5 class="left">Tasks</h5>
-      <div class="progress">
-        <div class="determinate" style="width: 90.8%">
-        </div>
-      </div>
-      <h5 class="left">Habits</h5>
-      <div class="progress">
-        <div class="determinate" style="width: 70%"></div>
-      </div>
+      <h5>{{user.username}}</h5>
     </v-grid>
 
     <br></br>
-    <v-grid s12 m6 l6 >
-      <div class="col s12 m7">
-        <div class="row">
-          <div class="col s12 m6">
-            <Tasks/>
+    <v-grid l12>
+      <v-grid s12 m6 l6 >
+        <div class="col s12 m7">
+          <div class="row">
+            <div class="col s12 m6">
+              <Tasks/>
+            </div>
           </div>
         </div>
-      </div>
-    </v-grid>
-    <v-grid s12 m6 l6>
-      <div class="col s12 m7">
-        <div class="row">
-          <div class="col s12 m6">
-            <Habits/>
+      </v-grid>
+      <v-grid s12 m6 l6>
+        <div class="col s12 m7">
+          <div class="row">
+            <div class="col s12 m6">
+              <Habits/>
+            </div>
           </div>
         </div>
-      </div>
+      </v-grid>
     </v-grid>
+
     <v-grid s12 m12 l12>
       <Actions/>
     </v-grid>
@@ -105,5 +97,8 @@ h5.left{
 }
 p{
   text-align: right;
+}
+h5{
+  margin-top: -63px;
 }
 </style>

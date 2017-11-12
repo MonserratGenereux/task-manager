@@ -52,4 +52,7 @@ export default {
 h2{
   text-align: center;
 }
+li{
+  color: black !important;
+}
 </style>

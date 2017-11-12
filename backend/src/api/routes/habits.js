@@ -38,7 +38,8 @@ router.get('/', (req, res) => {
     {
       'id': 'el id',
       'name': 'el nombre',
-      'type': 10,
+      'bad': true,
+      'good': false,
       'difficulty': 10,
       'score': 10,
       'color': 'rgba(244, 119, 33, 0.5)'
@@ -46,7 +47,8 @@ router.get('/', (req, res) => {
     {
       'id': 'el id',
       'name': 'el nombre',
-      'type': 10,
+      'good': true,
+      'bad': false,
       'difficulty': 10,
       'score': 10,
       'color': 'rgba(127, 187, 0, 0.5)'
@@ -54,7 +56,8 @@ router.get('/', (req, res) => {
     {
       'id': 'el id',
       'name': 'el nombre',
-      'type': 10,
+      'good': true,
+      'bad': true,
       'difficulty': 10,
       'score': 10,
       'color': 'rgba(255, 217, 0, 0.5)'
