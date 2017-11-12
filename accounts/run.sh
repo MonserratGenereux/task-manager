@@ -13,4 +13,4 @@ protoc \
   ../shared/proto/accounts/account.proto
 
 # Run
-go run src/main.go
+go run src/main.go src/config.go
