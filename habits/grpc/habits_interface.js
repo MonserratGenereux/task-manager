@@ -9,6 +9,7 @@ var createHabitHandler =    require('./../src/controllers/create-habits.js');
 var deleteHabitHandler =    require('./../src/controllers/delete-habits.js');
 var getHabitByIdHandler =   require('./../src/controllers/get-by-id-habits.js');
 var updateHabitHandler =    require('./../src/controllers/update-habits.js');
+var markGoodBadHandler =    require('./../src/controllers/mark-good-bad-habits.js');
 
 //rpc GetHabits (emptyInput) returns (HabitsResponse)
 function getHabits(call, callback) {
@@ -26,8 +27,8 @@ function getHabits(call, callback) {
    createHabitHandler(call.request)
     .then((statusResponse)=>{
       return callback(null, statusResponse);
-    }).catch((statusResponse)=>{
-      return callback(statusResponse, null);
+    }).catch((statusResponseErr)=>{
+      return callback(statusResponseErr, null);
     })
  }
 //rpc DeleteHabit (habitId) returns (response) {}
@@ -62,6 +63,15 @@ function updateHabit(call, callback) {
    })
 }
 
+function markHabit(call, callback) {
+  markGoodBadHandler(call.request)
+   .then((GetHabit)=>{
+     return callback(null, GetHabit);
+   }).catch((GetHabit)=>{
+     return callback(GetHabit, null);
+   })
+}
+
 function main() {
   var server = new grpc.Server();
   server.addProtoService(habits_proto.HabitService.service, {
@@ -69,7 +79,8 @@ function main() {
     createHabit: createHabit,
     deleteHabit:deleteHabit,
     getHabitById:getHabitById,
-    updateHabit:updateHabit
+    updateHabit:updateHabit,
+    markHabit:markHabit
   });
   server.bind(GRPC_PORT, grpc.ServerCredentials.createInsecure());
   server.start();

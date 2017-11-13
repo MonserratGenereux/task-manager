@@ -15,7 +15,7 @@ var getHabitByIdHandler = function(request){
           GetHabit.succeded = false;
           GetHabit.habit = {};
           console.log("GET HABIT BY ID ERR", GetHabit);
-          reject(GetHabit)
+          accept(GetHabit)
         })
     })
 }

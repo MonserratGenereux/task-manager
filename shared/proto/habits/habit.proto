@@ -19,7 +19,7 @@ service HabitService {
   rpc UpdateHabit (HabitUpdate) returns (StatusResponse) {}
 
   // Set as done a habit by id
-  rpc isDone (CompleteResponse) returns (StatusResponse) {}
+  rpc markHabit (UserUpdate) returns (GetHabit) {}
 
 }
 
@@ -31,10 +31,11 @@ message Habit {
   //Attributes needed for Habits
   string name = 3;
   string  description = 4;
-  string  type = 5;
-  string  difficulty = 6;
-  float   score = 7;
-  string  color = 8;
+  bool  good = 5;
+  bool  bad = 6;
+  string  difficulty = 7;
+  float   score = 8;
+  string  color = 9;
 }
 
 message HabitUpdate {
@@ -42,16 +43,18 @@ message HabitUpdate {
   string userId = 2;
   string name = 3;
   string  description = 4;
-  string  type = 5;
-  string  difficulty = 6;
+  bool  good = 5;
+  bool  bad = 6;
+  string  difficulty = 7;
 }
 
 message HabitCreate {
   string userId = 1;
   string name = 2;
   string  description = 3;
-  string  type = 4;
-  string  difficulty = 5;
+  bool  good = 4;
+  bool  bad = 5;
+  string  difficulty = 6;
 }
 
 message StatusResponse {
@@ -78,7 +81,8 @@ message UserId{
     string userId = 1;
 }
 
-message CompleteResponse{
+message UserUpdate{
     string _id = 1;
-    bool  done = 2;
+    bool  bad = 2;
+    bool  good = 3;
 }

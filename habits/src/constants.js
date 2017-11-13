@@ -11,26 +11,29 @@ define("DIFFICULTY", {
   "2": "HARD"
 });
 
-define("TYPE_NAME", {
-  "0": "GOOD",
-  "1": "BAD",
-  "2": "BOTH"
-});
-
-define("TYPE_VALUE", {
-  "GOOD": "1",
-  "BAD": "2",
-  "BOTH": "3"
+define("DIFFICULTY_NAME", {
+  "EASY": "0",
+  "MEDIUM": "1",
+  "HARD": "2"
 });
 
 define("SCORE", {
-  "GOOD": 2,
-  "BAD": 4,
-  "BOTH": 6,
-  "GOOD_FROM_BLUE": 1,
-  "BAD_FROM_ORANGE": 1.5,
-  "BAD_FROM_RED": 2
+  "EASY": 2,
+  "MEDIUM": 4,
+  "HARD": 6,
+  "BLUE_INCREASE": 1,
+  "GREEN_INCREASE": .5,
+  "ORANGE_DECREASE": 1.5,
+  "RED_DECREASE": 2
 });
+
+define("COLOR_RANGES",{
+  "RED_UPPER_LIM": 0,
+  "ORANGE_LOWER_LIM": 0,
+  "YELLOW_LOWER_LIM": 10,
+  "GREEN_LOWER_LIM": 40,
+  "BLUE_LOWER_LIM": 50
+})
 
 define("COLORS", {
   "RED": "RED",

@@ -5,7 +5,7 @@ var getHabitsHandler = function (request) {
     console.log("getHabitsHandler", request);
     var GetHabits = {}
     return new Promise((accept,reject)=>{
-      HabitSchema.find({_userId: request._userId})
+      HabitSchema.find({userId: request.userId})
         .then((habits)=>{
           var habitsArray = habits.map(function(habit){
             return new Habit(habit).getHabit()
@@ -19,7 +19,7 @@ var getHabitsHandler = function (request) {
           GetHabits.succeded = false;
           GetHabits.habits = [];
           console.log("GET HABITS ERR", GetHabits);
-          return reject(GetHabits);
+          return accept(GetHabits);
         })
     })
 }

@@ -16,10 +16,13 @@ var HabitSchema = new Schema({
       type: String,
       default: ""
     },
-    type: {
-      type: String,
-      required: true,
-      enum: Object.keys(constants.TYPE_NAME)
+    good: {
+      type: Boolean,
+      required: true
+    },
+    bad: {
+      type: Boolean,
+      required: true
     },
     difficulty: {
       type: String,

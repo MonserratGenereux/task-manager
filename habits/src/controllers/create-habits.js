@@ -1,24 +1,27 @@
 var HabitSchema = require('./../schema/Habit.js');
 var BasicHabit = require('./../HabitClass.js').BasicHabit;
+var StatusResponse = require('./../StatusResponse.js');
 
 var createHabitHandler = function(request){
-    var habit = new BasicHabit(request).getHabit();
-    var statusResponse = {}
     return new Promise((accept, reject)=>{
-      HabitSchema.create(habit)
+      var habit = new BasicHabit(request);
+      var sr;
+      if(!habit.validType()){
+        sr = new StatusResponse(false, "", "Please define if its a good, bad or both for the habit.").getStatusResponse();
+        console.log("CREATE STATUS ER:", sr);
+        return accept(sr);
+      }else{
+        HabitSchema.create(habit.getHabit())
         .then((habit)=>{
-          statusResponse.succeded = true;
-          statusResponse.habitId = habit._id.toString();
-          statusResponse.error = "";
-          console.log("CREATE STATUS:", statusResponse);
-          accept(statusResponse)
+          sr = new StatusResponse(true, habit._id.toString(),"").getStatusResponse();
+          console.log("CREATE STATUS:", sr);
+          accept(sr)
         },(error)=>{
-          statusResponse.succeded = false;
-          statusResponse.habitId = "";
-          statusResponse.error = error.message;
-          console.log("CREATE STATUS ER:", statusResponse);
-          reject(statusResponse)
+          sr = new StatusResponse(false, "", error.message).getStatusResponse();
+          console.log("CREATE STATUS ER:", sr);
+          accept(sr)
         })
+      }
     })
 
 }
