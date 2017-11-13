@@ -1,35 +1,64 @@
 module.exports = {
-	general_reports:{
+	admin_reports:{
 		type: 'object',
 		properties:{
-			countCompletedTask: { type: 'integer'},
-			countCreatedTask: { type: 'integer'},
-			countCompletedHabit: { type: 'integer'},
-			countCreatedHabit: { type: 'integer'}
+			habits: {
+				type: 'object',
+				properties:{
+					countGreen: { type: 'integer'},
+					countRed: { type: 'integer'},
+					countBlue: { type: 'integer'},
+					countYellow: { type: 'integer'},
+					countOrange: { type: 'integer'},
+					best: { $ref: "#/definitions/habits"},
+					worst: { $ref: "#/definitions/habits"}
+				}
+			},
+			tasks: {
+				type: 'object',
+				properties:{
+					completed: { type: 'integer'},
+					delayed: { type: 'integer'},
+					onTime: { type: 'integer'},
+					beforeTime: { type: 'integer'},
+					available: { type: 'integer'}
+				}
+			}
 		}
 	},
-	task_reports: {
+	user_reports: {
 		type: 'object',
 		properties:{
-			id: { type: 'string'},
-			name: { type: 'string'},
-			created: { type: 'string'},
-			completedOnTime: { type: 'string'},
-			completedBeforeTime: { type: 'string'},
-			dueDate: { type: 'string'},
-			completed: { type: 'boolean'}
-		},
-        additionalProperties: false
-	},
-	habit_reports: {
-		type: 'object',
-		properties:{
-			bestHabit: { type: 'object' },
-			worstHabit: { type: 'object' },
-			id: { type: 'string'},
-			name: { type: 'string'},
-			type: { type: 'string'},
-			score: { type: 'integer'},
-		}
-	}
-};
+			tasks: {
+				type: 'object',
+				properties: {
+					delayed: {
+						type: 'array',
+						items:{
+							$ref: "#/definitions/tasks"},
+						},
+						dueToday: {
+							type: 'array',
+							items:{
+								$ref: "#/definitions/tasks"},
+							}
+						}
+					},
+					habits: {
+						type: 'object',
+						properties: {
+							good: {
+								type: 'array',
+								items:{
+									$ref: "#/definitions/habits"},
+								},
+								bad: {
+									type: 'array',
+									items:{
+										$ref: "#/definitions/habits"},
+									}
+								}
+							}
+						}
+					}
+				};
