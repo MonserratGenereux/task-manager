@@ -1,5 +1,5 @@
 module.exports = {
-    habit:{
+    habits:{
         type: 'object',
         properties:{
             id: { type: 'string'},

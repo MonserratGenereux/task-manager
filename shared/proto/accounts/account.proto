@@ -5,10 +5,10 @@ package account;
 // The Accounts service definition.
 service AccountService {
   // Retrieve account by username
-  rpc GetAccountByUsername (GetAccountByUsernameRequest) returns (Account) {}
+  rpc GetAccountByID (AccountID) returns (GetAccountResponse) {}
 
-  // Checks if an account exists given the id
-  rpc AccountExists(AccountExistsRequest) returns (AccountExistsResponse){}
+  // Retrieve account by username
+  rpc GetAccountByUsername (AccountUsername) returns (GetAccountResponse) {}
 
   // Creates new account. Id must be empty.
   rpc CreateAccount (Account) returns (StatusResponse) {}
@@ -17,13 +17,13 @@ service AccountService {
   rpc UpdateAccount(Account) returns (StatusResponse) {}
 
   // Deletes the accounts given its id.
-  rpc DeleteAccount(DeleteAccountRequest) returns (StatusResponse) {}
+  rpc DeleteAccount(AccountID) returns (StatusResponse) {}
 }
 
 // 
 message Account {
   // Unique account id in the Task Manager system.
-  string id = 1;
+  int64 id = 1;
 
   // Unique username.
   string username = 2;
@@ -37,21 +37,19 @@ message Account {
 
 message StatusResponse {
   bool succeded = 1;
-  string error = 2;
+  int64 account_id = 2;
+  string error = 3;
 }
 
-message AccountExistsRequest {
-  string id  = 1;
+message AccountID {
+  int64 id = 1;
 }
 
-message AccountExistsResponse {
-  bool exists  = 1;
+message AccountUsername {
+  string username = 1;
 }
 
-message DeleteAccountRequest {
-  string id  = 1;
-}
-
-message GetAccountByUsernameRequest {
-  string username  = 1;
+message GetAccountResponse {
+  bool exists = 1;
+  Account account = 2;
 }

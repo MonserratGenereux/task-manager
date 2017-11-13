@@ -1,5 +1,5 @@
 module.exports = {
-	general_report:{
+	general_reports:{
 		type: 'object',
 		properties:{
 			countCompletedTask: { type: 'integer'},
@@ -8,7 +8,7 @@ module.exports = {
 			countCreatedHabit: { type: 'integer'}
 		}
 	},
-	task_report: {
+	task_reports: {
 		type: 'object',
 		properties:{
 			id: { type: 'string'},
@@ -21,7 +21,7 @@ module.exports = {
 		},
         additionalProperties: false
 	},
-	habit_report: {
+	habit_reports: {
 		type: 'object',
 		properties:{
 			bestHabit: { type: 'object' },

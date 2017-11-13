@@ -1,7 +1,15 @@
 package main
 
-import "server"
+import (
+	"server"
+)
 
 func main() {
-	server.Start("0.0.0.0", 50051)
+	accountsServer := &server.AccountsServer{
+		Host: "0.0.0.0",
+		Port: 50051,
+		DB:   DB,
+	}
+
+	accountsServer.Start()
 }

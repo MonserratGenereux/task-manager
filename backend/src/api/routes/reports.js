@@ -8,10 +8,10 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 /**
  * @swagger
- * /report:
+ * /reports:
  *   get:
  *     tags:
- *       - "report"
+ *       - "reports"
  *     summary: Fetch reports
  *     description: Returns a report of the tasks and habit of the user
  *     produces:
@@ -26,7 +26,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *       200:
  *         description: OK
  *         schema:
- *              $ref: "#/definitions/general_report"
+ *              $ref: "#/definitions/general_reports"
  *       400:
  *         description: invalid username
  */
@@ -36,10 +36,10 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
- * /report/task:
+ * /report/tasks:
  *   get:
  *     tags:
- *       - "report"
+ *       - "reports"
  *     summary: Fetch task report
  *     description: Returns report of the task of all users
  *     consumes:
@@ -58,7 +58,7 @@ router.get('/', (req, res) => {
  *         schema:
  *           type: "array"
  *           items: {
- *              $ref: "#/definitions/task_report"
+ *              $ref: "#/definitions/task_reports"
  *           }
  *       400:
  *         description: invalid user
@@ -69,10 +69,10 @@ router.get('/task', (req, res) => {
 
 /**
  * @swagger
- * /report/habit:
+ * /reports/habit:
  *   get:
  *     tags:
- *       - "report"
+ *       - "reports"
  *     summary: Fetch habit report
  *     description: Returns report of the habit of all users
  *     produces:
@@ -89,7 +89,7 @@ router.get('/task', (req, res) => {
  *         schema:
  *           type: "array"
  *           items: {
- *              $ref: "#/definitions/habit_report"
+ *              $ref: "#/definitions/habit_reports"
  *           }
  *       400:
  *         description: invalid user

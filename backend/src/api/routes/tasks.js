@@ -8,12 +8,12 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 /**
  * @swagger
- * /habit:
+ * /tasks:
  *   get:
  *     tags:
- *       - "habit"
- *     summary: Fetch habits
- *     description: Returns all habits available for the user
+ *       - "tasks"
+ *     summary: Fetch tasks
+ *     description: Returns all tasks available for the user
  *     produces:
  *       - application/json
  *     parameters:
@@ -24,12 +24,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         type: string
  *     responses:
  *       200:
- *         description: OK
- *         schema:
- *           type: "array"
- *           items: {
- *              $ref: "#/definitions/habit"
- *           }
+ *         description: list of tasks
  *       400:
  *         description: invalid username
  */
@@ -39,45 +34,12 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
- * /habit/{habitId}:
+ * /tasks/{taskId}:
  *   get:
  *     tags:
- *       - "habit"
- *     summary: Fetch habit
- *     description: Returns specified habit
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: user Id
- *         description: id of the user
- *         in: header
- *         required: true
- *         type: string
- *       - name: habitId
- *         description: id of the habit
- *         in: path
- *         required: true
- *         type: string
- *     responses:
- *       200:
- *         description: OK
- *         schema:
- *           $ref: "#/definitions/habit"
- *       400:
- *         description: invalid habit
- */
-router.get('/:habitId', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
-});
-
-/**
- * @swagger
- * /habit:
- *   post:
- *     tags:
- *       - "habit"
- *     summary: Create new habit
- *     description: Create new habit
+ *       - "tasks"
+ *     summary: Fetch task
+ *     description: Returns specified task
  *     produces:
  *       - application/json
  *     parameters:
@@ -86,17 +48,42 @@ router.get('/:habitId', (req, res) => {
  *         in: header
  *         required: true
  *         type: string
- *       - name: habit
- *         description: info of the newly create habit
- *         in: body
- *         required: true
- *         schema:
- *           $ref: "#/definitions/habit"
  *     responses:
  *       200:
- *         description: OK
+ *         description: single task
  *       400:
- *         description: server error
+ *         description: invalid task
+ */
+router.get('/:taskId', (req, res) => {
+  res.status(HttpStatus.OK).send('ok');
+});
+
+/**
+ * @swagger
+ * /tasks:
+ *   post:
+ *     tags:
+ *       - "tasks"
+ *     summary: Create new task
+ *     description: Create new task
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         description: id of the user
+ *         in: header
+ *         required: true
+ *         type: string
+ *       - name: task
+ *         description: info of the newly create task
+ *         in: body
+ *         required: true
+ *         type: object
+ *     responses:
+ *       200:
+ *         description: single task
+ *       400:
+ *         description: invalid username
  */
 router.post('/', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
@@ -104,12 +91,12 @@ router.post('/', (req, res) => {
 
 /**
  * @swagger
- * /habit:
+ * /tasks:
  *   patch:
  *     tags:
- *       - "habit"
- *     summary: Update existing habit
- *     description: Update existing habit
+ *       - "tasks"
+ *     summary: Update existing task
+ *     description: Update existing task
  *     produces:
  *       - application/json
  *     parameters:
@@ -118,17 +105,16 @@ router.post('/', (req, res) => {
  *         in: header
  *         required: true
  *         type: string
- *       - name: habit
- *         description: info of the habit to modify
+ *       - name: task
+ *         description: info of the task to be modified
  *         in: body
  *         required: true
- *         schema:
- *           $ref: "#/definitions/habit"
+ *         type: object
  *     responses:
  *       200:
- *         description: habit created
+ *         description: single task
  *       400:
- *         description: server error
+ *         description: invalid username
  */
 router.patch('/', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
@@ -136,12 +122,12 @@ router.patch('/', (req, res) => {
 
 /**
  * @swagger
- * /habit:
+ * /tasks:
  *   delete:
  *     tags:
- *       - "habit"
- *     summary: Delete habit
- *     description: Delete habit
+ *       - "tasks"
+ *     summary: Delete task
+ *     description: Delete task
  *     produces:
  *       - application/json
  *     parameters:
@@ -150,16 +136,16 @@ router.patch('/', (req, res) => {
  *         in: header
  *         required: true
  *         type: string
- *       - name: habitId
- *         description: id of the habit to delete
+ *       - name: taskId
+ *         description: id of the task to delete
  *         in: body
  *         required: true
  *         type: string
  *     responses:
  *       200:
- *         description: habit deleted
+ *         description: single task
  *       400:
- *         description: server error
+ *         description: invalid username
  */
 router.delete('/', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
@@ -167,12 +153,12 @@ router.delete('/', (req, res) => {
 
 /**
  * @swagger
- * /habit/done:
+ * /tasks/complete:
  *   post:
  *     tags:
- *       - "habit"
- *     summary: Mark habit as done
- *     description: Mark habit as done
+ *       - "tasks"
+ *     summary: Mark task as complete
+ *     description: Mark task as complete
  *     produces:
  *       - application/json
  *     parameters:
@@ -181,18 +167,18 @@ router.delete('/', (req, res) => {
  *         in: header
  *         required: true
  *         type: string
- *       - name: habitId
- *         description: id of the habit to mark as done
+ *       - name: taskId
+ *         description: id of the task to mark as complete
  *         in: body
  *         required: true
  *         type: string
  *     responses:
  *       200:
- *         description: OK
+ *         description: single task
  *       400:
- *         description: server error
+ *         description: invalid username
  */
-router.post('/done', (req, res) => {
+router.post('/complete', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
 });
 
