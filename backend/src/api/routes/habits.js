@@ -167,12 +167,12 @@ router.delete('/', (req, res) => {
 
 /**
  * @swagger
- * /habits/done:
+ * /habits/good/{habitId}:
  *   post:
  *     tags:
  *       - "habits"
- *     summary: Mark habit as done
- *     description: Mark habit as done
+ *     summary: Add points to good habit
+ *     description: Add points to good habit
  *     produces:
  *       - application/json
  *     parameters:
@@ -182,7 +182,7 @@ router.delete('/', (req, res) => {
  *         required: true
  *         type: string
  *       - name: habitId
- *         description: id of the habit to mark as done
+ *         description: id of the habit to add points
  *         in: body
  *         required: true
  *         type: string
@@ -192,7 +192,37 @@ router.delete('/', (req, res) => {
  *       400:
  *         description: server error
  */
-router.post('/done', (req, res) => {
+router.post('/good/:habitId', (req, res) => {
+  res.status(HttpStatus.OK).send('ok');
+});
+/**
+ * @swagger
+ * /habits/bad/{habitId}:
+ *   post:
+ *     tags:
+ *       - "habits"
+ *     summary: Subtract points to bad habit
+ *     description: Subtract points to bad habit
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         description: id of the user
+ *         in: header
+ *         required: true
+ *         type: string
+ *       - name: habitId
+ *         description: id of the habit to subtract points
+ *         in: body
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *       400:
+ *         description: server error
+ */
+router.post('/bad/:habitId', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
 });
 
