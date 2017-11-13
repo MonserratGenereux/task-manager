@@ -2,7 +2,6 @@ var HabitSchema = require('./../schema/Habit.js');
 var Habit = require('./../HabitClass.js').Habit;
 
 var getHabitsHandler = function (request) {
-    console.log("getHabitsHandler", request);
     var GetHabits = {}
     return new Promise((accept,reject)=>{
       HabitSchema.find({userId: request.userId})

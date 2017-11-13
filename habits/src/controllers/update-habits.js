@@ -6,7 +6,6 @@ var updateHabitHandler = function(request){
     var sr;
     return new Promise((accept,reject)=>{
       var habitUpdate = new Habit(request);
-      console.log("To update", habitUpdate.getHabitUpdate());
       HabitSchema.findByIdAndUpdate(habitUpdate.getId(), habitUpdate.getHabitUpdate())
         .then((updated)=>{
           sr = new StatusResponse(true, updated._id.toString(),"").getStatusResponse();

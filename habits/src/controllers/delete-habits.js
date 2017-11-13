@@ -2,7 +2,6 @@ var HabitSchema = require('./../schema/Habit.js');
 var StatusResponse = require('./../StatusResponse.js');
 
 var deleteHabitHandler = function(request){
-    //console.log("Delete Habit", request);
     var sr = {}
     return new Promise((accept, reject)=>{
       HabitSchema.find({_id: request._id})
