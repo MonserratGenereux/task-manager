@@ -42,3 +42,5 @@ define("COLORS", {
   "GREEN": "GREEN",
   "BLUE": "BLUE"
 });
+
+define("MONGO_PATH", "mongodb://localhost/habits");
