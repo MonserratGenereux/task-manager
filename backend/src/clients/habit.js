@@ -1,5 +1,5 @@
 const path = require('path');
-var PROTO_PATH = path.join(__dirname, '/../../../shared/proto/habits/habit.proto');
+var PROTO_PATH = path.join(__dirname, '/../../../shared/proto/habits/habits.proto');
 
 var grpc = require('grpc');
 var habits_proto = grpc.load(PROTO_PATH).habits;
