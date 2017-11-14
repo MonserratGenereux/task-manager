@@ -234,6 +234,8 @@ router.delete('/', (req, res) => {
  *     responses:
  *       200:
  *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/habits"
  *       400:
  *         description: server error
  */
@@ -264,6 +266,8 @@ router.post('/good/:habitId', (req, res) => {
  *     responses:
  *       200:
  *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/habits"
  *       400:
  *         description: server error
  */

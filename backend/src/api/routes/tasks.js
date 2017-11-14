@@ -33,30 +33,27 @@ router.get('/', (req, res) => {
     {
       'id': 'el id',
       'name': 'el nombre',
-      'type': 10,
-      'difficulty': 10,
-      'score': 10
+      'completed': true,
+      'dueDate': '12/12/2017'
+
     },
     {
       'id': 'el id',
       'name': 'el nombre',
-      'type': 10,
-      'difficulty': 10,
-      'score': 10
+      'completed': false,
+      'dueDate': '12/12/2017'
     },
     {
       'id': 'el id',
       'name': 'el nombre',
-      'type': 10,
-      'difficulty': 10,
-      'score': 10
+      'completed': true,
+      'dueDate': '12/12/2017'
     },
     {
       'id': 'el id',
       'name': 'el nombre',
-      'type': 10,
-      'difficulty': 10,
-      'score': 10
+      'completed': false,
+      'dueDate': '12/12/2017'
     }
   ]);
 });

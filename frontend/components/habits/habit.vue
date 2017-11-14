@@ -6,8 +6,8 @@
         <p>Points: {{info.score}}</p>
       </div>
       <div class="card-action">
-        <a v-if="this.info.typeGood== true" class="btn-floating btn-large waves-effect waves-light green" @click="success(info.id)" ><i class="material-icons">add</i></a>
-        <a v-if="this.info.typeBad== true"class="btn-floating btn-large waves-effect waves-light red" @click="failure(info.id)" style="margin-left: 249px;"><i class="material-icons">remove</i></a>
+        <a v-if="this.info.good== true" class="btn-floating btn-large waves-effect waves-light green" @click="success(info.id)" ><i class="material-icons">add</i></a>
+        <a v-if="this.info.bad== true"class="btn-floating btn-large waves-effect waves-light red" @click="failure(info.id)" style="margin-left: 249px;"><i class="material-icons">remove</i></a>
       </div>
     </div>
   </section>
@@ -23,13 +23,10 @@ export default {
   props: ['info'],
   methods: {
     success: function (id) {
-      this.info.score = this.info.score + 1
       var data = {
-        'id': this.id,
-        'good': true,
-        'bad': false
+        'id': this.id
       }
-      axios.patch('http://localhost:3000/habit', data)
+      axios.post('http://localhost:3000/habits/good' + this.info.id, data)
         .then((response) => {
           console.log('Respuesta', response)
         })
@@ -38,13 +35,10 @@ export default {
         })
     },
     failure: function (id) {
-      this.info.score = this.info.score - 1
       var data = {
-        'id': this.id,
-        'good': false,
-        'bad': true
+        'id': this.id
       }
-      axios.patch('http://localhost:3000/habit', data)
+      axios.post('http://localhost:3000/habits/bad' + this.info.id, data)
         .then((response) => {
           console.log('Respuesta', response)
         })

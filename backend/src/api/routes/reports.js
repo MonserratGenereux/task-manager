@@ -31,7 +31,35 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         description: invalid username
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  res.status(HttpStatus.OK).send({
+    "habits": {
+      "countGreen": 23,
+      "countRed": 44,
+      "countBlue": 532,
+      "countYellow": 62,
+      "countOrange": 22,
+      "best": {
+        "id": "234567",
+        "name": "besttt",
+        "type": 1,
+        "difficulty": 0,
+        "score": 90
+      },
+      "worst": {
+        "id": "asdfgh",
+        "name": "worst",
+        "type": 0,
+        "difficulty": 2,
+        "score": -20
+      }
+    },
+    "tasks": {
+      "completed": 23,
+      "delayed": 2,
+      "onTime": 10,
+      "beforeTime": 3,
+      "available": 4
+    }});
 });
 
 /**
@@ -60,75 +88,8 @@ router.get('/', (req, res) => {
  *       400:
  *         description: invalid user
  */
-router.get('/task', (req, res) => {
-  res.status(HttpStatus.OK).send([{
-    "id": "bladwe",
-    "name": "delayed",
-    "created": "hoy",
-    "completedOnTime": "false",
-    "completedBeforeTime": "false",
-    "dueDate": "hoy",
-    "completed": false
-  },
-  {
-    "id": "bladwe",
-    "name": "today",
-    "created": "hoy",
-    "completedOnTime": true,
-    "completedBeforeTime": "false",
-    "dueDate": "10/11/2017",
-    "completed": false
-  }]);
-});
-
-/**
- * @swagger
- * /report/habit:
- *   get:
- *     tags:
- *       - "report"
- *     summary: Fetch habit report
- *     description: Returns report of the habit of all users
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: userId
- *         description: id of the user admin
- *         in: header
- *         required: true
- *         type: string
- *     responses:
- *       200:
- *         description: OK
- *         schema:
- *           type: "array"
- *           items: {
- *              $ref: "#/definitions/habit_report"
- *           }
- *       400:
- *         description: invalid user
- */
-router.get('/habit', (req, res) => {
-  res.status(HttpStatus.OK).send([{
-    "bestHabit": {
-      "id": "best id",
-      "name": "best name",
-      "type": 9,
-      "difficulty": 90,
-      "score": 40
-    },
-    "worstHabit": {
-      "id": "worst id",
-      "name": "worst name",
-      "type": 9,
-      "difficulty": 90,
-      "score": 40
-    },
-    "id": "id",
-    "name": "uno",
-    "type": "3",
-    "score": 19
-  }]);
+router.get('/report/{userId}', (req, res) => {
+  res.status(HttpStatus.OK).send('ok');
 });
 
 module.exports = router;

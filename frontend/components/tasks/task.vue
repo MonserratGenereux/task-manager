@@ -1,8 +1,8 @@
 <template>
-  <div class="card">
+  <div class="card" v-if="!info.completed">
     <div class="card-content white-text">
       <span class="card-title">Task {{info.name}}</span>
-      <p>Due date: {{info.score}}</p>
+      <p>Due date: {{info.dueDate}}</p>
     </div>
     <div class="card-action">
       <a class="btn-floating btn-large waves-effect waves-light green" @click="completed()">
@@ -22,11 +22,10 @@ export default {
   props: ['info'],
   methods: {
     completed: function (id) {
-      this.info.score = this.info.score + 1
       var data = {
         'id': this.id
       }
-      axios.patch('http://localhost:3000/task', data)
+      axios.post('http://localhost:3000/tasks/complete/' + this.info.id, data)
         .then((response) => {
           console.log('Respuesta', response)
         })

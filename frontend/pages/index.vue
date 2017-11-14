@@ -57,7 +57,7 @@ export default{
   },
   methods: {
     getUser: function () {
-      axios.get('http://localhost:3000/account', {
+      axios.get('http://localhost:3000/accounts', {
         params: {
           password: 'password123'
         }

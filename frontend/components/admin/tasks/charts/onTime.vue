@@ -6,13 +6,14 @@
 
 <script>
   import LineChart from './chart.js'
-
+  import axios from 'axios'
   export default {
     components: {
       LineChart
     },
     data () {
       return {
+        range: [],
         datacollection: null,
         graphData: {}
       }
@@ -22,27 +23,25 @@
     },
     methods: {
       fillData () {
-        this.getData()
-        this.datacollection = {
-          labels: this.graphData.label,
-          datasets: [
-            {
-              backgroundColor: this.graphData.color,
-              data: this.graphData.data
-            }
-          ]
-        }
-      },
-      getData () {
         // axios
-        this.graphData = {
-          label: ['On time', 'Before Time'],
-          data: [this.getRandomInt(), this.getRandomInt()],
-          color: ['rgba(255, 217, 0, 0.5)', 'rgba(244, 119, 33, 0.5)']
-        }
-      },
-      getRandomInt () {
-        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+        axios.get('http://localhost:3000/reports', {
+          params: {
+          }
+        })
+          .then((response) => {
+            this.datacollection = {
+              labels: ['Before Time', 'On Time'],
+              datasets: [
+                {
+                  backgroundColor: ['rgba(255, 76, 76, 0.5)', 'rgba(0, 153, 229, 0.5)'],
+                  data: [response.data.tasks.available, response.data.tasks.completed]
+                }
+              ]
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
       }
     }
   }

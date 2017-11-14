@@ -1,59 +1,59 @@
 <template>
   <section>
     <div class="box">
-    <div class="box-part">
-      <h3>Create Habit </h3>
-      <v-grid s12 m6 l6 >
-        <div class="input-field col l12">
-          <input id="last_name" type="text" class="validate" v-model="create.name">
-          <label for="last_name">Name</label>
+      <div class="box-part">
+        <h3>Create Habit </h3>
+        <v-grid s12 m6 l6 >
+          <div class="input-field col l12">
+            <input id="last_name" type="text" class="validate" v-model="create.name">
+            <label for="last_name">Name</label>
           </div>
           <div class="input-field col l12">
-          <input id="last_name" type="text" class="validate" v-model="create.description">
-          <label for="last_name">Description</label>
-        </div>
-      </v-grid>
-      <v-grid s12 m6 l6 id="bp-left">
-        <h5>Habit type</h5>
-        <div class="type">
-          <row s12 m6 l6 offset-l2>
+            <input id="last_name" type="text" class="validate" v-model="create.description">
+            <label for="last_name">Description</label>
+          </div>
+        </v-grid>
+        <v-grid s12 m6 l6 id="bp-left">
+          <h5>Habit type</h5>
+          <div class="type">
+            <row s12 m6 l6 offset-l2>
 
-            <input type="checkbox" id="good" value="true" v-model="create.good">
-            <label for="good">Good</label>
+              <input type="checkbox" id="good" value="true" v-model="create.good">
+              <label for="good">Good</label>
 
-          </row>
-          <row s12 m6 l6 style="padding-left:90px">
-            <input type="checkbox" id="bad" value="true" v-model="create.bad">
-            <label for="bad">Bad</label>
-          </row>
-        <!--  <span>bad: {{ create.bad }}</span>
-          <span>good: {{ create.good }}</span>-->
-        </div>
-        <h5>Difficulty</h5>
-        <div class="col l4">
-          <p>
-            <input name="group2" type="radio" id="test4" value=0 v-model="create.difficulty"/>
-            <label for="test4">Easy</label>
-          </p>
-        </div>
-        <div class="col l4">
-          <p>
-            <input name="group2" type="radio" id="test5" value=1 v-model="create.difficulty"/>
-            <label for="test5">Medium</label>
-          </p>
-        </div>
-        <div class="col l4">
-          <p>
-            <input name="group2" type="radio" id="test6" value=2 v-model="create.difficulty"/>
-            <label for="test6">Hard</label>
-          </p>
-        </div>
-      </v-grid>
+            </row>
+            <row s12 m6 l6 style="padding-left:90px">
+              <input type="checkbox" id="bad" value="true" v-model="create.bad">
+              <label for="bad">Bad</label>
+            </row>
+            <!--  <span>bad: {{ create.bad }}</span>
+            <span>good: {{ create.good }}</span>-->
+          </div>
+          <h5>Difficulty</h5>
+          <div class="col l4">
+            <p>
+              <input name="group2" type="radio" id="test4" value=0 v-model="create.difficulty"/>
+              <label for="test4">Easy</label>
+            </p>
+          </div>
+          <div class="col l4">
+            <p>
+              <input name="group2" type="radio" id="test5" value=1 v-model="create.difficulty"/>
+              <label for="test5">Medium</label>
+            </p>
+          </div>
+          <div class="col l4">
+            <p>
+              <input name="group2" type="radio" id="test6" value=2 v-model="create.difficulty"/>
+              <label for="test6">Hard</label>
+            </p>
+          </div>
+        </v-grid>
+      </div>
+
     </div>
-
-</div>
-<button class="btn waves-effect waves-light" id="buttonSubmit" type="submit" name="action" @click="createHabit()">Save
-</button>
+    <button class="btn waves-effect waves-light" id="buttonSubmit" type="submit" name="action" @click="createHabit()">Save
+    </button>
   </section>
 </template>
 
@@ -65,28 +65,32 @@ export default{
       create: []
     }
   },
-  mounted () {
-    this.createHabit()
-  },
   methods: {
     createHabit: function () {
-      var api = 'http://localhost:3000/habit'
-      var data = {
-        'name': this.create.name,
-        'description': this.create.description,
-        'good': this.create.good,
-        'bad': this.create.bad,
-        'difficulty': this.create.difficulty,
-        'score': 0
+      if (!this.create.name || !this.create.description || !this.create.difficulty) {
+        alert('error')
+      } else {
+        var api = 'http://localhost:3000/habits'
+        var data = {
+          'name': this.create.name,
+          'description': this.create.description,
+          'good': this.create.good,
+          'bad': this.create.bad,
+          'difficulty': this.create.difficulty,
+          'score': 0
+        }
+        axios.post(api, data)
+          .then((response) => {
+            console.log(data)
+            console.log(response.data)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+        alert('Habito creado exitosamente')
+        this.$modal.hide('habits')
+        this.$emit('load', 'habit')
       }
-      axios.post(api, data)
-        .then((response) => {
-          console.log(data)
-          console.log(response.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
     }
   }
 }

@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     getTasks: function () {
-      axios.get('http://localhost:3000/task', {
+      axios.get('http://localhost:3000/tasks', {
       })
         .then((response) => {
           console.log('Respuesta', this.tasks = response.data)

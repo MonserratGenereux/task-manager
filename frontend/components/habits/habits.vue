@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     getHabits: function () {
-      axios.get('http://localhost:3000/habit', {
+      axios.get('http://localhost:3000/habits', {
       })
         .then((response) => {
           console.log('Respuesta', response)
