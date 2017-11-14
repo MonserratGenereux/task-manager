@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package account;
+package accounts;
+
+option go_package = "pb/accounts";
 
 // The Accounts service definition.
 service AccountService {
@@ -20,7 +22,7 @@ service AccountService {
   rpc DeleteAccount(AccountID) returns (StatusResponse) {}
 }
 
-// 
+
 message Account {
   // Unique account id in the Task Manager system.
   int64 id = 1;

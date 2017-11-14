@@ -2,12 +2,14 @@ syntax = "proto3";
 
 package habits;
 
+option go_package = "pb/habits";
+
 service HabitsService {
   //Retrieve all habits from user
-  rpc GetHabits (UserId) returns (GetHabits) {}
+  rpc GetHabits (UserId) returns (GetHabitsResponse) {}
 
   //Gets an habit by ID
-  rpc GetHabitById (HabitId) returns (GetHabit) {}
+  rpc GetHabitById (HabitId) returns (GetHabitResponse) {}
 
   //Deletes a habit by id
   rpc DeleteHabit (HabitId) returns (StatusResponse) {}
@@ -19,7 +21,7 @@ service HabitsService {
   rpc UpdateHabit (HabitUpdate) returns (StatusResponse) {}
 
   // Set as done a habit by id
-  rpc markHabit (UserUpdate) returns (GetHabit) {}
+  rpc MarkHabit (UserUpdate) returns (GetHabitResponse) {}
 
 }
 
@@ -63,25 +65,25 @@ message StatusResponse {
   string error = 3;
 }
 
-message GetHabits{
+message GetHabitsResponse {
     bool succeded = 1;
     repeated Habit habits = 2;
 }
 
-message GetHabit{
+message GetHabitResponse {
     bool succeded = 1;
     Habit habit = 2;
 }
 
-message HabitId{
+message HabitId {
     string _id = 1;
 }
 
-message UserId{
+message UserId {
     string userId = 1;
 }
 
-message UserUpdate{
+message UserUpdate {
     string _id = 1;
     bool  bad = 2;
     bool  good = 3;

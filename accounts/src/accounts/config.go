@@ -1,7 +1,7 @@
 package main
 
 import (
-	"db"
+	"accounts/db"
 	"log"
 
 	"github.com/go-redis/redis"

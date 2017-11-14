@@ -1,7 +1,7 @@
 package main
 
 import (
-	"server"
+	"accounts/server"
 )
 
 func main() {

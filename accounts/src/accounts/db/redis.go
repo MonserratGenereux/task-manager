@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	pb "pb/account"
+	pb "pb/accounts"
 	"strconv"
 
 	"github.com/go-redis/redis"

@@ -1,12 +1,12 @@
 package server
 
 import (
-	"db"
+	"accounts/db"
 	"fmt"
 	"log"
 	"net"
 
-	pb "pb/account"
+	pb "pb/accounts"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"

@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"testing"
 
-	pb "pb/account"
+	pb "pb/accounts"
 
 	"github.com/alicebob/miniredis"
 	"github.com/go-redis/redis"
