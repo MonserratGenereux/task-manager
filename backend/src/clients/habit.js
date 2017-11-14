@@ -5,7 +5,7 @@ var grpc = require('grpc');
 var habits_proto = grpc.load(PROTO_PATH).habits;
 
 function main() {
-  var client = new habits_proto.HabitService('localhost:50051',
+  var client = new habits_proto.HabitsService('localhost:50051',
                                        grpc.credentials.createInsecure());
 
   // client.getHabits({userId:'1'}, function(err, response) {
@@ -20,35 +20,35 @@ function main() {
   //   console.log("createHabit: ", response, err);
   // });
   //
-  client.createHabit({userId: '2', name: 'Pedro', good: true, bad: true, difficulty: "2"}, function(err, response) {
-    console.log("createHabit: ", response, err);
-  });
+  // client.createHabit({userId: '2', name: 'Pedro', good: true, bad: true, difficulty: "2"}, function(err, response) {
+  //   console.log("createHabit: ", response, err);
+  // });
   //
   // client.createHabit({userId: '2', name: 'Toa', good: false, bad: false, difficulty: "2"}, function(err, response) {
   //   console.log("createHabit: ", response, err);
   // });
 
-  // client.deleteHabit({_id: '5a08b3fa65f9291944c2a938'}, function(err, response) {
+  // client.deleteHabit({_id: '5a08e77c3cb6c701800dbe95'}, function(err, response) {
   //   console.log('deleteHabit:', response, err);
   // });
 
-  // client.getHabitById({_id: '5a08d82ace356f51e46214a9'}, function(err, response) {
+  // client.getHabitById({_id: '5a0a6d353b865967a44980cf'}, function(err, response) {
   //   console.log('getHabitById:', response, err);
   // });
 
-  // client.updateHabit({_id: '5a08db72ad5dfa6ae4555b89',
-  //                   userId: '1',
-  //                   name: 'Juan_updted',
+  // client.updateHabit({_id: '5a0a6fa63d94a172089f1897',
+  //                   userId: '2',
+  //                   name: 'Pedro_updted',
   //                   description: 'Soy una descripcion',
   //                   good: true,
-  //                   bad: false,
-  //                   difficulty: "1"}, function(err, response) {
+  //                   bad: true,
+  //                   difficulty: "2"}, function(err, response) {
   //   console.log('updateHabit:', response, err);
   // });
 
-  // client.markHabit({_id: '5a08e77c3cb6c701800dbe95', good: false, bad: true}, function(err, response) {
-  //   console.log('updateHabit:', response, err);
-  // });
+  client.markHabit({_id: '5a0a6fa63d94a172089f1897', good: true, bad: false}, function(err, response) {
+    console.log('updateHabit:', response, err);
+  });
 
 }
 

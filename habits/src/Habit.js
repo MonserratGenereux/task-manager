@@ -11,8 +11,7 @@ class Habit extends BasicHabit{
   }
 
   updateScore(good,bad){
-    if(good && !bad){
-      // Si se marco como bueno
+    if(this.isGood(good,bad)){
       if(this.color == constants.COLORS.BLUE){
         this.score += constants.SCORE.BLUE_INCREASE;
       }else if(this.color == constants.COLORS.GREEN){
@@ -20,8 +19,7 @@ class Habit extends BasicHabit{
       }else {
         this.score += this.getScoreType();
       }
-    }else if(bad && !good){
-      // Si se marco como malo
+    }else if(!this.isGood(good,bad)){
       if(this.color == constants.COLORS.ORANGE){
         this.score -= this.getScoreType() * constants.SCORE.ORANGE_DECREASE;
       }else if(this.color == constants.COLORS.RED){
@@ -32,6 +30,11 @@ class Habit extends BasicHabit{
     }
     this.updateColor();
     return;
+  }
+
+  isGood(g, b){
+    //Regresa True si es good.
+    return g && !b;
   }
 
   updateColor(){

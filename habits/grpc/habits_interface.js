@@ -74,7 +74,7 @@ function markHabit(call, callback) {
 
 function main() {
   var server = new grpc.Server();
-  server.addProtoService(habits_proto.HabitService.service, {
+  server.addProtoService(habits_proto.HabitsService.service, {
     getHabits,
     createHabit,
     deleteHabit,

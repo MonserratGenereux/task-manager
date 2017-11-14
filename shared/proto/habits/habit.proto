@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package habits;
 
-service HabitService {
+service HabitsService {
   //Retrieve all habits from user
   rpc GetHabits (UserId) returns (GetHabits) {}
 
