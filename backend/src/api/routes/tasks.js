@@ -153,7 +153,7 @@ router.delete('/', (req, res) => {
 
 /**
  * @swagger
- * /tasks/complete:
+ * /tasks/complete/{taskId}:
  *   post:
  *     tags:
  *       - "tasks"
@@ -178,7 +178,7 @@ router.delete('/', (req, res) => {
  *       400:
  *         description: invalid username
  */
-router.post('/complete', (req, res) => {
+router.post('/complete/:taskId', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
 });
 
