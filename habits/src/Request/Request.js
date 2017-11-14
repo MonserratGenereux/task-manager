@@ -11,7 +11,6 @@ class Request{
   updateResponse(succeded, error){
     this.response.succeded = succeded;
     this.response.error = error;
-    //this.response = new Response(succeded, error);
   }
 
   connectDb(){

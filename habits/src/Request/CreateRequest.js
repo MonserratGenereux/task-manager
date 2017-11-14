@@ -10,7 +10,6 @@ class CreateRequest extends Request{
   }
 
   obtainData(){
-    //Obtains the Habit in the request
     this.habit = new Habit(this.request);
   }
 
@@ -18,20 +17,32 @@ class CreateRequest extends Request{
     this.response.succeded = succeded;
     this.response.id = id;
     this.response.error = error;
-    //this.response = new StatusResponse(succeded, habitId, error);
+  }
+
+  isValidRequest(){
+    if(!this.habit.good && !this.habit.bad){
+      return false;
+    }
+    return true;
   }
 
   execute(){
     return new Promise((accept, reject)=>{
-      this.db_schema.create(this.habit.getHabit())
-        .then((habit)=>{
-          this.updateResponse(true, habit._id.toString(), '');
-          accept(this.response.getResponse());
-        })
-        .catch((err)=>{
-          this.updateResponse(false, '', err.message);
-          accept(this.response.getResponse());
-        })
+      if(this.isValidRequest()){
+        this.db_schema.create(this.habit.getHabit())
+          .then((habit)=>{
+            this.updateResponse(true, habit._id.toString(), '');
+            accept(this.response.getResponse());
+          })
+          .catch((err)=>{
+            this.updateResponse(false, '', err.message);
+            accept(this.response.getResponse());
+          })
+      }else{
+        this.updateResponse(false, '', 'Habit cannot be neigher good or bad');
+        accept(this.response.getResponse());
+      }
+
     });
   }
 }

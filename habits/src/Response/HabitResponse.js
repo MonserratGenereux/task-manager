@@ -1,19 +1,19 @@
 var Response = require('./Response.js');
 
-class StatusResponse extends Response{
-  constructor(succeded, id, error){
+class HabitResponse extends Response{
+  constructor(succeded, habit, error){
     super(succeded,error);
-    this.id = (id ? id : '');
+    this.habit = (habit ? habit : {});
   }
 
   getResponse(){
     return {
       succeded: this.succeded,
-      habitId: this.id,
+      habit: this.habit,
       error: this.error
     }
   }
 
 }
 
-module.exports = StatusResponse;
+module.exports = HabitResponse;
