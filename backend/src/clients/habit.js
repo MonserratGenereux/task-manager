@@ -16,9 +16,9 @@ function main() {
   //   console.log("createHabit: ", response, err);
   // });
   //
-  // client.createHabit({userId: '1', name: 'Paco', good: false, bad: true, difficulty: "2"}, function(err, response) {
-  //   console.log("createHabit: ", response, err);
-  // });
+  client.createHabit({userId: '1', name: 'Paco', good: false, bad: true, difficulty: "2"}, function(err, response) {
+    console.log("createHabit: ", response, err);
+  });
   //
   // client.createHabit({userId: '2', name: 'Pedro', good: true, bad: true, difficulty: "2"}, function(err, response) {
   //   console.log("createHabit: ", response, err);
@@ -46,9 +46,9 @@ function main() {
   //   console.log('updateHabit:', response, err);
   // });
 
-  client.markHabit({_id: '5a0a6fa63d94a172089f1897', good: true, bad: false}, function(err, response) {
-    console.log('updateHabit:', response, err);
-  });
+  // client.markHabit({_id: '5a0a6fa63d94a172089f1897', good: true, bad: false}, function(err, response) {
+  //   console.log('updateHabit:', response, err);
+  // });
 
 }
 
