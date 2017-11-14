@@ -75,12 +75,12 @@ function markHabit(call, callback) {
 function main() {
   var server = new grpc.Server();
   server.addProtoService(habits_proto.HabitService.service, {
-    getHabits: getHabits,
-    createHabit: createHabit,
-    deleteHabit:deleteHabit,
-    getHabitById:getHabitById,
-    updateHabit:updateHabit,
-    markHabit:markHabit
+    getHabits,
+    createHabit,
+    deleteHabit,
+    getHabitById,
+    updateHabit,
+    markHabit
   });
   server.bind(GRPC_PORT, grpc.ServerCredentials.createInsecure());
   server.start();

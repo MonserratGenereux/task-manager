@@ -20,9 +20,9 @@ function main() {
   //   console.log("createHabit: ", response, err);
   // });
   //
-  // client.createHabit({userId: '2', name: 'Pedro', good: true, bad: true, difficulty: "2"}, function(err, response) {
-  //   console.log("createHabit: ", response, err);
-  // });
+  client.createHabit({userId: '2', name: 'Pedro', good: true, bad: true, difficulty: "2"}, function(err, response) {
+    console.log("createHabit: ", response, err);
+  });
   //
   // client.createHabit({userId: '2', name: 'Toa', good: false, bad: false, difficulty: "2"}, function(err, response) {
   //   console.log("createHabit: ", response, err);

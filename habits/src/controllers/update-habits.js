@@ -1,5 +1,5 @@
 var HabitSchema = require('./../schema/Habit.js');
-var Habit = require('./../HabitClass.js').Habit;
+var Habit = require('./../Habit.js').Habit;
 var StatusResponse = require('./../StatusResponse.js');
 
 var updateHabitHandler = function(request){
