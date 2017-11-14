@@ -1,9 +1,10 @@
 syntax = "proto3";
 
-package com.tasks.proto;
+package tasks;
 
 option java_package = "com.tasks.proto";
 option java_outer_classname = "TasksMicroservice";
+option go_package = "pb/tasks";
 
 service TasksService {
   // Get a list of tasks from the User ID

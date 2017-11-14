@@ -3,7 +3,7 @@ package db
 import (
 	"encoding/json"
 	"fmt"
-	pb "pb/account"
+	pb "pb/accounts"
 )
 
 // AccountsDatabase provides thread-safe access to a database of accounts

@@ -19,12 +19,12 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.7.0)",
-    comments = "Source: task.proto")
+    comments = "Source: tasks/tasks.proto")
 public final class TasksServiceGrpc {
 
   private TasksServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "com.tasks.proto.TasksService";
+  public static final String SERVICE_NAME = "tasks.TasksService";
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -33,7 +33,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.UserID, com.tasks.proto.TasksMicroservice.Tasks>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "GetTasks"))
+              "tasks.TasksService", "GetTasks"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.UserID.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -46,7 +46,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.StatusResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "CreateTask"))
+              "tasks.TasksService", "CreateTask"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.Task.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -59,7 +59,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.TaskID, com.tasks.proto.TasksMicroservice.StatusResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "DeleteTask"))
+              "tasks.TasksService", "DeleteTask"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.TaskID.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -72,7 +72,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.TaskID, com.tasks.proto.TasksMicroservice.Task>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "GetTaskById"))
+              "tasks.TasksService", "GetTaskById"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.TaskID.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -85,7 +85,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.StatusResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "UpdateTask"))
+              "tasks.TasksService", "UpdateTask"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.Task.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -98,7 +98,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.TaskID, com.tasks.proto.TasksMicroservice.Task>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "CompleteTask"))
+              "tasks.TasksService", "CompleteTask"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.TaskID.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(

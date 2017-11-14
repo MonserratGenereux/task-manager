@@ -20,13 +20,4 @@ Comming soon.
 
 ## Protocol buffers
 
-If you make changes to the protocol buffer accounts file. Make sure to update the code by running:
-
-```bash
-mkdir -p src/pb/account
-
-protoc \
-  -I ../shared/proto/accounts \
-  --go_out=plugins=grpc:./src/pb/account \
-  ../shared/proto/accounts/account.proto
-```
+If you make changes to the protocol buffer accounts file. Make sure to update the code by running the `./protobuf.sh` and commiting such changes.

@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package reports;
+
+import public "habits/habits.proto";
+import public "tasks/tasks.proto";
+
+option go_package = "pb/reports";
+
+// The Reports service definition.
+service ReportsService {
+
+  rpc GetHabitsReport (Empty) returns (HabitsReport) {}
+
+  rpc GetHabitsUserReport (AccountID) returns (HabitsUserReport) {}
+
+  rpc GetTasksReport (Empty) returns (TasksReport) {}
+
+  rpc GetTasksUserReport (AccountID) returns (TasksUserReport) {}
+}
+
+message Empty {}
+
+message AccountID {
+  // Unique account id in the Task Manager system.
+  int64 id = 1;
+}
+
+message HabitsReport {}
+
+message HabitsUserReport {}
+
+message TasksReport {}
+
+message TasksUserReport {}
+
