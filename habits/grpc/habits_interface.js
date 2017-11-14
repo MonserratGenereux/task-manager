@@ -4,42 +4,84 @@ var PROTO_PATH = path.join(__dirname, '/../../shared/proto/habits/habit.proto');
 var grpc = require('grpc');
 var habits_proto = grpc.load(PROTO_PATH).habits;
 
-var getHabitsHandler =      require('./../src/get-habits.js');
-var createHabitHandler =    require('./../src/create-habits.js');
-var deleteHabitHandler =    require('./../src/delete-habits.js');
-var getHabitByIdHandler =   require('./../src/get-by-id-habits.js');
-var updateHabitHandler =    require('./../src/update-habits.js');
+var getHabitsHandler =      require('./../src/controllers/get-habits.js');
+var createHabitHandler =    require('./../src/controllers/create-habits.js');
+var deleteHabitHandler =    require('./../src/controllers/delete-habits.js');
+var getHabitByIdHandler =   require('./../src/controllers/get-by-id-habits.js');
+var updateHabitHandler =    require('./../src/controllers/update-habits.js');
+var markGoodBadHandler =    require('./../src/controllers/mark-good-bad-habits.js');
 
 //rpc GetHabits (emptyInput) returns (HabitsResponse)
 function getHabits(call, callback) {
-  callback(null, getHabitsHandler(call.request));
+  getHabitsHandler(call.request)
+   .then((GetHabits)=>{
+     console.log("Exito GetHabits:", GetHabits);
+     return callback(null, GetHabits);
+   }).catch((GetHabits)=>{
+     console.log("Error GetHabits:", GetHabits);
+     return callback(GetHabits, null);
+   })
 }
 //rpc CreateHabit (InputHabits) returns (OutputHabits) {}
  function createHabit(call, callback) {
-   callback(null, createHabitHandler(call.request));
+   createHabitHandler(call.request)
+    .then((statusResponse)=>{
+      return callback(null, statusResponse);
+    }).catch((statusResponseErr)=>{
+      return callback(statusResponseErr, null);
+    })
  }
 //rpc DeleteHabit (habitId) returns (response) {}
 function deleteHabit(call, callback) {
-  callback(null, deleteHabitHandler(call.request));
+  deleteHabitHandler(call.request)
+   .then((statusResponse)=>{
+     return callback(null, statusResponse);
+   }).catch((statusResponse)=>{
+     return callback(statusResponse, null);
+   })
 }
 // rpc GetHabitById (habitId) returns (OutputHabits) {}
 function getHabitById(call, callback) {
-  callback(null, getHabitByIdHandler(call.request));
+  getHabitByIdHandler(call.request)
+   .then((GetHabit)=>{
+     //console.log("YEA", GetHabit);
+     return callback(null, GetHabit);
+   }).catch((GetHabit)=>{
+     //console.log("NEL", GetHabit)
+     return callback(GetHabit, null);
+   })
 }
 // rpc UpdateHabit (habitId) returns (OutputHabits) {}
 function updateHabit(call, callback) {
-  callback(null, updateHabitHandler(call.request));
+  updateHabitHandler(call.request)
+   .then((UpdatedHabit)=>{
+     //console.log("YEA", GetHabit);
+     return callback(null, UpdatedHabit);
+   }).catch((UpdatedHabit)=>{
+     //console.log("NEL", GetHabit)
+     return callback(UpdatedHabit, null);
+   })
+}
+
+function markHabit(call, callback) {
+  markGoodBadHandler(call.request)
+   .then((GetHabit)=>{
+     return callback(null, GetHabit);
+   }).catch((GetHabit)=>{
+     return callback(GetHabit, null);
+   })
 }
 
 function main() {
   var server = new grpc.Server();
-  server.addProtoService(habits_proto.Habits.service, {
-                            getHabits: getHabits,
-                            createHabit: createHabit,
-                            deleteHabit:deleteHabit,
-                            getHabitById:getHabitById,
-                            updateHabit:updateHabit
-                        });
+  server.addProtoService(habits_proto.HabitsService.service, {
+    getHabits,
+    createHabit,
+    deleteHabit,
+    getHabitById,
+    updateHabit,
+    markHabit
+  });
   server.bind(GRPC_PORT, grpc.ServerCredentials.createInsecure());
   server.start();
 }
