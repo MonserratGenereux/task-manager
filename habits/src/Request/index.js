@@ -1,11 +1,11 @@
 var schema = require('./../schema/Habit.js');
-var Response = require('./../Response/Response.js');
+var Response = require('./../Response');
 class Request{
 
   constructor(request){
     this.request = request;
     this.response = new Response();
-    this.connectDb();
+    this.getMongooseSchema();
   }
 
   updateResponse(succeded, error){
@@ -13,13 +13,13 @@ class Request{
     this.response.error = error;
   }
 
-  connectDb(){
+  getMongooseSchema(){
     this.db_schema = schema;
   }
 
   execute(){
     return new Promise((accept, reject)=>{
-      accept(this.response.getResponse());
+      accept(this.response.generate());
     })
   }
 }

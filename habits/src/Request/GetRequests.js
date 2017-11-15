@@ -1,6 +1,6 @@
-var Request = require('./Request.js');
+var Request = require('./../Request');
 var HabitsResponse = require('./../Response/HabitsResponse.js');
-var Habit = require('./../Habit/Habit.js');
+var Habit = require('./../Habit');
 
 class GetRequests extends Request{
   constructor(request){
@@ -24,14 +24,14 @@ class GetRequests extends Request{
       this.db_schema.find({userId: this.userId})
         .then((habits)=>{
           var habitsArray = habits.map(function(h){
-            return new Habit(h).getHabit();
+            return new Habit(h).getCopy();
           });
           this.updateResponse(true, habitsArray,'');
-          accept(this.response.getResponse());
+          accept(this.response.generate());
         })
         .catch((err)=>{
           this.updateResponse(false, [], err.message);
-          accept(this.response.getResponse());
+          accept(this.response.generate());
         })
     });
   }

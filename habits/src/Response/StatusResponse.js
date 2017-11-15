@@ -1,4 +1,4 @@
-var Response = require('./Response.js');
+var Response = require('./../Response');
 
 class StatusResponse extends Response{
   constructor(succeded, id, error){
@@ -6,7 +6,7 @@ class StatusResponse extends Response{
     this.id = (id ? id : '');
   }
 
-  getResponse(){
+  generate(){
     return {
       succeded: this.succeded,
       habitId: this.id,

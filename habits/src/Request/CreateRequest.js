@@ -1,6 +1,6 @@
-var Request = require('./Request.js');
+var Request = require('./../Request');
 var StatusResponse = require('./../Response/StatusResponse.js');
-var Habit = require('./../Habit/Habit.js');
+var Habit = require('./../Habit');
 
 class CreateRequest extends Request{
   constructor(request){
@@ -29,18 +29,18 @@ class CreateRequest extends Request{
   execute(){
     return new Promise((accept, reject)=>{
       if(this.isValidRequest()){
-        this.db_schema.create(this.habit.getHabit())
+        this.db_schema.create(this.habit.getCopy())
           .then((habit)=>{
             this.updateResponse(true, habit._id.toString(), '');
-            accept(this.response.getResponse());
+            accept(this.response.generate());
           })
           .catch((err)=>{
             this.updateResponse(false, '', err.message);
-            accept(this.response.getResponse());
+            accept(this.response.generate());
           })
       }else{
         this.updateResponse(false, '', 'Habit cannot be neigher good or bad');
-        accept(this.response.getResponse());
+        accept(this.response.generate());
       }
 
     });

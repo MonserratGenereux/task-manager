@@ -1,4 +1,4 @@
-var Response = require('./Response.js');
+var Response = require('./../Response');
 
 class HabitResponse extends Response{
   constructor(succeded, habit, error){
@@ -6,7 +6,7 @@ class HabitResponse extends Response{
     this.habit = (habit ? habit : {});
   }
 
-  getResponse(){
+  generate(){
     return {
       succeded: this.succeded,
       habit: this.habit,

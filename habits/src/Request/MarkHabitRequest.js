@@ -1,6 +1,6 @@
-var Request = require('./Request.js');
+var Request = require('./../Request');
 var HabitResponse = require('./../Response/HabitResponse.js');
-var Habit = require('./../Habit/Habit.js');
+var Habit = require('./../Habit');
 
 class MarkHabitRequest extends Request{
   constructor(request){
@@ -31,17 +31,17 @@ class MarkHabitRequest extends Request{
           habit.color = habit_new.color;
           habit.save()
             .then((ok)=>{
-              this.updateResponse(true,  habit_new.getHabit(),'');
-              return accept(this.response.getResponse());
+              this.updateResponse(true,  habit_new.getCopy(),'');
+              return accept(this.response.generate());
             })
             .catch((err)=>{
               this.updateResponse(false, {}, err.message);
-              accept(this.response.getResponse());
+              accept(this.response.generate());
             })
         })
         .catch((err)=>{
           this.updateResponse(false, {}, err.message);
-          accept(this.response.getResponse());
+          accept(this.response.generate());
         })
     });
   }

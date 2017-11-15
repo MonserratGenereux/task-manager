@@ -1,6 +1,6 @@
-var Request = require('./Request.js');
+var Request = require('./../Request');
 var HabitResponse = require('./../Response/HabitResponse.js');
-var Habit = require('./../Habit/Habit.js');
+var Habit = require('./../Habit');
 
 class GetByIdRequest extends Request{
   constructor(request){
@@ -23,13 +23,13 @@ class GetByIdRequest extends Request{
     return new Promise((accept, reject)=>{
       this.db_schema.findById(this._id)
         .then((habit)=>{
-          var my_habit = new Habit(habit._doc).getHabit();
+          var my_habit = new Habit(habit._doc).getCopy();
           this.updateResponse(true, my_habit,'');
-          accept(this.response.getResponse());
+          accept(this.response.generate());
         })
         .catch((err)=>{
           this.updateResponse(false, {}, err.message);
-          accept(this.response.getResponse());
+          accept(this.response.generate());
         })
     });
   }

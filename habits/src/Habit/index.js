@@ -1,20 +1,20 @@
 const constants = require("./../constants");
 
 class Habit{
-  constructor(request){
-    this.request =      request;
-    this._id =          (request._id ? request._id.toString() : undefined);
-    this.userId =       (request.userId ? request.userId : '');
-    this.name =         (request.name ? request.name : '');
-    this.description =  (request.description ? request.description : '');
-    this.good =         request.good;
-    this.bad =          request.bad;
-    this.difficulty =   (request.difficulty ? request.difficulty : '');
-    this.score =        (request.score ? request.score : 0);
-    this.color =        (request.color ? request.color : constants.COLORS.ORANGE);
+  constructor(data){
+    this.data =      data;
+    this._id =          (data._id ? data._id.toString() : undefined);
+    this.userId =       (data.userId ? data.userId : '');
+    this.name =         (data.name ? data.name : '');
+    this.description =  (data.description ? data.description : '');
+    this.good =         data.good;
+    this.bad =          data.bad;
+    this.difficulty =   (data.difficulty ? data.difficulty : '');
+    this.score =        (data.score ? data.score : 0);
+    this.color =        (data.color ? data.color : constants.COLORS.ORANGE);
   }
 
-  getHabit(){
+  getCopy(){
     var habit = {}
     if(this._id) habit._id = this._id.toString();
     habit.userId = this.userId;
@@ -31,24 +31,32 @@ class Habit{
 
   updateScore(good,bad){
     if(this.isGood(good,bad)){
-      if(this.color == constants.COLORS.BLUE){
-        this.score += constants.SCORE.BLUE_INCREASE;
-      }else if(this.color == constants.COLORS.GREEN){
-        this.score += this.getScoreType() * constants.SCORE.GREEN_INCREASE;
-      }else {
-        this.score += this.getScoreType();
-      }
+      this.markAsGood();
     }else if(!this.isGood(good,bad)){
-      if(this.color == constants.COLORS.ORANGE){
-        this.score -= this.getScoreType() * constants.SCORE.ORANGE_DECREASE;
-      }else if(this.color == constants.COLORS.RED){
-        this.score -= this.getScoreType() * constants.SCORE.RED_DECREASE;
-      }else {
-        this.score -= this.getScoreType();
-      }
+      this.markAsBad();
     }
     this.updateColor();
     return;
+  }
+
+  markAsGood(){
+    if(this.color == constants.COLORS.BLUE){
+      this.score += constants.SCORE.BLUE_INCREASE;
+    }else if(this.color == constants.COLORS.GREEN){
+      this.score += this.getScoreType() * constants.SCORE.GREEN_INCREASE;
+    }else {
+      this.score += this.getScoreType();
+    }
+  }
+
+  markAsBad(){
+    if(this.color == constants.COLORS.ORANGE){
+      this.score -= this.getScoreType() * constants.SCORE.ORANGE_DECREASE;
+    }else if(this.color == constants.COLORS.RED){
+      this.score -= this.getScoreType() * constants.SCORE.RED_DECREASE;
+    }else {
+      this.score -= this.getScoreType();
+    }
   }
 
   isGood(g, b){
@@ -83,7 +91,7 @@ class Habit{
     }
   }
 
-  getHabitUpdate(){
+  getCopyForUpdate(){
     return {
       name: this.name,
       description: this.description,

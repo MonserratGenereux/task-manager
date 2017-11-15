@@ -4,7 +4,7 @@ class Response{
     this.error = (error ? error : 'No attributes for response');
   }
 
-  getResponse(){
+  generate(){
     return {
       succeded: this.succeded,
       error: this.error

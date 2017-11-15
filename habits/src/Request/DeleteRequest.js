@@ -1,6 +1,6 @@
-var Request = require('./Request.js');
+var Request = require('./../Request');
 var StatusResponse = require('./../Response/StatusResponse.js');
-var Habit = require('./../Habit/Habit.js');
+var Habit = require('./../Habit');
 
 class DeleteRequest extends Request{
   constructor(request){
@@ -30,11 +30,11 @@ class DeleteRequest extends Request{
           }else{
             this.updateResponse(true, '', 'ID not found');
           }
-          accept(this.response.getResponse());
+          accept(this.response.generate());
         })
         .catch((err)=>{
           this.updateResponse(false, '', err.message);
-          accept(this.response.getResponse());
+          accept(this.response.generate());
         })
     });
   }
