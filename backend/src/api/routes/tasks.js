@@ -32,28 +32,32 @@ router.get('/', (req, res) => {
   res.status(HttpStatus.OK).send([
     {
       'id': 'el id',
-      'name': 'el nombre',
+      'name': 'el nombre1',
       'completed': true,
-      'dueDate': '12/12/2017'
+      'dueDate': '12/12/2017',
+      'flag':false
 
     },
     {
       'id': 'el id',
-      'name': 'el nombre',
+      'name': 'el nombre2',
       'completed': false,
-      'dueDate': '12/12/2017'
+      'dueDate': '12/12/2017',
+      'flag':true
     },
     {
       'id': 'el id',
-      'name': 'el nombre',
+      'name': 'el nombre3',
       'completed': true,
-      'dueDate': '12/12/2017'
+      'dueDate': '12/12/2017',
+      'flag':false
     },
     {
       'id': 'el id',
-      'name': 'el nombre',
+      'name': 'el nombre4',
       'completed': false,
-      'dueDate': '12/12/2017'
+      'dueDate': '12/12/2017',
+      'flag':true
     }
   ]);
 });

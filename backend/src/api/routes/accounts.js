@@ -37,6 +37,11 @@ router.get('/', (req, res) => {
     "username": "Monserrat",
     "email": "monserratg@gmail.com",
     "password": "password123"
+  },
+  {
+    "username": "vertge",
+    "email": "rferfrf",
+    "password": "ferferf3"
   });
 });
 

@@ -2,20 +2,25 @@
   <section>
     <h5>Tasks</h5>
     <Task v-for="task in tasks"  v-bind:info="task" :key="tasks.id"/>
+    <reminder v-for="task in tasks" v-bind:info="task" :key="tasks.id"/>
+    </div>
   </section>
 </template>
 
 <script>
 import axios from 'axios'
 import Task from '~/components/tasks/task'
+import reminder from '~/components/tasks/reminder'
 export default {
   data () {
     return {
-      tasks: ['']
+      tasks: [''],
+      flag: ['']
     }
   },
   components: {
-    Task
+    Task,
+    reminder
   },
   mounted () {
     this.getTasks()
@@ -26,6 +31,7 @@ export default {
       })
         .then((response) => {
           console.log('Respuesta', this.tasks = response.data)
+          this.flag = response.data.tasks.flag
         })
         .catch((error) => {
           console.log(error)

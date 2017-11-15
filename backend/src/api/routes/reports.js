@@ -31,35 +31,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         description: invalid username
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send({
-    "habits": {
-      "countGreen": 23,
-      "countRed": 44,
-      "countBlue": 532,
-      "countYellow": 62,
-      "countOrange": 22,
-      "best": {
-        "id": "234567",
-        "name": "besttt",
-        "type": 1,
-        "difficulty": 0,
-        "score": 90
-      },
-      "worst": {
-        "id": "asdfgh",
-        "name": "worst",
-        "type": 0,
-        "difficulty": 2,
-        "score": -20
-      }
-    },
-    "tasks": {
-      "completed": 23,
-      "delayed": 2,
-      "onTime": 10,
-      "beforeTime": 3,
-      "available": 4
-    }});
+  res.status(HttpStatus.OK).send('ok');
 });
 
 /**
@@ -88,8 +60,7 @@ router.get('/', (req, res) => {
  *       400:
  *         description: invalid user
  */
-router.get('/report/{userId}', (req, res) => {
+router.get('/task', (req, res) => {
   res.status(HttpStatus.OK).send('ok');
 });
-
 module.exports = router;

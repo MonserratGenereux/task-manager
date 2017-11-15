@@ -2,7 +2,7 @@
   <div class="card" v-if="!info.completed">
     <div class="card-content white-text">
       <span class="card-title">Task {{info.name}}</span>
-      <p>Due date: {{info.dueDate}}</p>
+      <p>Due date: {{info.flag}}</p>
     </div>
     <div class="card-action">
       <a class="btn-floating btn-large waves-effect waves-light green" @click="completed()">
@@ -19,6 +19,7 @@ export default {
     return {
     }
   },
+
   props: ['info'],
   methods: {
     completed: function (id) {
