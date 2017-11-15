@@ -1,8 +1,13 @@
-const path = require('path');
-var PROTO_PATH = path.join(__dirname, '/../../../shared/proto/habits/habits.proto');
+const PROTO_PATH = __dirname + '/../../../shared/proto/habits/habits.proto';
 
 var grpc = require('grpc');
 var habits_proto = grpc.load(PROTO_PATH).habits;
+
+const client = new habits_proto.HabitsService(
+  'localhost:50051',
+  grpc.credentials.createInsecure());
+
+module.exports = client;
 
 function main() {
   var client = new habits_proto.HabitsService('localhost:50051',
@@ -32,7 +37,7 @@ function main() {
   //   console.log('deleteHabit:', response, err);
   // });
 
-  // client.getHabitById({_id: '5a0b3769f50f1d2e60fb555a'}, function(err, response) {
+  // client.getHabitById({_id: '5a0b3769f50f1d2e60fb555a',userId: "1"}, function(err, response) {
   //   console.log('getHabitById:', response, err);
   // });
 

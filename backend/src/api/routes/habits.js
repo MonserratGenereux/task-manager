@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const HttpStatus = require('http-status-codes');
+var client = require('./../../clients/habit.js');
 
 
 const router = express.Router();
@@ -18,7 +19,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *       - application/json
  *     parameters:
  *       - name: userId
- *         description: id of the user
+ *         description: Users Id
  *         in: header
  *         required: true
  *         type: string
@@ -26,15 +27,25 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *       200:
  *         description: OK
  *         schema:
- *           type: "array"
- *           items: {
- *              $ref: "#/definitions/habits"
- *           }
+ *           $ref: "#/definitions/GetHabitsResponse"
  *       400:
- *         description: invalid username
+ *         description: Invalid Request
+ *
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  if(req.get('userId')){
+    var userId = req.get('userId');
+    client.getHabits({userId: userId}, function(err, HabitsResponse) {
+      if(err){
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+      }else{
+        res.status(HttpStatus.OK).send(HabitsResponse);
+      }
+    });
+  }else{
+    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+  }
+
 });
 
 /**
@@ -64,10 +75,22 @@ router.get('/', (req, res) => {
  *         schema:
  *           $ref: "#/definitions/habits"
  *       400:
- *         description: invalid habit
+ *         description: Invalid Request
  */
 router.get('/:habitId', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  if(req.get('userId') && req.params.habitId){
+    var userId = req.get('userId');
+    var _id = req.params.habitId;
+    client.getHabitById({_id: _id, userId: userId}, function(err, GetHabitResponse) {
+      if(err){
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+      }else{
+        res.status(HttpStatus.OK).send(GetHabitResponse);
+      }
+    });
+  }else{
+    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+  }
 });
 
 /**

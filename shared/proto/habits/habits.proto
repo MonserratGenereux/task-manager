@@ -79,6 +79,7 @@ message GetHabitResponse {
 
 message HabitId {
     string _id = 1;
+    string userId = 2;
 }
 
 message UserId {
