@@ -68,11 +68,13 @@ message StatusResponse {
 message GetHabitsResponse {
     bool succeded = 1;
     repeated Habit habits = 2;
+    string error = 3;
 }
 
 message GetHabitResponse {
     bool succeded = 1;
     Habit habit = 2;
+    string error = 3;
 }
 
 message HabitId {
