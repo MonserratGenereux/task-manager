@@ -14,6 +14,26 @@ module.exports = {
         },
         additionalProperties: false
     },
+    HabitCreate:{
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        description: { type: 'string'},
+        good: { type: 'boolean'},
+        bad: { type: 'boolean'},
+        difficulty: { type: 'string' }
+      },
+      additionalProperties: false
+    },
+    StatusResponse:{
+      type: 'object',
+      properties: {
+        succeded: { type: 'boolean'},
+        habitId: { type: 'string' },
+        error: { type: 'string' }
+      },
+      additionalProperties: false
+    },
     GetHabitsResponse:{
       type: 'object',
       properties:{

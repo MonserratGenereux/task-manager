@@ -110,19 +110,34 @@ router.get('/:habitId', (req, res) => {
  *         required: true
  *         type: string
  *       - name: habit
- *         description: info of the newly create habit
+ *         description: Information to create a new Habit
  *         in: body
  *         required: true
  *         schema:
- *           $ref: "#/definitions/habits"
+ *           $ref: "#/definitions/HabitCreate"
  *     responses:
  *       200:
  *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  *       400:
  *         description: server error
  */
 router.post('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  if(req.get('userId') && req.query){
+    req.query.userId = req.get('userId');
+    req.query.good = (req.query.good === 'true');
+    req.query.bad = (req.query.good === 'true');
+    client.createHabit(req.query, function(err, StatusResponse) {
+      if(err){
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+      }else{
+        res.status(HttpStatus.OK).send(StatusResponse);
+      }
+    });
+  }else{
+    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+  }
 });
 
 /**
