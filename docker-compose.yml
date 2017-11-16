@@ -1,0 +1,11 @@
+version: '3'
+services:
+  accounts:
+    build: ./accounts
+    ports:
+     - "3001:${ACCOUNTS_SERVER_PORT}"
+    env_file:
+    - .env
+    volumes:
+      - ./shared:/shared
+      
