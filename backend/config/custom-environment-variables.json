@@ -1,0 +1,26 @@
+{
+  "logger" : "BACKEND_LOGGER",
+  "proto_path": "BACKEND_PROTO_PATH",
+  "server": {
+    "host": "BACKEND_SERVER_HOST",
+    "port": "BACKEND_SERVER_PORT"
+  }, 
+  "services" : {
+    "accounts" : {
+      "protocol": "ACCOUNTS_PROTOCOL",
+      "address": "ACCOUNTS_ADDRESS"
+    },
+    "habits" : {
+      "protocol": "HABITS_PROTOCOL",
+      "address": "HABITS_ADDRESS"
+    },
+    "reports" : {
+      "protocol": "REPORTS_PROTOCOL",
+      "address": "REPORTS_ADDRESS"
+    },
+    "tasks" : {
+      "protocol": "TASKS_PROTOCOL",
+      "address": "TASKS_ADDRESS"
+    }
+  }
+}

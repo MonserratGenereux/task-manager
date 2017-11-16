@@ -1,0 +1,30 @@
+{
+  "logger" : "winston",
+  "proto_path": "../../../shared/proto",
+  "server": {
+    "host": "localhost",
+    "port": 3000
+  },
+  "services" : {
+    "accounts" : {
+      "protocol": "grpc",
+      "proto_file": "accounts/accounts.proto",
+      "address": "localhost:3001"
+    },
+    "habits" : {
+      "protocol": "grpc",
+      "proto_file": "accounts/accounts.proto",
+      "address": "localhost:3002"
+    },
+    "reports" : {
+      "protocol": "grpc",
+      "proto_file": "accounts/accounts.proto",
+      "address": "localhost:3003"
+    },
+    "tasks" : {
+      "protocol": "grpc",
+      "proto_file": "accounts/accounts.proto",
+      "address": "localhost:3004"
+    }
+  }
+}
