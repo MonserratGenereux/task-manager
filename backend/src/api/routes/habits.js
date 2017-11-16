@@ -35,10 +35,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
  */
 router.get('/', (req, res) => {
   if(req.get('userId')){
-    var userId = req.get('userId');
-    client.getHabits({userId: userId}, function(err, HabitsResponse) {
+    client.getHabits({userId: req.get('userId')}, function(err, HabitsResponse) {
       if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
         res.status(HttpStatus.OK).send(HabitsResponse);
       }
@@ -46,7 +45,6 @@ router.get('/', (req, res) => {
   }else{
     res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
   }
-
 });
 
 /**
@@ -79,12 +77,10 @@ router.get('/', (req, res) => {
  *         description: Invalid Request
  */
 router.get('/:habitId', (req, res) => {
-  if(req.get('userId') && req.params.habitId){
-    var userId = req.get('userId');
-    var _id = req.params.habitId;
-    client.getHabitById({_id: _id, userId: userId}, function(err, GetHabitResponse) {
+  if( && req.params.habitId){
+    client.getHabitById({_id: req.params.habitId, userId: req.get('userId')}, function(err, GetHabitResponse) {
       if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
         res.status(HttpStatus.OK).send(GetHabitResponse);
       }
@@ -130,10 +126,10 @@ router.post('/', (req, res) => {
   if(req.get('userId') && req.body.habit){
     req.body.habit.userId = req.get('userId');
     req.body.habit.good = (req.body.habit.good === 'true');
-    req.body.habit.bad = (req.body.habit.good === 'true');
+    req.body.habit.bad = (req.body.habit.bad === 'true');
     client.createHabit(req.body.habit, function(err, StatusResponse) {
       if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
         res.status(HttpStatus.OK).send(StatusResponse);
       }
@@ -179,10 +175,10 @@ router.patch('/', (req, res) => {
   if(req.get('userId') && req.body.habit){
     req.body.habit.userId = req.get('userId');
     req.body.habit.good = (req.body.habit.good === 'true');
-    req.body.habit.bad = (req.body.habit.good === 'true');
+    req.body.habit.bad = (req.body.habit.bad === 'true');
     client.updateHabit(req.body.habit, function(err, StatusResponse) {
       if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
         res.status(HttpStatus.OK).send(StatusResponse);
       }
@@ -225,11 +221,9 @@ router.patch('/', (req, res) => {
  */
 router.delete('/:habitId', (req, res) => {
   if(req.get('userId') && req.params.habitId){
-    var userId = req.get('userId');
-    var _id = req.params.habitId;
-    client.deleteHabit({_id: _id, userId: userId}, function(err, GetHabitResponse) {
+    client.deleteHabit({_id: req.params.habitId, userId: req.get('userId')}, function(err, GetHabitResponse) {
       if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
         res.status(HttpStatus.OK).send(GetHabitResponse);
       }
@@ -272,11 +266,9 @@ router.delete('/:habitId', (req, res) => {
  */
 router.post('/good/:habitId', (req, res) => {
   if(req.get('userId') && req.params.habitId){
-    var userId = req.get('userId');
-    var _id = req.params.habitId;
-    client.markHabit({_id: _id, userId: userId, good: true, bad: false}, function(err, GetHabitResponse) {
+    client.markHabit({_id: req.params.habitId, userId: req.get('userId'), good: true, bad: false}, function(err, GetHabitResponse) {
       if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
         res.status(HttpStatus.OK).send(GetHabitResponse);
       }
@@ -318,11 +310,9 @@ router.post('/good/:habitId', (req, res) => {
  */
 router.post('/bad/:habitId', (req, res) => {
   if(req.get('userId') && req.params.habitId){
-    var userId = req.get('userId');
-    var _id = req.params.habitId;
-    client.markHabit({_id: _id, userId: userId, good: false, bad: true}, function(err, GetHabitResponse) {
+    client.markHabit({_id: req.params.habitId, userId: req.get('userId'), good: false, bad: true}, function(err, GetHabitResponse) {
       if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
         res.status(HttpStatus.OK).send(GetHabitResponse);
       }
