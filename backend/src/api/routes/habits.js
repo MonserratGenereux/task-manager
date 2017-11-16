@@ -77,7 +77,7 @@ router.get('/', (req, res) => {
  *         description: Invalid Request
  */
 router.get('/:habitId', (req, res) => {
-  if( && req.params.habitId){
+  if(req.get('userId') && req.params.habitId){
     client.getHabitById({_id: req.params.habitId, userId: req.get('userId')}, function(err, GetHabitResponse) {
       if(err){
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
@@ -125,8 +125,6 @@ router.get('/:habitId', (req, res) => {
 router.post('/', (req, res) => {
   if(req.get('userId') && req.body.habit){
     req.body.habit.userId = req.get('userId');
-    req.body.habit.good = (req.body.habit.good === 'true');
-    req.body.habit.bad = (req.body.habit.bad === 'true');
     client.createHabit(req.body.habit, function(err, StatusResponse) {
       if(err){
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
@@ -174,8 +172,7 @@ router.post('/', (req, res) => {
 router.patch('/', (req, res) => {
   if(req.get('userId') && req.body.habit){
     req.body.habit.userId = req.get('userId');
-    req.body.habit.good = (req.body.habit.good === 'true');
-    req.body.habit.bad = (req.body.habit.bad === 'true');
+    console.log("REQ",req.body.habit);
     client.updateHabit(req.body.habit, function(err, StatusResponse) {
       if(err){
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);

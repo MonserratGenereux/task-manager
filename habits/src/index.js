@@ -1,15 +1,14 @@
+const config = require('config');
 const path = require('path');
-const GRPC_PORT = '0.0.0.0:50051';
-var PROTO_PATH = path.join(__dirname, '/../../../shared/proto/habits/habits.proto');
-var grpc = require('grpc');
-var habits_proto = grpc.load(PROTO_PATH).habits;
+const grpc = require('grpc');
+const habits_proto = grpc.load(path.join(__dirname, config.get("proto_path") , config.get("proto_file"))).habits;
 
-var CreateRequest = require('./../Request/CreateRequest.js');
-var DeleteRequest = require('./../Request/DeleteRequest.js');
-var GetByIdRequest = require('./../Request/GetByIdRequest.js');
-var GetRequests = require('./../Request/GetRequests.js');
-var MarkHabitRequest = require('./../Request/MarkHabitRequest.js');
-var UpdateRequest = require('./../Request/UpdateRequest.js');
+var CreateRequest = require('./Request/CreateRequest.js');
+var DeleteRequest = require('./Request/DeleteRequest.js');
+var GetByIdRequest = require('./Request/GetByIdRequest.js');
+var GetRequests = require('./Request/GetRequests.js');
+var MarkHabitRequest = require('./Request/MarkHabitRequest.js');
+var UpdateRequest = require('./Request/UpdateRequest.js');
 
 function getHabits(call, callback) {
   new GetRequests(call.request)
@@ -72,6 +71,7 @@ function markHabit(call, callback) {
 }
 
 function main() {
+
   var server = new grpc.Server();
   server.addProtoService(habits_proto.HabitsService.service, {
     getHabits,
@@ -81,7 +81,8 @@ function main() {
     updateHabit,
     markHabit
   });
-  server.bind(GRPC_PORT, grpc.ServerCredentials.createInsecure());
+
+  server.bind(config.get("grpc_port"), grpc.ServerCredentials.createInsecure());
   server.start();
 }
 
