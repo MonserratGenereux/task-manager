@@ -88,6 +88,7 @@ message UserId {
 
 message UserUpdate {
     string _id = 1;
-    bool  bad = 2;
-    bool  good = 3;
+    string userId = 2;
+    bool  bad = 3;
+    bool  good = 4;
 }
