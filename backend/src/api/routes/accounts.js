@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const HttpStatus = require('http-status-codes');
-
+const accountsClient = require('../../clients/accounts');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -32,8 +32,15 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *       400:
  *         description: invalid username
  */
-router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+router.get('/:username', (req, res) => {
+  accountsClient.getAccountByUsername({username: req.params.username})
+  .then(account => {
+    res.status(HttpStatus.OK).send(account);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -62,7 +69,24 @@ router.get('/', (req, res) => {
  *         description: server error
  */
 router.post('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  console.log(req.body);
+  const newAccount = req.body.account;
+  accountsClient.createAccount({
+    username: newAccount.username,
+    email: newAccount.email,
+    password: newAccount.password,
+  })
+  .then(statusResponse => {
+    if (statusResponse.error) {
+      console.log(statusResponse.error);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    res.status(HttpStatus.OK).send(statusResponse);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -91,7 +115,18 @@ router.post('/', (req, res) => {
  *         description: server error
  */
 router.patch('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  accountsClient.updateAccount(req.body.account)
+  .then(statusResponse => {
+    if (statusResponse.error) {
+      console.log(statusResponse.error);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    res.status(HttpStatus.OK).send(statusResponse);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -119,7 +154,19 @@ router.patch('/', (req, res) => {
  *         description: server error
  */
 router.delete('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  console.log(req.body.id);
+  accountsClient.deleteAccount({id: req.body.id})
+  .then(statusResponse => {
+    if (statusResponse.error) {
+      console.log(statusResponse.error);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    res.status(HttpStatus.OK).send(statusResponse);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 module.exports = router;

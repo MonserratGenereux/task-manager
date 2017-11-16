@@ -1,10 +1,28 @@
-const PROTO_PATH = __dirname + '/../../../shared/proto/accounts/account.proto';
+// const PROTO_PATH = __dirname + '/../../../shared/proto/accounts/account.proto';
 
-var grpc = require('grpc');
-var accountProto = grpc.load(PROTO_PATH).account;
+const config = require('config');
+const grpc = require('grpc');
+const promisify = require('grpc-promisify');
+const path = require('path');
+const fs = require('fs');
+
+const accountConfig = config.get('services.accounts');
+
+const protoPath = config.get('proto_path');
+const protoFile = path.isAbsolute(protoPath) ?
+                path.join(protoPath, accountConfig.proto_file) : 
+                path.join(__dirname, protoPath, accountConfig.proto_file);
+
+if (!fs.statSync(protoFile).isFile()) {
+  throw new Error(`Provided proto file ${protoFile} does not exist`);
+}
+
+const accountProto = grpc.load(protoFile).accounts;
 
 const client = new accountProto.AccountService(
-  'localhost:50051',
+  accountConfig.address,
   grpc.credentials.createInsecure());
+
+promisify(client);
 
 module.exports = client;
