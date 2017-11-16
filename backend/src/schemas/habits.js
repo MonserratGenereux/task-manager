@@ -25,6 +25,18 @@ module.exports = {
       },
       additionalProperties: false
     },
+    HabitUpdate:{
+      type: 'object',
+      properties: {
+        _id: { type: 'string' },
+        name: { type: 'string' },
+        description: { type: 'string'},
+        good: { type: 'boolean'},
+        bad: { type: 'boolean'},
+        difficulty: { type: 'string' }
+      },
+      additionalProperties: false
+    },
     StatusResponse:{
       type: 'object',
       properties: {
@@ -54,7 +66,3 @@ module.exports = {
       additionalProperties: false
     }
 };
-
-// //,
-// GetHabitResponse
-// StatusResponse,

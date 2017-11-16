@@ -30,7 +30,8 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *           $ref: "#/definitions/GetHabitsResponse"
  *       400:
  *         description: Invalid Request
- *
+ *         schema:
+ *           $ref: "#/definitions/GetHabitsResponse"
  */
 router.get('/', (req, res) => {
   if(req.get('userId')){
@@ -121,14 +122,16 @@ router.get('/:habitId', (req, res) => {
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  *       400:
- *         description: server error
+ *         description: Invalid Request
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/', (req, res) => {
-  if(req.get('userId') && req.query){
-    req.query.userId = req.get('userId');
-    req.query.good = (req.query.good === 'true');
-    req.query.bad = (req.query.good === 'true');
-    client.createHabit(req.query, function(err, StatusResponse) {
+  if(req.get('userId') && req.body.habit){
+    req.body.habit.userId = req.get('userId');
+    req.body.habit.good = (req.body.habit.good === 'true');
+    req.body.habit.bad = (req.body.habit.good === 'true');
+    client.createHabit(req.body.habit, function(err, StatusResponse) {
       if(err){
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
       }else{
@@ -161,15 +164,32 @@ router.post('/', (req, res) => {
  *         in: body
  *         required: true
  *         schema:
- *           $ref: "#/definitions/habits"
+ *           $ref: "#/definitions/HabitUpdate"
  *     responses:
  *       200:
  *         description: habit created
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  *       400:
- *         description: server error
+ *         description: Invalid Request
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  */
 router.patch('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  if(req.get('userId') && req.body.habit){
+    req.body.habit.userId = req.get('userId');
+    req.body.habit.good = (req.body.habit.good === 'true');
+    req.body.habit.bad = (req.body.habit.good === 'true');
+    client.updateHabit(req.body.habit, function(err, StatusResponse) {
+      if(err){
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+      }else{
+        res.status(HttpStatus.OK).send(StatusResponse);
+      }
+    });
+  }else{
+    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+  }
 });
 
 /**
@@ -190,17 +210,33 @@ router.patch('/', (req, res) => {
  *         type: string
  *       - name: habitId
  *         description: id of the habit to delete
- *         in: body
+ *         in: path
  *         required: true
  *         type: string
  *     responses:
  *       200:
- *         description: habit deleted
+ *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  *       400:
- *         description: server error
+ *         description: Invalid Request
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  */
-router.delete('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+router.delete('/:habitId', (req, res) => {
+  if(req.get('userId') && req.params.habitId){
+    var userId = req.get('userId');
+    var _id = req.params.habitId;
+    client.deleteHabit({_id: _id, userId: userId}, function(err, GetHabitResponse) {
+      if(err){
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+      }else{
+        res.status(HttpStatus.OK).send(GetHabitResponse);
+      }
+    });
+  }else{
+    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+  }
 });
 
 /**
@@ -221,17 +257,33 @@ router.delete('/', (req, res) => {
  *         type: string
  *       - name: habitId
  *         description: id of the habit to add points
- *         in: body
+ *         in: path
  *         required: true
  *         type: string
  *     responses:
  *       200:
  *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/habits"
  *       400:
  *         description: server error
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/good/:habitId', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  if(req.get('userId') && req.params.habitId){
+    var userId = req.get('userId');
+    var _id = req.params.habitId;
+    client.markHabit({_id: _id, userId: userId, good: true, bad: false}, function(err, GetHabitResponse) {
+      if(err){
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+      }else{
+        res.status(HttpStatus.OK).send(GetHabitResponse);
+      }
+    });
+  }else{
+    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+  }
 });
 /**
  * @swagger
@@ -251,17 +303,33 @@ router.post('/good/:habitId', (req, res) => {
  *         type: string
  *       - name: habitId
  *         description: id of the habit to subtract points
- *         in: body
+ *         in: path
  *         required: true
  *         type: string
  *     responses:
  *       200:
  *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/habits"
  *       400:
  *         description: server error
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/bad/:habitId', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  if(req.get('userId') && req.params.habitId){
+    var userId = req.get('userId');
+    var _id = req.params.habitId;
+    client.markHabit({_id: _id, userId: userId, good: false, bad: true}, function(err, GetHabitResponse) {
+      if(err){
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+      }else{
+        res.status(HttpStatus.OK).send(GetHabitResponse);
+      }
+    });
+  }else{
+    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+  }
 });
 
 module.exports = router;
