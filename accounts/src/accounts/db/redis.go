@@ -52,7 +52,10 @@ func NewRedisDB(options *redis.Options) (AccountsDatabase, error) {
 // GetByUsername retrieves an account by its username.
 func (db *RedisDB) GetByUsername(username string) (*pb.Account, error) {
 	accountID, err := db.client.Get(buildUsernameKey(username)).Result()
-	if err != nil {
+	if err == redis.Nil {
+		log.Printf("Account with username %s does not exists", username)
+		return nil, nil
+	} else if err != nil {
 		return nil, err
 	}
 
