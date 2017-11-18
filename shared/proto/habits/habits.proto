@@ -20,8 +20,11 @@ service HabitsService {
   // Updates all fields in the given habit.
   rpc UpdateHabit (HabitUpdate) returns (StatusResponse) {}
 
-  // Set as done a habit by id
-  rpc MarkHabit (UserUpdate) returns (GetHabitResponse) {}
+  // Set as good a habit by id
+  rpc MarkAsBad (UserMarkUpdate) returns (GetHabitResponse) {}
+
+  // Set as bad a habit by id
+  rpc MarkAsGood (UserMarkUpdate) returns (GetHabitResponse) {}
 
 }
 
@@ -91,4 +94,9 @@ message UserUpdate {
     string userId = 2;
     bool  bad = 3;
     bool  good = 4;
+}
+
+message UserMarkUpdate {
+    string _id = 1;
+    string userId = 2;
 }
