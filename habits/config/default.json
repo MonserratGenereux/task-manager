@@ -1,0 +1,10 @@
+{
+  "proto_path": "../../../shared/proto",
+  "proto_file": "habits/habits.proto",
+  "mongo_path": "mongodb://localhost/habits",
+  "server": {
+    "protocol": "grpc",
+    "host": "localhost",
+    "port": "3002"
+  }
+}

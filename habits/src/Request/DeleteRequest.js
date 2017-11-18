@@ -11,6 +11,7 @@ class DeleteRequest extends Request{
 
   obtainData(){
     this.id = this.request._id;
+    this.userId = this.request.userId;
   }
 
   updateResponse(succeded, id, error){
@@ -21,14 +22,14 @@ class DeleteRequest extends Request{
 
   execute(){
     return new Promise((accept, reject)=>{
-      this.db_schema.find({_id: this.id})
+      this.db_schema.find({_id: this.id, userId: this.userId})
         .remove()
         .exec()
         .then((habit)=>{
           if(habit.result.n != 0){
             this.updateResponse(true, this.id.toString(), '');
           }else{
-            this.updateResponse(true, '', 'ID not found');
+            this.updateResponse(true, '', 'Habit not found for that user.');
           }
           accept(this.response.generate());
         })

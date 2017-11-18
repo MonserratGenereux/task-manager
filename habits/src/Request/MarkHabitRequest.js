@@ -11,6 +11,7 @@ class MarkHabitRequest extends Request{
 
   obtainData(){
     this._id = this.request._id;
+    this.userId = this.request.userId;
     this.bad = this.request.bad;
     this.good = this.request.good;
   }
@@ -23,7 +24,7 @@ class MarkHabitRequest extends Request{
 
   execute(){
     return new Promise((accept, reject)=>{
-      this.db_schema.findOne({_id: this._id})
+      this.db_schema.findOne({_id: this._id, userId: this.userId})
         .then((habit)=>{
           var habit_new = new Habit(habit);
           habit_new.updateScore(this.good, this.bad);

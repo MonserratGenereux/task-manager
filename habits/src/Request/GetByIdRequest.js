@@ -11,6 +11,7 @@ class GetByIdRequest extends Request{
 
   obtainData(){
     this._id = this.request._id;
+    this.userId = this.request.userId;
   }
 
   updateResponse(succeded, habit, error){
@@ -21,9 +22,9 @@ class GetByIdRequest extends Request{
 
   execute(){
     return new Promise((accept, reject)=>{
-      this.db_schema.findById(this._id)
+      this.db_schema.findOne({_id: this._id, userId: this.userId})
         .then((habit)=>{
-          var my_habit = new Habit(habit._doc).getCopy();
+          var my_habit = new Habit(habit).getCopy();
           this.updateResponse(true, my_habit,'');
           accept(this.response.generate());
         })

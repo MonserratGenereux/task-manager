@@ -1,11 +1,44 @@
+const config = require('config');
+const grpc = require('grpc');
+const promisify = require('grpc-promisify');
 const path = require('path');
-var PROTO_PATH = path.join(__dirname, '/../../../shared/proto/habits/habits.proto');
+const fs = require('fs');
 
-var grpc = require('grpc');
-var habits_proto = grpc.load(PROTO_PATH).habits;
+const Logger = require('../util/logger');
+const logger = Logger(config.get('logger'));
+
+const habitConfig = config.get('services.habits');
+
+const protoPath = config.get('proto_path');
+const protoFile = path.isAbsolute(protoPath) ?
+                path.join(protoPath, habitConfig.proto_file) : 
+                path.join(__dirname, protoPath, habitConfig.proto_file);
+
+if (!fs.statSync(protoFile).isFile()) {
+  throw new Error(`Provided proto file ${protoFile} does not exist`);
+}
+
+const habitProto = grpc.load(protoFile).habits;
+
+const client = new habitProto.HabitsService(
+  habitConfig.address,
+  grpc.credentials.createInsecure());
+
+const deadline = new Date();
+const ttl = habitConfig.connection_ttl_seconds;
+deadline.setSeconds(deadline.getSeconds() + ttl);
+client.waitForReady(deadline, (err) => {
+  if (err) 
+    throw new Error(`Habits grpc service at ${habitConfig.address} is not available: ${err}`);
+  logger.info(`Started habits grpc client on server ${habitConfig.address}`);
+})
+
+promisify(client);
+
+module.exports = client;
 
 function main() {
-  var client = new habits_proto.HabitsService('localhost:50051',
+  var client = new habitProto.HabitsService('localhost:50051',
                                        grpc.credentials.createInsecure());
 
   // client.getHabits({userId:'2'}, function(err, response) {
@@ -32,7 +65,7 @@ function main() {
   //   console.log('deleteHabit:', response, err);
   // });
 
-  // client.getHabitById({_id: '5a0b3769f50f1d2e60fb555a'}, function(err, response) {
+  // client.getHabitById({_id: '5a0b3769f50f1d2e60fb555a',userId: "1"}, function(err, response) {
   //   console.log('getHabitById:', response, err);
   // });
 

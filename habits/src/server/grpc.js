@@ -1,15 +1,27 @@
+const config = require('config');
 const path = require('path');
-const GRPC_PORT = '0.0.0.0:50051';
-var PROTO_PATH = path.join(__dirname, '/../../../shared/proto/habits/habits.proto');
-var grpc = require('grpc');
-var habits_proto = grpc.load(PROTO_PATH).habits;
+const fs = require('fs');
+const grpc = require('grpc');
 
-var CreateRequest = require('./../Request/CreateRequest.js');
-var DeleteRequest = require('./../Request/DeleteRequest.js');
-var GetByIdRequest = require('./../Request/GetByIdRequest.js');
-var GetRequests = require('./../Request/GetRequests.js');
-var MarkHabitRequest = require('./../Request/MarkHabitRequest.js');
-var UpdateRequest = require('./../Request/UpdateRequest.js');
+// Load proto file.
+const protoPath = config.get('proto_path');
+const protoFile = config.get('proto_file');
+const protoFilepath = path.isAbsolute(protoPath) ?
+                path.join(protoPath, protoFile) : 
+                path.join(__dirname, protoPath, protoFile);
+
+if (!fs.statSync(protoFilepath).isFile()) {
+  throw new Error(`Provided proto file ${protoFile} does not exist`);
+}
+
+const habitsProto = grpc.load(protoFilepath).habits;
+
+var CreateRequest = require('../Request/CreateRequest.js');
+var DeleteRequest = require('../Request/DeleteRequest.js');
+var GetByIdRequest = require('../Request/GetByIdRequest.js');
+var GetRequests = require('../Request/GetRequests.js');
+var MarkHabitRequest = require('../Request/MarkHabitRequest.js');
+var UpdateRequest = require('../Request/UpdateRequest.js');
 
 function getHabits(call, callback) {
   new GetRequests(call.request)
@@ -71,18 +83,20 @@ function markHabit(call, callback) {
     })
 }
 
-function main() {
-  var server = new grpc.Server();
-  server.addProtoService(habits_proto.HabitsService.service, {
-    getHabits,
-    createHabit,
-    deleteHabit,
-    getHabitById,
-    updateHabit,
-    markHabit
-  });
-  server.bind(GRPC_PORT, grpc.ServerCredentials.createInsecure());
-  server.start();
-}
+var server = new grpc.Server();
+server.addService(habitsProto.HabitsService.service, {
+  getHabits,
+  createHabit,
+  deleteHabit,
+  getHabitById,
+  updateHabit,
+  markHabit
+});
 
-main();
+const host = config.get("server.host");
+const port = config.get("server.port");
+const address = host + ":" + port;
+server.bind(address, grpc.ServerCredentials.createInsecure());
+console.log(`GPRC server listening on ${address}`);
+
+module.exports = server;

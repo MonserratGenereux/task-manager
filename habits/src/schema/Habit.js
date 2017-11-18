@@ -1,7 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 const constants = require("./../constants");
-mongoose.connect(constants.MONGO_PATH,  { useMongoClient: true });
+const config = require('config');
+const Schema = mongoose.Schema;
+mongoose.connect(config.get("mongo_path"),  { useMongoClient: true });
 
 var HabitSchema = new Schema({
     userId: {
