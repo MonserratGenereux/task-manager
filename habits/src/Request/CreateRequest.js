@@ -10,6 +10,7 @@ class CreateRequest extends Request{
   }
 
   obtainData(){
+    console.log("NIGGA");
     this.habit = new Habit(this.request);
   }
 

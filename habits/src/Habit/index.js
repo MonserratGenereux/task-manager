@@ -1,4 +1,5 @@
 const constants = require("./../constants");
+const Stage = require('./Stage.js');
 
 class Habit{
   constructor(data){
@@ -11,7 +12,8 @@ class Habit{
     this.bad =          data.bad;
     this.difficulty =   (data.difficulty ? data.difficulty : '');
     this.score =        (data.score ? data.score : 0);
-    this.color =        (data.color ? data.color : constants.COLORS.ORANGE);
+    this.stage =        Stage.forScore(this.score);
+    this.color =        this.stage.getColor();//(data.color ? data.color : constants.COLORS.ORANGE);
   }
 
   getCopy(){
