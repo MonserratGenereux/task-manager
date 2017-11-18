@@ -1,6 +1,17 @@
 {
+<<<<<<< HEAD
   "proto_path": "../../shared/proto",
   "proto_file": "habits/habits.proto",
   "grpc_port": "0.0.0.0:50051",
   "mongo_path": "mongodb://localhost/habits"
+=======
+  "proto_path": "../../../shared/proto",
+  "proto_file": "habits/habits.proto",
+  "mongo_path": "mongodb://localhost/habits",
+  "server": {
+    "protocol": "grpc",
+    "host": "localhost",
+    "port": "3002"
+  }
+>>>>>>> e93992abad4fe3e75a0481b1983d687126ed600d
 }

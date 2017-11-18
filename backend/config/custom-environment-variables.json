@@ -1,6 +1,6 @@
 {
   "logger" : "BACKEND_LOGGER",
-  "proto_path": "BACKEND_PROTO_PATH",
+  "proto_path": "PROTO_PATH",
   "server": {
     "host": "BACKEND_SERVER_HOST",
     "port": "BACKEND_SERVER_PORT"
@@ -8,19 +8,23 @@
   "services" : {
     "accounts" : {
       "protocol": "ACCOUNTS_PROTOCOL",
-      "address": "ACCOUNTS_ADDRESS"
+      "address": "ACCOUNTS_ADDRESS",
+      "connection_ttl_seconds": "ACCOUNTS_CONNECTION_TTL"
     },
     "habits" : {
       "protocol": "HABITS_PROTOCOL",
-      "address": "HABITS_ADDRESS"
+      "address": "HABITS_ADDRESS",
+      "connection_ttl_seconds": "HABITS_CONNECTION_TTL"
     },
     "reports" : {
       "protocol": "REPORTS_PROTOCOL",
-      "address": "REPORTS_ADDRESS"
+      "address": "REPORTS_ADDRESS",
+      "connection_ttl_seconds": "REPORTS_CONNECTION_TTL"
     },
     "tasks" : {
       "protocol": "TASKS_PROTOCOL",
-      "address": "TASKS_ADDRESS"
+      "address": "TASKS_ADDRESS",
+      "connection_ttl_seconds": "TASKS_CONNECTION_TTL"
     }
   }
 }

@@ -2,14 +2,25 @@ version: "3"
 services:
   accounts:
     build: ./accounts
+    ports:
+     - "3001:${ACCOUNTS_SERVER_PORT}"
     env_file:
     - .env
+  habits:
+    build: ./habits
+    ports:
+     - "3002:${HABITS_SERVER_PORT}"
+    env_file:
+    - .env
+    volumes:
+      - ./shared:/shared
   backend:
     build: ./backend
     ports:
       - "3000:${BACKEND_SERVER_PORT}"
     environment:
       - ACCOUNTS_ADDRESS=accounts:${ACCOUNTS_SERVER_PORT}
+      - HABITS_ADDRESS=habits:${HABITS_SERVER_PORT}
     env_file:
     - .env
     volumes:

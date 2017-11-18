@@ -1,0 +1,10 @@
+{
+  "proto_path": "PROTO_PATH",
+  "proto_file": "HABITS_PROTO_FILE",
+  "mongo_path": "HABITS_MONGO_URL",
+  "server": {
+    "protocol": "HABITS_SERVER_PROTOCOL",
+    "host": "HABITS_SERVER_HOST",
+    "port": "HABITS_SERVER_PORT"
+  }
+}

@@ -1,8 +1,43 @@
-const PROTO_PATH = __dirname + '/../../../shared/proto/habits/habits.proto';
+const config = require('config');
+const grpc = require('grpc');
+const promisify = require('grpc-promisify');
+const path = require('path');
+const fs = require('fs');
 
-var grpc = require('grpc');
-var habits_proto = grpc.load(PROTO_PATH).habits;
+const Logger = require('../util/logger');
+const logger = Logger(config.get('logger'));
 
+const habitConfig = config.get('services.habits');
+
+const protoPath = config.get('proto_path');
+const protoFile = path.isAbsolute(protoPath) ?
+                path.join(protoPath, habitConfig.proto_file) :
+                path.join(__dirname, protoPath, habitConfig.proto_file);
+
+if (!fs.statSync(protoFile).isFile()) {
+  throw new Error(`Provided proto file ${protoFile} does not exist`);
+}
+
+const habitProto = grpc.load(protoFile).habits;
+
+const client = new habitProto.HabitsService(
+  habitConfig.address,
+  grpc.credentials.createInsecure());
+
+const deadline = new Date();
+const ttl = habitConfig.connection_ttl_seconds;
+deadline.setSeconds(deadline.getSeconds() + ttl);
+client.waitForReady(deadline, (err) => {
+  if (err)
+    throw new Error(`Habits grpc service at ${habitConfig.address} is not available: ${err}`);
+  logger.info(`Started habits grpc client on server ${habitConfig.address}`);
+})
+
+promisify(client);
+
+module.exports = client;
+
+<<<<<<< HEAD
 const client = new habits_proto.HabitsService(
   'localhost:50051',
   grpc.credentials.createInsecure());
@@ -12,6 +47,11 @@ module.exports = client;
 // function main() {
 //   var client = new habits_proto.HabitsService('localhost:50051',
 //                                        grpc.credentials.createInsecure());
+=======
+function main() {
+  var client = new habitProto.HabitsService('localhost:50051',
+                                       grpc.credentials.createInsecure());
+>>>>>>> e93992abad4fe3e75a0481b1983d687126ed600d
 
   // client.getHabits({userId:'2'}, function(err, response) {
   //   console.log('getHabit:', response, err);
