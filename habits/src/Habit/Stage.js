@@ -3,7 +3,8 @@ const YellowStage = require('./YellowStage');
 const GreenStage = require('./GreenStage');
 const BlueStage = require('./BlueStage');
 const OrangeStage = require('./OrangeStage');
-const c = require('./../constants.js')
+const c = require('./../constants.js');
+
 class Stage{
   constructor(score){
     this.score = score;

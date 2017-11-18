@@ -1,4 +1,4 @@
-const Stage = require('./Stage');
+var Stage = require('./Stage.js');
 const c = require('./../constants.js');
 
 class BlueStage extends Stage{

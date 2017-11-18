@@ -9,9 +9,9 @@ const client = new habits_proto.HabitsService(
 
 module.exports = client;
 
-function main() {
-  var client = new habits_proto.HabitsService('localhost:50051',
-                                       grpc.credentials.createInsecure());
+// function main() {
+//   var client = new habits_proto.HabitsService('localhost:50051',
+//                                        grpc.credentials.createInsecure());
 
   // client.getHabits({userId:'2'}, function(err, response) {
   //   console.log('getHabit:', response, err);
@@ -55,6 +55,6 @@ function main() {
   //   console.log('updateHabit:', response, err);
   // });
 
-}
-
-main();
+// }
+//
+// main();

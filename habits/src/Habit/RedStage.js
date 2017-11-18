@@ -1,5 +1,7 @@
-const Stage = require('./Stage');
+var Stage = require('./index.js');
 const c = require('./../constants.js');
+
+console.log("STAGE:" , Stage );
 
 class RedStage extends Stage{
   constructor(score){
