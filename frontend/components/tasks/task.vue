@@ -1,8 +1,8 @@
 <template>
-  <div class="card" v-if="!info.completed">
+    <div class="card" v-if="!info.completed" :class="{redBackground: color.true}">
     <div class="card-content white-text">
       <span class="card-title">Task {{info.name}}</span>
-      <p>Due date: {{info.flag}}</p>
+      <p>Due date: {{info.dueDate}}</p>
     </div>
     <div class="card-action">
       <a class="btn-floating btn-large waves-effect waves-light green" @click="completed()">
@@ -17,11 +17,23 @@ import axios from 'axios'
 export default {
   data () {
     return {
+      red: false
     }
   },
 
   props: ['info'],
+  created () {
+    this.setColor(this.info.display_color)
+  },
   methods: {
+    setColor: function (color) {
+      this.color = {}
+      if (color) {
+        this.color[color] = true
+      } else {
+        this.color[''] = true
+      }
+    },
     completed: function (id) {
       var data = {
         'id': this.id
@@ -61,5 +73,8 @@ export default {
 }
 p{
   text-align: right;
+}
+.redBackground{
+  background-color: rgba(255, 76, 76, 0.5) !important;
 }
 </style>

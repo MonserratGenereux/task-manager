@@ -3,9 +3,9 @@
     <v-grid s12 m8 l8 offset-l2 offset-m2>
       <h1>Task Manager</h1>
       <div class="input-field">
-          <i class="material-icons prefix">email</i>
-          <input id="icon_prefix" type="email" class="validate" v-model="login.email">
-          <label for="icon_prefix">Email</label>
+          <i class="material-icons prefix">user</i>
+          <input id="icon_prefix" type="email" class="validate" v-model="login.username">
+          <label for="icon_prefix">User Name</label>
         </div>
 
     </v-grid>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 export default{
   data () {
@@ -33,17 +34,22 @@ export default{
       login: []
     }
   },
+  props: ['info'],
   methods: {
     loginAction: function () {
-      var api = 'http://localhost:3000/api/zUsers/login'
+      var api = 'http://localhost:3000/accounts/' + this.login.username
       var data = {
-        'email': this.login.email,
+        'username': this.login.username,
         'password': this.login.password
       }
       axios.get(api, data)
         .then((response) => {
-          console.log(response)
-          window.location = '/register'
+          if (!response.data.exists) {
+            alert('The account does not exists')
+          } else {
+            Vue.localStorage.set('user-id', response.data.account.id)
+            window.location = '/'
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -52,7 +58,5 @@ export default{
   }
 }
 </script>
-
-
 <style>
 </style>

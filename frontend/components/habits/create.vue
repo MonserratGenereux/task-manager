@@ -17,17 +17,13 @@
           <h5>Habit type</h5>
           <div class="type">
             <row s12 m6 l6 offset-l2>
-
               <input type="checkbox" id="good" value="true" v-model="create.good">
               <label for="good">Good</label>
-
             </row>
             <row s12 m6 l6 style="padding-left:90px">
               <input type="checkbox" id="bad" value="true" v-model="create.bad">
               <label for="bad">Bad</label>
             </row>
-            <!--  <span>bad: {{ create.bad }}</span>
-            <span>good: {{ create.good }}</span>-->
           </div>
           <h5>Difficulty</h5>
           <div class="col l4">
@@ -50,7 +46,6 @@
           </div>
         </v-grid>
       </div>
-
     </div>
     <button class="btn waves-effect waves-light" id="buttonSubmit" type="submit" name="action" @click="createHabit()">Save
     </button>
@@ -58,6 +53,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 export default{
   data () {
@@ -67,22 +63,25 @@ export default{
   },
   methods: {
     createHabit: function () {
+      let userId = Vue.localStorage.get('user-id')
       if (!this.create.name || !this.create.description || !this.create.difficulty) {
         alert('error')
       } else {
         var api = 'http://localhost:3000/habits'
-        var data = {
+        var habit = {
           'name': this.create.name,
           'description': this.create.description,
           'good': this.create.good,
           'bad': this.create.bad,
-          'difficulty': this.create.difficulty,
-          'score': 0
+          'difficulty': this.create.difficulty
         }
-        axios.post(api, data)
+        var config = {
+          headers: {'user-id': userId}
+        }
+        axios.post(api, {habit}, config)
           .then((response) => {
-            console.log(data)
-            console.log(response.data)
+            console.log('ke zta pazandaaa', response)
+            location.reload()
           })
           .catch((error) => {
             console.log(error)

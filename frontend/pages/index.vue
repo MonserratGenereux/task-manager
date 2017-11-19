@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 import Tasks from '~/components/tasks/tasks'
 import Habits from '~/components/habits/habits'
@@ -57,13 +58,9 @@ export default{
   },
   methods: {
     getUser: function () {
-      axios.get('http://localhost:3000/accounts', {
-        params: {
-          'password': 'password123'
-        }
-      })
+      let userid = Vue.localStorage.get('userid')
+      axios.get('http://localhost:3000/accounts/' + userid)
         .then((response) => {
-          console.log('respuesta', response.data)
           this.user = response.data
         })
         .catch((error) => {

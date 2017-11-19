@@ -34,7 +34,6 @@ export default {
       axios.get('http://localhost:3000/reports', {
       })
         .then((response) => {
-          console.log('Respuestaaaa', response.data.habits.best.name)
           this.bestName = response.data.habits.best.name
           this.bestScore = response.data.habits.best.score
           this.worstName = response.data.habits.worst.name

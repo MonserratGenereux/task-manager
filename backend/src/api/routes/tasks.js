@@ -29,37 +29,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         description: invalid username
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send([
-    {
-      'id': 'el id',
-      'name': 'el nombre1',
-      'completed': true,
-      'dueDate': '12/12/2017',
-      'flag':false
-
-    },
-    {
-      'id': 'el id',
-      'name': 'el nombre2',
-      'completed': false,
-      'dueDate': '12/12/2017',
-      'flag':true
-    },
-    {
-      'id': 'el id',
-      'name': 'el nombre3',
-      'completed': true,
-      'dueDate': '12/12/2017',
-      'flag':false
-    },
-    {
-      'id': 'el id',
-      'name': 'el nombre4',
-      'completed': false,
-      'dueDate': '12/12/2017',
-      'flag':true
-    }
-  ]);
+  res.status(HttpStatus.OK).send('ok');
 });
 
 /**
@@ -85,7 +55,41 @@ router.get('/', (req, res) => {
  *         description: invalid task
  */
 router.get('/:taskId', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  res.status(HttpStatus.OK).send([
+    {
+      'id': 'el id',
+      'name': 'el nombre1',
+      'completed': true,
+      'dueDate': '12/12/2017',
+      'reminder_flag':false,
+      'display_color': false
+
+    },
+    {
+      'id': 'el id',
+      'name': 'el nombre2',
+      'completed': false,
+      'dueDate': '12/12/2017',
+      'reminder_flag':true,
+      'display_color': true
+    },
+    {
+      'id': 'el id',
+      'name': 'el nombre3',
+      'completed': true,
+      'dueDate': '12/12/2017',
+      'reminder_flag':false,
+      'display_color': false
+    },
+    {
+      'id': 'el id',
+      'name': 'el nombre4',
+      'completed': false,
+      'dueDate': '12/12/2017',
+      'reminder_flag':true,
+      'display_color': true
+    }
+  ]);
 });
 
 /**

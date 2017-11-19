@@ -1,37 +1,23 @@
-<template >
-  <div>
-    <notifications group="custom-template"
-    :duration="5000"
-    :width="500"
-    animation-name="v-fade-left"
-    position="top left"
-    v-if="info.flag">
-    <template slot="body" scope="props">
-      <div class="custom-template">
-        <div class="custom-template-content">
-          <div class="custom-template-title">
-            {{info.name}}
-          </div>
-          <div class="custom-template-text"
-          v-html="info.flag"></div>
-        </div>
-      </div>
-    </template>
-  </notifications>
-</div>
+<template>
+  <div class="reminder">
+    <notifications
+      :duration="5000"
+      :width="500"
+      animation-name="v-fade-left"
+      position="top left">
+    </notifications>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
-  name: 'app',
+  name: 'reminder',
   data () {
     return {
-      reminder: [''],
-      id: 0,
+      id: 1,
       animation: {
         enter: {
-          opacity: [1, 0],
+          opacity: [2, 2],
           translateX: [0, -300],
           scale: [1, 0.2]
         },
@@ -43,38 +29,26 @@ export default {
     }
   },
   mounted () {
-    this.completed('custom-template')
+    let title = 'This is a Reminder for task'
+    let text = this.info.name
+    let group = 'custom-template'
+    this.$notify({ group, title, text })
   },
   props: ['info'],
   methods: {
     clean (group) {
       this.$notify({ group, clean: true })
-    },
-    completed: function (group, type = '') {
-      axios.get('http://localhost:3000/tasks?flag=true')
-        .then((response) => {
-          this.reminder = response.data
-          console.log('Respuestaewdnwoe', response.data)
-          let title = response.data
-          let text = 'text'
-          this.$notify({ group, title, text, type })
-        })
-        .catch((error) => {
-          console.log(error)
-        })
     }
   }
 }
 </script>
 
 <style lang="scss">
+.notifications{
+  padding-top: 65px !important;
+}
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 0;
-  padding-top: 80px;
-  margin: 0;
   h2 {
     font-weight: 300;
     a {
@@ -82,27 +56,7 @@ body {
       font-size: 12px;
     }
   }
-  button {
-    display: inline-block;
-    box-sizing: border-box;
-    border: 0;
-    border-radius: 3px;
-    color: white;
-    vertical-align: top;
-    text-decoration: none;
-    font-size: 12px;
-    font-family: inherit;
-    cursor: pointer;
-    outline: none;
-    transition: all 500ms;
-    padding: 12px;
-    box-shadow: none;
-    background: #02ccba;
-    font-weight: 600;
-    width: 100%;
-    letter-spacing: 1px;
-    box-shadow: 0 5px 15px 0px rgba(46,61,73,0.1);
-  }
+
   #app {
     text-align: center;
     color: #2c3e50;
@@ -120,7 +74,7 @@ body {
   box-shadow: 0 5px 15px 0px rgba(46, 61, 73, 0.1);
 }
 /*
-EXAMPLES
+  EXAMPLES
 */
 .notification.n-light {
   margin: 10px;

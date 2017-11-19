@@ -1,13 +1,14 @@
 <template>
   <section>
     <h5>Tasks</h5>
-    <Task v-for="task in tasks"  v-bind:info="task" :key="tasks.id"/>
-    <reminder v-for="task in tasks" v-bind:info="task" :key="tasks.id"/>
+    <Task v-for="task in tasks"  v-bind:info="task" :key="task.id"/>
+    <reminder v-for="task in reminder_flag" v-bind:info="task" :key="task.id"/>
     </div>
   </section>
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 import Task from '~/components/tasks/task'
 import reminder from '~/components/tasks/reminder'
@@ -15,7 +16,7 @@ export default {
   data () {
     return {
       tasks: [''],
-      flag: ['']
+      reminder_flag: ['']
     }
   },
   components: {
@@ -27,15 +28,24 @@ export default {
   },
   methods: {
     getTasks: function () {
-      axios.get('http://localhost:3000/tasks', {
-      })
+      let userid = Vue.localStorage.get('userid')
+      axios.get('http://localhost:3000/tasks/' + userid)
         .then((response) => {
-          console.log('Respuesta', this.tasks = response.data)
-          this.flag = response.data.tasks.flag
+          this.tasks = response.data
+          this.setNotifications(response.data)
         })
         .catch((error) => {
           console.log(error)
         })
+    },
+    setNotifications: function (object) {
+      let reminderObject = []
+      for (var index in object) {
+        if (object[index].reminder_flag) {
+          reminderObject.push(object[index])
+        }
+      }
+      this.reminder_flag = reminderObject
     }
   }
 }

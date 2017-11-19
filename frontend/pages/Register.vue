@@ -6,7 +6,7 @@
 
       <div class="input-field">
           <i class="material-icons prefix">person</i>
-          <input id="icon_prefix" type="text" class="validate" v-model="login.name">
+          <input id="icon_prefix" type="text" class="validate" v-model="login.username">
           <label for="icon_prefix">Name</label>
         </div>
 
@@ -49,12 +49,12 @@ export default{
   },
   methods: {
     loginAction: function () {
-      var api = 'http://localhost:3000/docs/#/account/post_account'
+      var api = 'http://localhost:3000/accounts'
       var data = {
-        'name': this.login.name,
+        'username': this.login.username,
         'email': this.login.email,
-        'password': this.login.password,
-        'birthday': this.login.birthday
+        'password': this.login.password
+      // 'birthday': this.login.birthday
       }
       axios.post(api, data)
         .then((response) => {

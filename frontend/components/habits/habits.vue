@@ -1,18 +1,19 @@
 <template>
   <section>
     <h5>Habits</h5>
-      <Habit v-for="habit in habits"  v-bind:info="habit" :key="habits.id"/>
+    <Habit v-for="habit in habits"  v-bind:info="habit" :key="habits.id"/>
   </section>
 
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 import Habit from '~/components/habits/habit'
 export default {
   data () {
     return {
-      habits: ['']
+      habits: []
     }
   },
   components: {
@@ -23,11 +24,13 @@ export default {
   },
   methods: {
     getHabits: function () {
-      axios.get('http://localhost:3000/habits', {
-      })
+      let userId = Vue.localStorage.get('user-id')
+      var config = {
+        headers: {'user-id': userId}
+      }
+      axios.get('http://localhost:3000/habits', config)
         .then((response) => {
-          console.log('Respuesta', response)
-          this.habits = response.data
+          this.habits = response.data.habits
         })
         .catch((error) => {
           console.log(error)
@@ -35,6 +38,6 @@ export default {
     }
   }
 }
-</script>
-<style lang="css">
-</style>
+  </script>
+  <style lang="css">
+  </style>

@@ -34,52 +34,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         description: invalid username
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send([
-    {
-      'id': 'el id',
-      'name': 'el nombre',
-      'bad': true,
-      'good': false,
-      'difficulty': 10,
-      'score': 10,
-      'color': 'rgba(244, 119, 33, 0.5)'
-    },
-    {
-      'id': 'el id',
-      'name': 'el nombre',
-      'good': true,
-      'bad': false,
-      'difficulty': 10,
-      'score': 10,
-      'color': 'rgba(127, 187, 0, 0.5)'
-    },
-    {
-      'id': 'el id',
-      'name': 'el nombre',
-      'good': true,
-      'bad': true,
-      'difficulty': 10,
-      'score': 10,
-      'color': 'rgba(255, 217, 0, 0.5)'
-    },
-    {
-      'id': 'el id',
-      'name': 'el nombre',
-      'type': 10,
-      'difficulty': 10,
-      'score': 10,
-      'color': 'rgba(0, 153, 229, 0.5)'
-    }
-    ,
-    {
-      'id': 'el id',
-      'name': 'el nombre',
-      'type': 10,
-      'difficulty': 10,
-      'score': 10,
-      'color': 'rgba(255, 76, 76, 0.5)'
-    }
-  ]);
+  res.status(HttpStatus.OK).send('ok');
 });
 
 /**
@@ -112,7 +67,34 @@ router.get('/', (req, res) => {
  *         description: invalid habit
  */
 router.get('/:habitId', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  res.status(HttpStatus.OK).send({
+  "succeded": true,
+  "habits": [
+    {
+      "_id": "5a10def5decd7c0010b5b85f",
+      "userId": "1",
+      "name": "ewfnkjnkjf",
+      "description": "f3k4f3",
+      "good": true,
+      "bad": true,
+      "difficulty": "0",
+      "score": 0,
+      "color": "ORANGE"
+    },
+    {
+      "_id": "5a10fa60decd7c0010b5b860",
+      "userId": "1",
+      "name": "habit2",
+      "description": "f3k4fwf",
+      "good": false,
+      "bad": true,
+      "difficulty": "0",
+      "score": 0,
+      "color": "ORANGE"
+    }
+  ],
+  "error": ""
+});
 });
 
 /**

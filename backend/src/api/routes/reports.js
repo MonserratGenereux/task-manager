@@ -31,7 +31,36 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         description: invalid username
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  res.status(HttpStatus.OK).send({
+  "habits": {
+    "countGreen": 12,
+    "countRed": 30,
+    "countBlue": 40,
+    "countYellow": 50,
+    "countOrange": 10,
+    "best": {
+      "id": "id",
+      "name": "name",
+      "type": 0,
+      "difficulty": 0,
+      "score": 10
+    },
+    "worst": {
+      "id": "is worsr",
+      "name": "feo",
+      "type": 0,
+      "difficulty": 0,
+      "score": -20
+    }
+  },
+  "tasks": {
+    "completed": 10,
+    "delayed": 20,
+    "onTime": 30,
+    "beforeTime": 40,
+    "available": 20
+  }
+});
 });
 
 /**
