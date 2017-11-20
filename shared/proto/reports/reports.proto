@@ -27,14 +27,14 @@ message AccountID {
 }
 
 message HabitsReport {
-  int64 blue_count = 1;
-  int64 green_count = 2;
-  int64 yellow_count = 3;
-  int64 orange_count = 4;
-  int64 red_count = 5;
+  message RangeCount {
+    string color = 1;
+    int64 count = 2;
+  }
 
-  habits.Habit worst = 6;
-  habits.Habit best = 7;
+  repeated RangeCount range_counts = 1;
+  habits.Habit worst = 2;
+  habits.Habit best = 3;
 }
 
 message HabitsUserReport {
@@ -42,12 +42,12 @@ message HabitsUserReport {
   repeated habits.Habit bad_habits = 2;
 }
 
-message TasksReport {
+message TasksUserReport {
   repeated tasks.Task delayed = 1;
   repeated tasks.Task dueToday = 2;
 }
 
-message TasksUserReport {
+message TasksReport {
 
   message CompletedTasks {
     int64 onTime = 1;
@@ -58,7 +58,7 @@ message TasksUserReport {
   message AvailableTasks {
     int64 remaining = 1;
     int64 forToday = 2;
-    int64  delayed= 3;
+    int64 delayed= 3;
   }
 
   CompletedTasks completed_tasks = 1;
