@@ -252,12 +252,12 @@ router.delete('/:taskId', (req, res) => {
  *     responses:
  *       200:
  *         description: OK
- *           schema:
- *             $ref: "#/definitions/tasks"
+ *         schema:
+ *           $ref: "#/definitions/tasks"
  *       400:
  *         description: server error
- *           schema:
- *             $ref: "#/definitions/StatusResponse"
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  *          
  *       
  */
