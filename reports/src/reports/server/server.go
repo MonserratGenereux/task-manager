@@ -22,22 +22,22 @@ type ReportsServer struct {
 
 // GetHabitsReport retrieves a general habits report.
 func (s *ReportsServer) GetHabitsReport(ctx context.Context, in *reports.Empty) (*reports.HabitsReport, error) {
-	return &reports.HabitsReport{}, nil
+	return s.DB.GetHabitsReport()
 }
 
 // GetHabitsUserReport retrieves a user specific habits report.
 func (s *ReportsServer) GetHabitsUserReport(ctx context.Context, in *reports.AccountID) (*reports.HabitsUserReport, error) {
-	return &reports.HabitsUserReport{}, nil
+	return s.DB.GetHabitsUserReport(in.Id)
 }
 
 // GetTasksReport retrieves a general tasks report.
 func (s *ReportsServer) GetTasksReport(ctx context.Context, in *reports.Empty) (*reports.TasksReport, error) {
-	return &reports.TasksReport{}, nil
+	return s.DB.GetTasksReport()
 }
 
 // GetTasksUserReport retrieves a user specific tasks report.
 func (s *ReportsServer) GetTasksUserReport(ctx context.Context, in *reports.AccountID) (*reports.TasksUserReport, error) {
-	return &reports.TasksUserReport{}, nil
+	return s.DB.GetTasksUserReport(in.Id)
 }
 
 // Start initiliazes and start a server implementing Account service.
