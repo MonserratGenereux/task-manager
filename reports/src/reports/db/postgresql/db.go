@@ -19,7 +19,8 @@ const (
 	 description TEXT NOT NULL,
 	 created TIMESTAMP NOT NULL,
 	 due TIMESTAMP NOT NULL,
-	 completed TIMESTAMP
+	 completed TIMESTAMP,
+	 is_completed BOOL NOT NULL
 	);
 	`
 
