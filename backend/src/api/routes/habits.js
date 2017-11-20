@@ -124,6 +124,7 @@ router.get('/:habitId', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/', (req, res) => {
+  console.log("req.body", req.body);
   if(req.get('user-id') && req.body.habit){
     req.body.habit.userId = req.get('user-id');
     client.createHabit(req.body.habit, function(err, StatusResponse) {
@@ -264,7 +265,7 @@ router.delete('/:habitId', (req, res) => {
  */
 router.post('/good/:habitId', (req, res) => {
   if(req.get('user-id') && req.params.habitId){
-    client.markHabit({_id: req.params.habitId, userId: req.get('user-id'), good: true, bad: false}, function(err, GetHabitResponse) {
+    client.MarkAsGood({_id: req.params.habitId, userId: req.get('user-id')}, function(err, GetHabitResponse) {
       if(err){
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
@@ -308,7 +309,7 @@ router.post('/good/:habitId', (req, res) => {
  */
 router.post('/bad/:habitId', (req, res) => {
   if(req.get('user-id') && req.params.habitId){
-    client.markHabit({_id: req.params.habitId, userId: req.get('user-id'), good: false, bad: true}, function(err, GetHabitResponse) {
+    client.MarkAsGood({_id: req.params.habitId, userId: req.get('user-id')}, function(err, GetHabitResponse) {
       if(err){
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
