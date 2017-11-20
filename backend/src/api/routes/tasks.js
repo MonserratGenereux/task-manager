@@ -26,10 +26,11 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *       200:
  *         description: OK
  *         schema:
- *         $ref: "#/definitions/GetTasksResponse"
+ *           $ref: "#/definitions/GetTasksResponse"
  *       400:
  *         description: invalid request
- *         $ref: "#/definitions/GetTasksResponse"
+ *         schema:
+ *           $ref: "#/definitions/GetTasksResponse"
  */
 router.get('/', (req, res) => {
     req.hea
@@ -65,10 +66,12 @@ router.get('/', (req, res) => {
  *     responses:
  *       200:
  *         description: OK
- *         $ref: "#/definitions/GetTasksResponse"
+ *         schema:
+ *           $ref: "#/definitions/GetTasksResponse"
  *       400:
  *         description: invalid request
- *         $ref: "#/definitions/GetTasksResponse"
+ *         schema:
+ *           $ref: "#/definitions/GetTasksResponse"
  */
 router.get('/', (req, res) => {
     req.hea
@@ -250,11 +253,11 @@ router.delete('/:taskId', (req, res) => {
  *       200:
  *         description: OK
  *           schema:
- *           $ref: "#/definitions/tasks"
+ *             $ref: "#/definitions/tasks"
  *       400:
  *         description: server error
- *         schema:
- *           $ref: "#/definitions/StatusResponse"
+ *           schema:
+ *             $ref: "#/definitions/StatusResponse"
  *          
  *       
  */
