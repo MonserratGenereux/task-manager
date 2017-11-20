@@ -1,46 +1,88 @@
 package com.tasks.app;
 
-import com.tasks.proto.TasksServiceGrpc;
-import com.tasks.proto.TasksMicroservice.UserID;
+import com.tasks.app.db.TasksDatabase;
+import com.tasks.proto.TasksMicroservice.StatusResponse;
 import com.tasks.proto.TasksMicroservice.Task;
 import com.tasks.proto.TasksMicroservice.TaskID;
 import com.tasks.proto.TasksMicroservice.Tasks;
-import com.tasks.proto.TasksMicroservice.StatusResponse;
-import io.grpc.stub.StreamObserver; 
+import com.tasks.proto.TasksMicroservice.UserID;
+import com.tasks.proto.TasksServiceGrpc;
+
+import io.grpc.stub.StreamObserver;
 
 public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
-	
-	@Override
-    public void getTasks(UserID userID, StreamObserver<Tasks> responseObserver) {
-    	System.out.println("El usuario es " + userID.getId());
-    }
-	
-	@Override
-	public void createTask(Task task, StreamObserver<StatusResponse> responseObserver){
-		System.out.println("El task es "+ task.getTitle());
+
+	private TasksDatabase db;
+
+	public TasksImpl(TasksDatabase db) {
+		this.db = db;
 	}
-	
+
 	@Override
-	public void getTaskById(TaskID taskID, StreamObserver<Task> responseObserver){
-		System.out.println("El task id es: "+ taskID.getId());
+	public void getTasks(UserID userID, StreamObserver<Tasks> responseObserver) {
+		try {
+			Tasks tasks = db.getTasks(userID);
+			responseObserver.onNext(tasks);
+		} catch (Exception e) {
+			responseObserver.onError(e);
+		}
+		responseObserver.onCompleted();
 	}
-	
+
 	@Override
-	public void deleteTask(TaskID taskID, StreamObserver<StatusResponse> responseObserver){
-		System.out.println("El task id es: "+ taskID.getId());
+	public void createTask(Task task, StreamObserver<StatusResponse> responseObserver) {
+		try {
+			db.createTask(task);
+			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
+		} catch (Exception e) {
+			responseObserver.onError(e);
+		}
+		responseObserver.onCompleted();
 	}
-	
+
 	@Override
-	public void updateTask(Task task, StreamObserver<StatusResponse> responseObserver){
-		System.out.println("El task fue creado: "+ task.getCreatedTimestamp());
+	public void getTaskById(TaskID taskID, StreamObserver<Task> responseObserver) {
+		try {
+			Task task = db.getTaskById(taskID);
+			responseObserver.onNext(task);
+		} catch (Exception e) {
+			responseObserver.onError(e);
+		}
+		responseObserver.onCompleted();
 	}
-	
-	
+
 	@Override
-	public void completeTask(TaskID taskID, StreamObserver<Task> responseObserver){
-		System.out.println("El task id es: "+ taskID.getId());
+	public void deleteTask(TaskID taskID, StreamObserver<StatusResponse> responseObserver) {
+		try {
+			db.deleteTask(taskID);
+			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
+		} catch (Exception e) {
+			responseObserver.onError(e);
+		}
+		responseObserver.onCompleted();
+
 	}
-	
-	
-	
+
+	@Override
+	public void updateTask(Task task, StreamObserver<StatusResponse> responseObserver) {
+		try {
+			db.updateTask(task);
+			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
+		} catch (Exception e) {
+			responseObserver.onError(e);
+		}
+		responseObserver.onCompleted();
+	}
+
+	@Override
+	public void completeTask(TaskID taskID, StreamObserver<Task> responseObserver) {
+		try {
+			Task task = db.completeTask(taskID);
+			responseObserver.onNext(task);
+		} catch (Exception e) {
+			responseObserver.onError(e);
+		}
+		responseObserver.onCompleted();
+	}
+
 }

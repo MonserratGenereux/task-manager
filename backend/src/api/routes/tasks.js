@@ -17,7 +17,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -43,7 +43,7 @@ router.get('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -69,7 +69,7 @@ router.get('/:taskId', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -100,7 +100,7 @@ router.post('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -131,7 +131,7 @@ router.patch('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -162,7 +162,7 @@ router.delete('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true

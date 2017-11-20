@@ -1,25 +1,24 @@
 package com.tasks.app;
 
 import io.grpc.BindableService;
-
-import com.tasks.app.*;
+import com.tasks.app.db.PostgreSQL.TasksDatabaseSQL;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.stub.StreamObserver;
 import java.io.IOException;
 import java.util.logging.Logger;
-import java.util.List;
+
 
 public class App {
     private static final Logger logger = Logger.getLogger(App.class.getName());
 
   private Server server;
-
+  private TasksDatabaseSQL taskDB;
   private void start() throws IOException {
 
       int port = 50051;
+      taskDB = new TasksDatabaseSQL();
       server = ServerBuilder.forPort(port)
-        .addService((BindableService) new TasksImpl())
+        .addService((BindableService) new TasksImpl(taskDB))
         .build()
         .start();
       logger.info("Server started, listening on " + port);
@@ -44,7 +43,7 @@ public class App {
         server.awaitTermination();
         }
     }
-
+    
     public static void main( String[] args ) throws IOException, InterruptedException {
         final App server = new App();
         server.start();
