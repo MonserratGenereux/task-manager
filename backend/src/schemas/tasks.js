@@ -53,7 +53,7 @@ module.exports = {
     GetTasksResponse: {
         type: 'object',
         properties: {
-            succeded: { type: 'boolean' },
+            is_completed: { type: 'boolean' },
             habits: {
                 type: 'array',
                 items: { $ref: "#/definitions/tasks" }
@@ -62,14 +62,5 @@ module.exports = {
         },
         additionalProperties: false
     },
-    GetTasksResponse: {
-        type: 'object',
-        properties: {
-            succeded: { type: 'boolean' },
-            habits: { $ref: "#/definitions/tasks" },
-            error: { type: 'string' }
-        },
-        additionalProperties: false
-    }
 
 };

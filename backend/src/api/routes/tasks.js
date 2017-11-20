@@ -77,7 +77,7 @@ router.get('/', (req, res) => {
             if (err) {
                 res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
             } else {
-                res.status(HttpStatus.OK).send(HabitsResponse);
+                res.status(HttpStatus.OK).send(TasksResponse);
             }
         });
     } else {
@@ -105,7 +105,7 @@ router.get('/', (req, res) => {
  *         description: info of the newly create task
  *         in: body
  *         required: true
- *        schema:
+ *         schema:
  *           $ref: "#/definitions/TaskCreate"
  *     responses:
  *       200:
@@ -124,7 +124,7 @@ router.get('/', (req, res) => {
             if (err) {
                 res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
             } else {
-                res.status(HttpStatus.OK).send(HabitsResponse);
+                res.status(HttpStatus.OK).send(TasksResponse);
             }
         });
     } else {
@@ -165,10 +165,10 @@ router.get('/', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.patch('/', (req, res) => {
-    if (req.get('user-id') && req.body.habit) {
-        req.body.habit.userId = req.get('user-id');
-        console.log("REQ", req.body.habit);
-        client.updateTask(req.body.habit, function(err, StatusResponse) {
+    if (req.get('user-id') && req.body.task) {
+        req.body.task.userId = req.get('user-id');
+        console.log("REQ", req.body.task);
+        client.updateTask(req.body.task, function(err, StatusResponse) {
             if (err) {
                 res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
             } else {
@@ -213,11 +213,11 @@ router.patch('/', (req, res) => {
  */
 router.delete('/:taskId', (req, res) => {
     if (req.get('user-id') && req.params.habitId) {
-        client.deleteTask({ _id: req.params.habitId, userId: req.get('user-id') }, function(err, GetHabitResponse) {
+        client.deleteTask({ _id: req.params.taskId, userId: req.get('user-id') }, function(err, GetHabitResponse) {
             if (err) {
                 res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
             } else {
-                res.status(HttpStatus.OK).send(GetHabitResponse);
+                res.status(HttpStatus.OK).send(GetTasksResponse);
             }
         });
     } else {
@@ -249,7 +249,7 @@ router.delete('/:taskId', (req, res) => {
  *     responses:
  *       200:
  *         description: OK
- *            schema:
+ *           schema:
  *           $ref: "#/definitions/tasks"
  *       400:
  *         description: server error
