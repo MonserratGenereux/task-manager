@@ -90,6 +90,11 @@ public final class TasksMicroservice {
      * <code>bool is_completed = 10;</code>
      */
     boolean getIsCompleted();
+
+    /**
+     * <code>bool reminder_flag = 11;</code>
+     */
+    boolean getReminderFlag();
   }
   /**
    * Protobuf type {@code tasks.Task}
@@ -114,6 +119,7 @@ public final class TasksMicroservice {
       reminderTimestamp_ = java.util.Collections.emptyList();
       displayColor_ = "";
       isCompleted_ = false;
+      reminderFlag_ = false;
     }
 
     @java.lang.Override
@@ -211,6 +217,11 @@ public final class TasksMicroservice {
             case 80: {
 
               isCompleted_ = input.readBool();
+              break;
+            }
+            case 88: {
+
+              reminderFlag_ = input.readBool();
               break;
             }
           }
@@ -420,6 +431,15 @@ public final class TasksMicroservice {
       return isCompleted_;
     }
 
+    public static final int REMINDER_FLAG_FIELD_NUMBER = 11;
+    private boolean reminderFlag_;
+    /**
+     * <code>bool reminder_flag = 11;</code>
+     */
+    public boolean getReminderFlag() {
+      return reminderFlag_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -466,6 +486,9 @@ public final class TasksMicroservice {
       }
       if (isCompleted_ != false) {
         output.writeBool(10, isCompleted_);
+      }
+      if (reminderFlag_ != false) {
+        output.writeBool(11, reminderFlag_);
       }
       unknownFields.writeTo(output);
     }
@@ -522,6 +545,10 @@ public final class TasksMicroservice {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(10, isCompleted_);
       }
+      if (reminderFlag_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(11, reminderFlag_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -558,6 +585,8 @@ public final class TasksMicroservice {
           .equals(other.getDisplayColor());
       result = result && (getIsCompleted()
           == other.getIsCompleted());
+      result = result && (getReminderFlag()
+          == other.getReminderFlag());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -597,6 +626,9 @@ public final class TasksMicroservice {
       hash = (37 * hash) + IS_COMPLETED_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getIsCompleted());
+      hash = (37 * hash) + REMINDER_FLAG_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getReminderFlag());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -746,6 +778,8 @@ public final class TasksMicroservice {
 
         isCompleted_ = false;
 
+        reminderFlag_ = false;
+
         return this;
       }
 
@@ -784,6 +818,7 @@ public final class TasksMicroservice {
         result.reminderTimestamp_ = reminderTimestamp_;
         result.displayColor_ = displayColor_;
         result.isCompleted_ = isCompleted_;
+        result.reminderFlag_ = reminderFlag_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -865,6 +900,9 @@ public final class TasksMicroservice {
         }
         if (other.getIsCompleted() != false) {
           setIsCompleted(other.getIsCompleted());
+        }
+        if (other.getReminderFlag() != false) {
+          setReminderFlag(other.getReminderFlag());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1319,6 +1357,32 @@ public final class TasksMicroservice {
       public Builder clearIsCompleted() {
         
         isCompleted_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean reminderFlag_ ;
+      /**
+       * <code>bool reminder_flag = 11;</code>
+       */
+      public boolean getReminderFlag() {
+        return reminderFlag_;
+      }
+      /**
+       * <code>bool reminder_flag = 11;</code>
+       */
+      public Builder setReminderFlag(boolean value) {
+        
+        reminderFlag_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool reminder_flag = 11;</code>
+       */
+      public Builder clearReminderFlag() {
+        
+        reminderFlag_ = false;
         onChanged();
         return this;
       }
@@ -3277,6 +3341,7 @@ public final class TasksMicroservice {
       if (id_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, id_);
+
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3557,6 +3622,7 @@ public final class TasksMicroservice {
       public Builder clearId() {
         
         id_ = 0L;
+        
         onChanged();
         return this;
       }
@@ -3662,6 +3728,7 @@ public final class TasksMicroservice {
       "sponse\"\000\022,\n\014CompleteTask\022\r.tasks.TaskID\032" +
       "\013.tasks.Task\"\000B.\n\017com.tasks.protoB\021Tasks" +
       "MicroserviceZ\010pb/tasksb\006proto3"
+
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3682,6 +3749,7 @@ public final class TasksMicroservice {
         internal_static_tasks_Task_descriptor,
         new java.lang.String[] { "Id", "UserId", "Title", "Description", "CreatedTimestamp", "DueTimestamp", "CompletedTimestamp", "ReminderTimestamp", "DisplayColor", "IsCompleted", });
     internal_static_tasks_StatusResponse_descriptor =
+
       getDescriptor().getMessageTypes().get(1);
     internal_static_tasks_StatusResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(

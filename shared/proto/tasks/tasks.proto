@@ -37,6 +37,7 @@ message Task {
   repeated int64  reminder_timestamp = 8;
   string display_color = 9;
   bool is_completed = 10; 
+  bool reminder_flag = 11; 
 }
 
 message StatusResponse {
