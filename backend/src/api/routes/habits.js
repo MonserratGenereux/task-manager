@@ -263,13 +263,8 @@ router.delete('/:habitId', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/good/:habitId', (req, res) => {
-<<<<<<< HEAD
-  if(req.get('userId') && req.params.habitId){
-    client.markAsGood({_id: req.params.habitId, userId: req.get('userId')}, function(err, GetHabitResponse) {
-=======
   if(req.get('user-id') && req.params.habitId){
     client.markHabit({_id: req.params.habitId, userId: req.get('user-id'), good: true, bad: false}, function(err, GetHabitResponse) {
->>>>>>> 0757ee77abb974281cbf64b9756170fdda4d73b3
       if(err){
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
