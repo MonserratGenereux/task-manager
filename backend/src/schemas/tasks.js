@@ -1,15 +1,75 @@
 module.exports = {
-    tasks:{
+    tasks: {
         type: 'object',
-        properties:{
-            id: { type: 'string'},
-            name: { type: 'string'},
-            description: { type: 'string'},
-            color: { type: 'string'},
-            // due date: MM/DD/YYYY
-            dueDate: { type: 'string'},
-            reminder: { type: 'string'}
+        properties: {
+            id: { type: 'integer' },
+            user_id: { type: 'integer' },
+            title: { type: 'string' },
+            description: { type: 'string' },
+            created_timestamp: { type: 'integer' },
+            due_timestamp: { type: 'integer' },
+            reminder_timestamp: { type: '[integer]' },
+            display_color: { type: 'integer' },
+            is_completed: { type: 'boolean' },
+            reminder_display: { type: 'boolean' }
+        },
+        additionalProperties: false
+    },
+    TaskCreate: {
+        type: 'object',
+        properties: {
+            title: { type: 'string' },
+            description: { type: 'string' },
+            created_timestamp: { type: 'integer' },
+            due_timestamp: { type: 'integer' },
+            reminder_timestamp: { type: '[integer]' },
+            reminder_display: { type: 'boolean' }
+        },
+        additionalProperties: false
+    },
+    TaskUpdate: {
+        type: 'object',
+        properties: {
+            id: { type: 'integer' },
+            title: { type: 'string' },
+            description: { type: 'string' },
+            created_timestamp: { type: 'integer' },
+            due_timestamp: { type: 'integer' },
+            reminder_timestamp: { type: '[integer]' },
+            reminder_display: { type: 'boolean' }
+        },
+        additionalProperties: false
+
+    },
+    StatusResponse: {
+        type: 'object',
+        properties: {
+            is_completed: { type: 'boolean' },
+            taskId: { type: 'string' },
+            error: { type: 'string' }
+        },
+        additionalProperties: false
+    },
+    GetTasksResponse: {
+        type: 'object',
+        properties: {
+            succeded: { type: 'boolean' },
+            habits: {
+                type: 'array',
+                items: { $ref: "#/definitions/tasks" }
+            },
+            error: { type: 'string' }
+        },
+        additionalProperties: false
+    },
+    GetTasksResponse: {
+        type: 'object',
+        properties: {
+            succeded: { type: 'boolean' },
+            habits: { $ref: "#/definitions/tasks" },
+            error: { type: 'string' }
         },
         additionalProperties: false
     }
+
 };

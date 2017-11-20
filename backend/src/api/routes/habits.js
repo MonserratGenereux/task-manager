@@ -34,18 +34,18 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *           $ref: "#/definitions/GetHabitsResponse"
  */
 router.get('/', (req, res) => {
-  req.hea
-  if(req.get('user-id')){
-    client.getHabits({userId: req.get('user-id')}, function(err, HabitsResponse) {
-      if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-      }else{
-        res.status(HttpStatus.OK).send(HabitsResponse);
-      }
-    });
-  }else{
-    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-  }
+    req.hea
+    if (req.get('user-id')) {
+        client.getHabits({ userId: req.get('user-id') }, function(err, HabitsResponse) {
+            if (err) {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+            } else {
+                res.status(HttpStatus.OK).send(HabitsResponse);
+            }
+        });
+    } else {
+        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+    }
 });
 
 /**
@@ -78,17 +78,17 @@ router.get('/', (req, res) => {
  *         description: Invalid Request
  */
 router.get('/:habitId', (req, res) => {
-  if(req.get('user-id') && req.params.habitId){
-    client.getHabitById({_id: req.params.habitId, userId: req.get('user-id')}, function(err, GetHabitResponse) {
-      if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-      }else{
-        res.status(HttpStatus.OK).send(GetHabitResponse);
-      }
-    });
-  }else{
-    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-  }
+    if (req.get('user-id') && req.params.habitId) {
+        client.getHabitById({ _id: req.params.habitId, userId: req.get('user-id') }, function(err, GetHabitResponse) {
+            if (err) {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+            } else {
+                res.status(HttpStatus.OK).send(GetHabitResponse);
+            }
+        });
+    } else {
+        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+    }
 });
 
 /**
@@ -124,18 +124,18 @@ router.get('/:habitId', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/', (req, res) => {
-  if(req.get('user-id') && req.body.habit){
-    req.body.habit.userId = req.get('user-id');
-    client.createHabit(req.body.habit, function(err, StatusResponse) {
-      if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-      }else{
-        res.status(HttpStatus.OK).send(StatusResponse);
-      }
-    });
-  }else{
-    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-  }
+    if (req.get('user-id') && req.body.habit) {
+        req.body.habit.userId = req.get('user-id');
+        client.createHabit(req.body.habit, function(err, StatusResponse) {
+            if (err) {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+            } else {
+                res.status(HttpStatus.OK).send(StatusResponse);
+            }
+        });
+    } else {
+        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+    }
 });
 
 /**
@@ -171,19 +171,19 @@ router.post('/', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.patch('/', (req, res) => {
-  if(req.get('user-id') && req.body.habit){
-    req.body.habit.userId = req.get('user-id');
-    console.log("REQ",req.body.habit);
-    client.updateHabit(req.body.habit, function(err, StatusResponse) {
-      if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-      }else{
-        res.status(HttpStatus.OK).send(StatusResponse);
-      }
-    });
-  }else{
-    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-  }
+    if (req.get('user-id') && req.body.habit) {
+        req.body.habit.userId = req.get('user-id');
+        console.log("REQ", req.body.habit);
+        client.updateHabit(req.body.habit, function(err, StatusResponse) {
+            if (err) {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+            } else {
+                res.status(HttpStatus.OK).send(StatusResponse);
+            }
+        });
+    } else {
+        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+    }
 });
 
 /**
@@ -218,17 +218,17 @@ router.patch('/', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.delete('/:habitId', (req, res) => {
-  if(req.get('user-id') && req.params.habitId){
-    client.deleteHabit({_id: req.params.habitId, userId: req.get('user-id')}, function(err, GetHabitResponse) {
-      if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-      }else{
-        res.status(HttpStatus.OK).send(GetHabitResponse);
-      }
-    });
-  }else{
-    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-  }
+    if (req.get('user-id') && req.params.habitId) {
+        client.deleteHabit({ _id: req.params.habitId, userId: req.get('user-id') }, function(err, GetHabitResponse) {
+            if (err) {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+            } else {
+                res.status(HttpStatus.OK).send(GetHabitResponse);
+            }
+        });
+    } else {
+        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+    }
 });
 
 /**
@@ -263,17 +263,17 @@ router.delete('/:habitId', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/good/:habitId', (req, res) => {
-  if(req.get('user-id') && req.params.habitId){
-    client.markHabit({_id: req.params.habitId, userId: req.get('user-id'), good: true, bad: false}, function(err, GetHabitResponse) {
-      if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-      }else{
-        res.status(HttpStatus.OK).send(GetHabitResponse);
-      }
-    });
-  }else{
-    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-  }
+    if (req.get('user-id') && req.params.habitId) {
+        client.markHabit({ _id: req.params.habitId, userId: req.get('user-id'), good: true, bad: false }, function(err, GetHabitResponse) {
+            if (err) {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+            } else {
+                res.status(HttpStatus.OK).send(GetHabitResponse);
+            }
+        });
+    } else {
+        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+    }
 });
 /**
  * @swagger
@@ -307,17 +307,17 @@ router.post('/good/:habitId', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/bad/:habitId', (req, res) => {
-  if(req.get('user-id') && req.params.habitId){
-    client.markHabit({_id: req.params.habitId, userId: req.get('user-id'), good: false, bad: true}, function(err, GetHabitResponse) {
-      if(err){
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-      }else{
-        res.status(HttpStatus.OK).send(GetHabitResponse);
-      }
-    });
-  }else{
-    res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-  }
+    if (req.get('user-id') && req.params.habitId) {
+        client.markHabit({ _id: req.params.habitId, userId: req.get('user-id'), good: false, bad: true }, function(err, GetHabitResponse) {
+            if (err) {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+            } else {
+                res.status(HttpStatus.OK).send(GetHabitResponse);
+            }
+        });
+    } else {
+        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+    }
 });
 
 module.exports = router;
