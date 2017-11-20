@@ -309,7 +309,7 @@ router.post('/good/:habitId', (req, res) => {
  */
 router.post('/bad/:habitId', (req, res) => {
   if(req.get('user-id') && req.params.habitId){
-    client.MarkAsGood({_id: req.params.habitId, userId: req.get('user-id')}, function(err, GetHabitResponse) {
+    client.MarkAsBad({_id: req.params.habitId, userId: req.get('user-id')}, function(err, GetHabitResponse) {
       if(err){
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
       }else{
