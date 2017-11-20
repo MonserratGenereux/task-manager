@@ -60,7 +60,7 @@ export default {
 }
 .card{
   width: 400px;
-  background-color: rgb(32,145,135,0.5) !important;
+  background-color: rgb(205,89, 90,0.4) !important;
 }
 .right{
   border-right: black;

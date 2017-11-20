@@ -2,7 +2,7 @@
   <div class="card-panel teal">
     <span class="white-text">Name:{{info.name}}
     </span>
-    <span class="white-text points">CompletedOnTime: {{info.completedOnTime}}
+    <span class="white-text points">dueDate: {{info.dueDate}}
     </span>
         </div>
 </template>
@@ -20,5 +20,8 @@ export default {
 <style>
 .points{
   text-align: right;
+}
+.teal{
+  background-color: rgb(205,89, 90,0.4) !important;
 }
 </style>

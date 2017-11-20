@@ -22,14 +22,10 @@ export default {
   },
   methods: {
     getDelayedTasks: function () {
-      axios.get('http://localhost:3000/report/task', {
-        params: {
-          completedOnTime: false
-        }
-      })
+      axios.get('http://localhost:3000/report/user')
         .then((response) => {
           console.log(response.data)
-          this.delayedtasks = response.data
+          this.delayedtasks = response.data.tasks
         })
         .catch((error) => {
           console.log(error)

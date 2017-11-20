@@ -22,14 +22,10 @@ export default {
   },
   methods: {
     getBadHabits: function () {
-      axios.get('http://localhost:3000/report/habit', {
-        params: {
-          type: 2
-        }
-      })
+      axios.get('http://localhost:3000/report/user')
         .then((response) => {
           console.log(response.data)
-          this.badHabits = response.data
+          this.badHabits = response.data.habits
         })
         .catch((error) => {
           console.log(error)

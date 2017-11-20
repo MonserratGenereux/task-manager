@@ -21,4 +21,7 @@ export default {
 .points{
   text-align: right;
 }
+.teal{
+  background-color: rgb(205,89, 90,0.4) !important;
+}
 </style>

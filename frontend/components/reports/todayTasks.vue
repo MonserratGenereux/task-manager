@@ -23,14 +23,10 @@ export default {
   },
   methods: {
     getTodayTasks: function () {
-      axios.get('http://localhost:3000/report/task', {
-        params: {
-          dueDate: '10/11/2017'
-        }
-      })
+      axios.get('http://localhost:3000/report/user')
         .then((response) => {
           console.log(response.data)
-          this.todayTaks = response.data
+          this.todayTaks = response.data.tasks
         })
         .catch((error) => {
           console.log(error)

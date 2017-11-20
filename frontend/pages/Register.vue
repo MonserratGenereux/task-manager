@@ -1,13 +1,12 @@
 <template>
   <v-row>
-    <h1>Task Manager</h1>
     <h2>Register</h2>
     <v-grid s12 m6 l6 >
 
       <div class="input-field">
           <i class="material-icons prefix">person</i>
           <input id="icon_prefix" type="text" class="validate" v-model="login.username">
-          <label for="icon_prefix">Name</label>
+          <label for="icon_prefix">User Name</label>
         </div>
 
         <div class="input-field">

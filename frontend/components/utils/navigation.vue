@@ -23,6 +23,6 @@
 </template>
 <style>
 .nav-wrapper {
-        background-color: rgb(38, 165, 153) !important;
+        background-color: rgb(205,89, 90) !important;
     }
 </style>

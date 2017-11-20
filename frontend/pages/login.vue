@@ -3,8 +3,8 @@
     <v-grid s12 m8 l8 offset-l2 offset-m2>
       <h1>Task Manager</h1>
       <div class="input-field">
-          <i class="material-icons prefix">user</i>
-          <input id="icon_prefix" type="email" class="validate" v-model="login.username">
+          <i class="material-icons prefix">person</i>
+          <input id="icon_prefix" type="text" class="validate" v-model="login.username">
           <label for="icon_prefix">User Name</label>
         </div>
 
@@ -59,4 +59,12 @@ export default{
 }
 </script>
 <style>
+.btn{
+  background-color: rgb(205,89, 90,0.4) !important;
+}
+
+.active{
+  color: rgb(205,89, 90,0.4) !important;
+}
+
 </style>
