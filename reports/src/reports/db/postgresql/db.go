@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	postgresURL = "postgres://qjpkoyywrlpjum:87c093e2aedc98ab716410d7dc460168a943381c5200bd34d3906c49f86babd8@ec2-54-163-236-33.compute-1.amazonaws.com:5432/d76gm40btv2p96"
+	// postgresURL = "postgres://qjpkoyywrlpjum:87c093e2aedc98ab716410d7dc460168a943381c5200bd34d3906c49f86babd8@ec2-54-163-236-33.compute-1.amazonaws.com:5432/d76gm40btv2p96"
 
 	createTasksTable = `
 	CREATE TABLE IF NOT EXISTS tasks (
@@ -44,14 +44,14 @@ var (
 	DB *sql.DB
 )
 
-func getConnection() *sql.DB {
+func getConnection(uri string) *sql.DB {
 	if DB == nil {
 		var err error
-		DB, err = sql.Open("postgres", postgresURL)
+		DB, err = sql.Open("postgres", uri)
 		if err != nil {
-			log.Fatalf("Could not connect to PostgreSQL at %s: %s", postgresURL, err.Error())
+			log.Fatalf("Could not connect to PostgreSQL at %s: %s", uri, err.Error())
 		}
-		log.Printf("Succesfully created connection pool to PostgreSQL at %s", postgresURL)
+		log.Printf("Succesfully created connection pool to PostgreSQL at %s", uri)
 
 		createTables()
 		log.Printf("Succesfully created tasks and habit tables")
@@ -65,11 +65,11 @@ func createTables() {
 
 	_, err = DB.Exec(createTasksTable)
 	if err != nil {
-		log.Fatalf("Could not create tasks table")
+		log.Fatalf("Could not create tasks table %s", err)
 	}
 
 	_, err = DB.Exec(createHabitsTable)
 	if err != nil {
-		log.Fatalf("Could not create habits table")
+		log.Fatalf("Could not create habits table %s", err)
 	}
 }

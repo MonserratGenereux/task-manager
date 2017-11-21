@@ -6,5 +6,17 @@
     "protocol": "grpc",
     "host": "localhost",
     "port": "3002"
+  },
+  "events_publisher" : {
+    "protocol": "amqp",
+    "amqp": {
+      "uri": "amqp://guest:guest@localhost:5672/",
+      "bindKey": "habits", 
+      "exchange": "task-manager-exchange", 
+      "exchangeType": "direct", 
+      "options" : {
+        "durable": true
+      }
+    }
   }
 }

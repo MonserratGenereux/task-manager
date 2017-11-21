@@ -26,13 +26,14 @@ class MarkHabitRequest extends Request{
     return new Promise((accept, reject)=>{
       this.db_schema.findOne({_id: this._id, userId: this.userId})
         .then((habit)=>{
-          var habit_new = new Habit(habit);
-          habit_new.updateScore(this.good, this.bad);
-          habit.score = habit_new.score;
-          habit.color = habit_new.color;
+          var newHabit = new Habit(habit);
+          newHabit.updateScore(this.good, this.bad);
+          habit.score = newHabit.score;
+          habit.color = newHabit.color;
           habit.save()
             .then((ok)=>{
-              this.updateResponse(true,  habit_new.getCopy(),'');
+              this.updateResponse(true,  newHabit.getCopy(),'');
+              newHabit.publishChanges();
               return accept(this.response.generate());
             })
             .catch((err)=>{

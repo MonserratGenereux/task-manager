@@ -1,5 +1,6 @@
 const constants = require("./../constants");
 const StageFactory = require('./StageFactory.js');
+const eventPublisher = require('../EventPublisher');
 
 class Habit{
   constructor(data){
@@ -70,6 +71,9 @@ class Habit{
     }
   }
 
+  publishChanges() {
+    eventPublisher.publish(this.getCopy());
+  }
 }
 
 module.exports = Habit;

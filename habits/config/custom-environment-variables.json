@@ -6,5 +6,14 @@
     "protocol": "HABITS_SERVER_PROTOCOL",
     "host": "HABITS_SERVER_HOST",
     "port": "HABITS_SERVER_PORT"
+  },
+  "events_publisher" : {
+    "protocol": "HABITS_EVENTS_PUBLISHER_PROTOCOL",
+    "amqp": {
+      "uri": "HABITS_AMQP_URI", 
+      "bindKey": "HABITS_AMQP_BINDING_KEY", 
+      "exchange": "HABITS_AMQP_EXCHANGE", 
+      "exchangeType": "HABITS_AMQP_EXCHANGE_TYPE"
+    }
   }
 }

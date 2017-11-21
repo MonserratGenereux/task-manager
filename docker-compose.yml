@@ -14,6 +14,12 @@ services:
     - .env
     volumes:
       - ./shared:/shared
+  reports:
+    build: ./reports
+    ports:
+     - "3004:${REPORTS_SERVER_PORT}"
+    env_file:
+    - .env
   backend:
     build: ./backend
     ports:
