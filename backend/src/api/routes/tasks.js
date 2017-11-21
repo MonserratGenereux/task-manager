@@ -67,11 +67,9 @@ router.get('/', (req, res) => {
  *       200:
  *         description: OK
  *         schema:
- *           $ref: "#/definitions/GetTasksResponse"
+ *           $ref: "#/definitions/tasks"
  *       400:
  *         description: invalid request
- *         schema:
- *           $ref: "#/definitions/GetTasksResponse"
  */
 router.get('/', (req, res) => {
     req.hea
@@ -156,10 +154,10 @@ router.get('/', (req, res) => {
  *         in: body
  *         required: true
  *         schema:
- *           $ref: "#/definitions/TaskCreate"
+ *           $ref: "#/definitions/TaskUpdate"
  *     responses:
  *       200:
- *         description: OK
+ *         description: task created
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  *       400:
