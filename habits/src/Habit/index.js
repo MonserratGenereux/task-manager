@@ -12,7 +12,7 @@ class Habit{
     this.bad =          data.bad;
     this.difficulty =   (data.difficulty ? data.difficulty : '');
     this.score =        (data.score ? data.score : 0);
-    this.color =        (data.color ? data.color : constants.COLORS.ORANGE);
+    // this.color =        (data.color ? data.color : constants.COLORS.ORANGE);
     this.stage =        StageFactory.stageFor(this.score);
   }
 
@@ -32,14 +32,16 @@ class Habit{
   }
 
   updateGoodStage(){
-    var multiplier = this.stage.getGoodMultiplier(this.difficulty);
-    this.score += constants.SCORE[constants.DIFFICULTY[this.difficulty]] * multiplier;
+    //var multiplier = this.stage.getGoodMultiplier(this.difficulty);
+    //this.score += constants.SCORE[constants.DIFFICULTY[this.difficulty]] * multiplier;
+    this.score += this.stage.getIncreaseForGood(this.difficulty);
     this.stage = StageFactory.stageFor(this.score);
   }
 
   updateBadStage(){
-    var multiplier = this.stage.getBadMultiplier(this.difficulty);
-    this.score -= constants.SCORE[constants.DIFFICULTY[this.difficulty]] * multiplier;
+    // var multiplier = this.stage.getBadMultiplier(this.difficulty);
+    // this.score -= constants.SCORE[constants.DIFFICULTY[this.difficulty]] * multiplier;
+    this.score -= this.stage.getDecreaseForBad(this.difficulty);
     this.stage = StageFactory.stageFor(this.score);
   }
 
@@ -53,7 +55,7 @@ class Habit{
 
   getScoreUpdate(){
     return {
-      color: this.color,
+      color: this.stage.color,
       score: this.score,
     }
   }

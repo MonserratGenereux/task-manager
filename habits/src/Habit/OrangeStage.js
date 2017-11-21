@@ -2,14 +2,13 @@ const c = require('./../constants.js');
 const Stage = require('./Stage.js');
 
 class OrangeStage extends Stage{
-  constructor(score){
-    super(score);
-    this.score = score;
-    this.color = c.COLORS.ORANGE;
+
+  constructor(){
+    super(c.COLORS.ORANGE);
   }
 
-  getBadMultiplier(difficulty){
-    return c.SCORE.ORANGE_DECREASE;
+  getDecreaseForBad(difficulty){
+    return c.SCORE[c.DIFFICULTY[difficulty]] * c.SCORE.ORANGE_DECREASE;
   }
 }
 

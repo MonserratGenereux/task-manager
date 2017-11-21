@@ -10,18 +10,18 @@ class StageFactory{
 
   static stageFor(score){
       if(score <           c.COLOR_RANGES.RED_UPPER_LIM){
-        return new RedStage(score);
+        return new RedStage();
       }else if(score >=    c.COLOR_RANGES.ORANGE_LOWER_LIM
               && score <=  c.COLOR_RANGES.YELLOW_LOWER_LIM){
-        return new OrangeStage(score);
+        return new OrangeStage();
       }else if(score >     c.COLOR_RANGES.YELLOW_LOWER_LIM
               && score <=  c.COLOR_RANGES.GREEN_LOWER_LIM){
-        return new YellowStage(score);
+        return new YellowStage();
       }else if(score >     c.COLOR_RANGES.GREEN_LOWER_LIM
               && score <=  c.COLOR_RANGES.BLUE_LOWER_LIM){
-        return new GreenStage(score);
+        return new GreenStage();
       }else if(score >     c.COLOR_RANGES.BLUE_LOWER_LIM){
-        return new BlueStage(score);
+        return new BlueStage();
       }
   }
 }

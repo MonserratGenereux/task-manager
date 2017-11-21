@@ -1,15 +1,17 @@
+const c = require('./../constants.js');
+
 class Stage{
-  constructor(score){
-    this.score = score;
-    this.color;
+
+  constructor(color){
+    this.color = color;
   }
 
-  getGoodMultiplier(){
-    return 1;
+  getIncreaseForGood(difficulty){
+    return c.SCORE[c.DIFFICULTY[difficulty]];
   }
 
-  getBadMultiplier(){
-    return -1;
+  getDecreaseForBad(difficulty){
+    return c.SCORE[c.DIFFICULTY[difficulty]];
   }
 }
 
