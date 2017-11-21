@@ -50,15 +50,18 @@ export default{
     loginAction: function () {
       var api = 'http://localhost:3000/accounts'
       var data = {
-        'username': this.login.username,
-        'email': this.login.email,
-        'password': this.login.password
-      // 'birthday': this.login.birthday
+        'account': {
+          'username': this.login.username,
+          'email': this.login.email,
+          'password': this.login.password
+          // 'birthday': this.login.birthday
+        }
       }
       axios.post(api, data)
         .then((response) => {
           console.log(response)
-          window.location = '/dashboard'
+          console.log(data)
+          window.location = '/login'
         })
         .catch((error) => {
           console.log(error)

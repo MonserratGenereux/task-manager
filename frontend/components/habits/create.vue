@@ -64,8 +64,8 @@ export default{
   methods: {
     createHabit: function () {
       let userId = Vue.localStorage.get('user-id')
-      if (!this.create.name || !this.create.description || !this.create.difficulty) {
-        alert('error')
+      if (!this.create.name || !this.create.description || !this.create.difficulty || (!this.create.good && !this.create.bad)) {
+        alert('Please enter all fields')
       } else {
         var api = 'http://localhost:3000/habits'
         var habit = {
@@ -80,13 +80,11 @@ export default{
         }
         axios.post(api, {habit}, config)
           .then((response) => {
-            console.log('ke zta pazandaaa', response)
             location.reload()
           })
           .catch((error) => {
             console.log(error)
           })
-        alert('Habito creado exitosamente')
         this.$modal.hide('habits')
         this.$emit('load', 'habit')
       }

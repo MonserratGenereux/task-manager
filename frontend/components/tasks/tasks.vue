@@ -52,4 +52,7 @@ export default {
 </script>
 
 <style lang="css">
+.btn{
+  background-color: rgb(205,89, 90,0.4) !important;
+}
 </style>

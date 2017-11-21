@@ -17,6 +17,7 @@
     "chart.js": "^2.7.1",
     "jquery": "^3.2.1",
     "materializecss-vuejs-component": "^2.1.1",
+    "moment": "^2.19.2",
     "nuxt": "^1.0.0-rc11",
     "vue-chart-js": "^1.4.1",
     "vue-chartjs": "^3.0.2",

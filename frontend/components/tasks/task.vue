@@ -1,7 +1,7 @@
 <template>
     <div class="card" v-if="!info.completed" :class="{redBackground: color.true}">
     <div class="card-content white-text">
-      <span class="card-title">Task {{info.name}}</span>
+      <span class="card-title">{{info.name}}</span>
       <p>Due date: {{info.dueDate}}</p>
     </div>
     <div class="card-action">
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 export default {
   data () {
@@ -35,12 +36,21 @@ export default {
       }
     },
     completed: function (id) {
+      let userId = Vue.localStorage.get('user-id')
       var data = {
-        'id': this.id
+        '_id': this.info._id,
+        'id': this.info.userId,
+        'name': this.info.name,
+        'description': this.info.description,
+        'color': this.info.color
       }
-      axios.post('http://localhost:3000/tasks/complete/' + this.info.id, data)
+      var config = {
+        headers: {'user-id': userId}
+      }
+      axios.post('http://localhost:3000/tasks/complete/' + this.info._id, {data}, config)
         .then((response) => {
           console.log('Respuesta', response)
+          location.reload()
         })
         .catch((error) => {
           console.log(error)

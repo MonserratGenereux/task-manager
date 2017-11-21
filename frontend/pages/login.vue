@@ -46,7 +46,6 @@ export default{
         .then((response) => {
           if (!response.data.exists) {
             alert('The account does not exists')
-          } else {
             Vue.localStorage.set('user-id', response.data.account.id)
             window.location = '/'
           }

@@ -2,7 +2,7 @@
   <section>
     <div class="card" :class="{redBackground: color.RED, orangeBackground: color.ORANGE, yellowBackground: color.YELLOW, greenBackground: color.GREEN, blueBackground:color.BLUE}">
       <div class="card-content white-text">
-        <span class="card-title">Habit {{info.name}}</span>
+        <span class="card-title">{{info.name}}</span>
         <p>Points: {{info.score}}</p>
       </div>
       <div class="card-action">
@@ -18,13 +18,7 @@ import Vue from 'vue'
 import axios from 'axios'
 export default {
   data () {
-    return {
-      red: false,
-      orange: false,
-      yellow: false,
-      green: false,
-      blue: false
-    }
+    return {}
   },
   props: ['info'],
   created () {
@@ -57,9 +51,6 @@ export default {
       }
       axios.post('http://localhost:3000/habits/good/' + this.info._id, {data}, config)
         .then((response) => {
-          console.log('GOOOOOOD')
-          console.log('Respuesta', response)
-          console.log(data)
         })
         .catch((error) => {
           console.log(error)
@@ -83,8 +74,7 @@ export default {
       }
       axios.post('http://localhost:3000/habits/bad/' + this.info._id, data, config)
         .then((response) => {
-          console.log('BADD')
-          console.log('Respuesta', response)
+          console.log(response)
         })
         .catch((error) => {
           console.log(error)
