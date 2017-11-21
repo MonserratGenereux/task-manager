@@ -112,3 +112,4 @@ server.bind(address, grpc.ServerCredentials.createInsecure());
 console.log(`GPRC server listening on ${address}`);
 
 module.exports = server;
+

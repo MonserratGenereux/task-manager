@@ -9,7 +9,7 @@ import (
 
 func manualTest() {
 
-	DB, _ := NewReportsDatabase()
+	DB, _ := NewReportsDatabase("sup")
 
 	DB.SaveHabit(&habits.Habit{
 		XId:    "1",

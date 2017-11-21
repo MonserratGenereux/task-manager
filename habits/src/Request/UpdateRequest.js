@@ -24,6 +24,7 @@ class UpdateRequest extends Request{
       this.db_schema.findByIdAndUpdate(this.habit._id.toString(), this.habit.getCopyForUpdate())
         .then((habit)=>{
           this.updateResponse(true, habit._id.toString(), '');
+          habit.publishChanges();
           accept(this.response.generate());
         })
         .catch((err)=>{

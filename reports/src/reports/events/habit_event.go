@@ -1,6 +1,11 @@
 package events
 
-import "log"
+import (
+	"log"
+	"pb/habits"
+
+	"github.com/golang/protobuf/proto"
+)
 
 // HabitEvent represents an event of Habits
 type HabitEvent struct {
@@ -18,10 +23,18 @@ func NewHabitEvent(topic string, body []byte) EventHandler {
 
 // Handle handles a Habit event
 func (e *HabitEvent) Handle() error {
+	habit := &habits.Habit{}
+	err := proto.Unmarshal(e.body, habit)
+	if err != nil {
+		log.Println("unmarshaling error: ", err)
+		// log.Fatal("unmarshaling error: ", err)
+	}
+
 	log.Printf(
-		"got %dB delivery: %q",
+		"Got habit %dB delivery: %s",
 		len(e.body),
-		e.body,
+		habit,
 	)
-	return nil
+
+	return reportsDB.SaveHabit(habit)
 }
