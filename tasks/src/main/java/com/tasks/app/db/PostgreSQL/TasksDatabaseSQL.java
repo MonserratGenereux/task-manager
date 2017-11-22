@@ -132,7 +132,7 @@ public class TasksDatabaseSQL implements TasksDatabase {
 
 	public boolean getShouldRemindToday(boolean isCompleted, List<Long> reminders) {
 		boolean shouldRemindToday = false;
-		if (isCompleted) {
+		if (!isCompleted) {
 			long now = System.currentTimeMillis();
 			for (long remainderTimestamp : reminders) {
 				if (areOnSameDay(now, remainderTimestamp)) {
