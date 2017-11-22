@@ -215,6 +215,7 @@ func (rd *ReportsDatabase) GetTasksUserReport(userID int64) (*reports.TasksUserR
 	}
 
 	dueToday, err := getUserDueTodayTasks(tx, id)
+	fmt.Println(dueToday)
 	if err != nil {
 		return nil,
 			fmt.Errorf("Could not fetch user %s due today tasks: %s", id, err.Error())

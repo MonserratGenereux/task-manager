@@ -3,8 +3,10 @@ package postgresql
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"pb/reports"
 	"pb/tasks"
+	"time"
 )
 
 const (
@@ -168,8 +170,12 @@ func queryUserTasks(statement *sql.Stmt, userID string) ([]*tasks.Task, error) {
 
 	tasks := make([]*tasks.Task, 0)
 	for rows.Next() {
-		task, _ := scanTask(rows)
-		tasks = append(tasks, task)
+		task, err := scanTask(rows)
+		if err != nil {
+			log.Println(err)
+		} else {
+			tasks = append(tasks, task)
+		}
 	}
 
 	err = rows.Err()
@@ -186,9 +192,9 @@ func scanTask(row scannable) (*tasks.Task, error) {
 	var userID int64
 	var title string
 	var description string
-	var created int64
-	var due int64
-	var completed int64
+	var created time.Time
+	var due time.Time
+	var completed time.Time
 	var isCompleted bool
 
 	err := row.Scan(
@@ -211,9 +217,9 @@ func scanTask(row scannable) (*tasks.Task, error) {
 			UserId:             userID,
 			Title:              title,
 			Description:        description,
-			CreatedTimestamp:   created,
-			DueTimestamp:       due,
-			CompletedTimestamp: completed,
+			CreatedTimestamp:   created.Unix() * 1000,
+			DueTimestamp:       due.Unix() * 1000,
+			CompletedTimestamp: completed.Unix() * 1000,
 		},
 		nil
 }

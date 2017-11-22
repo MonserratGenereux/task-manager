@@ -37,8 +37,7 @@ class AmqpPublisher extends EventPublisher {
       console.log("Publisher not connected, wait until is ready to publish");
       return;
     }
-
-    console.log(message);
+    
     this.channel.publish(this.exchange, this.bindKey, message.buffer)
     console.log(`Published ${this.bindKey} event: ${message}`)
   }

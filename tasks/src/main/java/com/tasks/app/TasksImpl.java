@@ -40,7 +40,7 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 
 	@Override
 	public void createTask(Task task, StreamObserver<StatusResponse> responseObserver) {
-		System.out.println(task);
+		System.out.println("Create task: " + task);
 		try {
 			db.createTask(task);
 			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
