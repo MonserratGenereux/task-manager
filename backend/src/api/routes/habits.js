@@ -123,6 +123,22 @@ router.get('/:habitId', (req, res) => {
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
+
+router.post('/', (req, res) => {
+    console.log("req.body", req.body);
+    if (req.get('user-id') && req.body.habit) {
+        req.body.habit.userId = req.get('user-id');
+        client.createHabit(req.body.habit, function(err, StatusResponse) {
+            if (err) {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+            } else {
+                res.status(HttpStatus.OK).send(StatusResponse);
+            }
+        });
+    } else {
+        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
+    }
+});
 /**
  * @swagger
  * /habits:
