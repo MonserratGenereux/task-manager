@@ -47,7 +47,6 @@ router.get('/', (req, res) => {
         res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
     }
 });
-
 /**
  * @swagger
  * /habits/{habitId}:
@@ -90,7 +89,6 @@ router.get('/:habitId', (req, res) => {
         res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
     }
 });
-
 /**
  * @swagger
  * /habits:
