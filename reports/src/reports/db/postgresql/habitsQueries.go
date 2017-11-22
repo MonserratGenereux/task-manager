@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"pb/habits"
 	"pb/reports"
+	"strings"
 )
 
 const (
@@ -31,7 +32,7 @@ const (
 	userHabitTypeQuery = `
 		SELECT *
 		FROM habits 
-		WHERE user_id = $1 AND $2 = true;
+		WHERE user_id = $1 AND $habitType = true;
 	`
 )
 
@@ -81,10 +82,11 @@ func getUserGoodHabits(transaction *sql.Tx, userID string) ([]*habits.Habit, err
 }
 
 func getUserHabitsByType(transaction *sql.Tx, userID, habitType string) ([]*habits.Habit, error) {
-	rows, err := transaction.Query(userHabitTypeQuery, userID, habitType)
+	query := strings.Replace(userHabitTypeQuery, "$habitType", habitType, -1)
+	rows, err := transaction.Query(query, userID)
 	if err != nil {
 		return nil,
-			fmt.Errorf("Could not execute query %s: %s", countByRangeQuery, err)
+			fmt.Errorf("Could not execute query %s: %s", userHabitTypeQuery, err)
 	}
 
 	defer rows.Close()

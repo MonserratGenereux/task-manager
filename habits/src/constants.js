@@ -11,11 +11,11 @@ define("DIFFICULTY", {
   "2": "HARD"
 });
 
-define("DIFFICULTY_NAME", {
-  "EASY": "0",
-  "MEDIUM": "1",
-  "HARD": "2"
-});
+// define("DIFFICULTY_NAME", {
+//   "EASY": "0",
+//   "MEDIUM": "1",
+//   "HARD": "2"
+// });
 
 define("SCORE", {
   "EASY": 2,

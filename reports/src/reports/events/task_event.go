@@ -1,6 +1,11 @@
 package events
 
-import "log"
+import (
+	"log"
+	"pb/tasks"
+
+	"github.com/golang/protobuf/proto"
+)
 
 // TaskEvent represents an event of Tasks
 type TaskEvent struct {
@@ -18,10 +23,18 @@ func NewTaskEvent(topic string, body []byte) EventHandler {
 
 // Handle handles a task event
 func (eh *TaskEvent) Handle() error {
+	task := &tasks.Task{}
+	err := proto.Unmarshal(eh.body, task)
+	if err != nil {
+		log.Fatal("unmarshaling error: ", err)
+	}
+
 	log.Printf(
-		"got %dB delivery: %q",
+		"Got task %dB delivery: %q",
 		len(eh.body),
 		eh.body,
 	)
+
+	log.Println(task)
 	return nil
 }

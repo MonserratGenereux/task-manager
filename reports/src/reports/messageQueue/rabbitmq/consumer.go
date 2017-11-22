@@ -9,12 +9,6 @@ import (
 	"github.com/streadway/amqp"
 )
 
-const (
-	exchange     = "task-manager-exchange"
-	exchangeType = "direct"
-	queueName    = "task-manager-queue"
-)
-
 // Consumer consumes from a RabbitMQ queue.
 type Consumer struct {
 	conn    *amqp.Connection
@@ -48,7 +42,7 @@ func (c *Consumer) Close() error {
 }
 
 // NewConsumer creates a new RabitMQ consumer.
-func NewConsumer(amqpURI, topic string) (*Consumer, error) {
+func NewConsumer(amqpURI, topic, queueName, exchange, exchangeType string) (*Consumer, error) {
 	c := &Consumer{
 		conn:    nil,
 		channel: nil,

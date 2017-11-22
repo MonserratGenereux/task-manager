@@ -23,12 +23,12 @@ type ReportsDatabase struct {
 var _ db.ReportsDatabase = &ReportsDatabase{}
 
 // NewReportsDatabase creates and implementation ReportsDatabase in PostgreSQL.
-func NewReportsDatabase() (db.ReportsDatabase, error) {
-	db := getConnection()
+func NewReportsDatabase(uri string) (db.ReportsDatabase, error) {
+	db := getConnection(uri)
 	err := db.Ping()
 	if err != nil {
 		return nil,
-			fmt.Errorf("Could ping PostgreSQL instance is alive at %s: %s", postgresURL, err.Error())
+			fmt.Errorf("Could ping PostgreSQL instance is alive at %s: %s", uri, err.Error())
 	}
 
 	upserTask, err := DB.Prepare(`

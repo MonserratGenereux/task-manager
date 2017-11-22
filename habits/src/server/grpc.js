@@ -7,7 +7,7 @@ const grpc = require('grpc');
 const protoPath = config.get('proto_path');
 const protoFile = config.get('proto_file');
 const protoFilepath = path.isAbsolute(protoPath) ?
-                path.join(protoPath, protoFile) : 
+                path.join(protoPath, protoFile) :
                 path.join(__dirname, protoPath, protoFile);
 
 if (!fs.statSync(protoFilepath).isFile()) {
@@ -20,7 +20,8 @@ var CreateRequest = require('../Request/CreateRequest.js');
 var DeleteRequest = require('../Request/DeleteRequest.js');
 var GetByIdRequest = require('../Request/GetByIdRequest.js');
 var GetRequests = require('../Request/GetRequests.js');
-var MarkHabitRequest = require('../Request/MarkHabitRequest.js');
+var MarkAsGoodRequest = require('../Request/MarkAsGoodRequest.js');
+var MarkAsBadRequest = require('../Request/MarkAsBadRequest.js');
 var UpdateRequest = require('../Request/UpdateRequest.js');
 
 function getHabits(call, callback) {
@@ -73,8 +74,18 @@ function updateHabit(call, callback) {
     })
 }
 
-function markHabit(call, callback) {
-  new MarkHabitRequest(call.request)
+function markAsGood(call, callback) {
+  new MarkAsGoodRequest(call.request)
+    .execute()
+    .then((GetHabit)=>{
+     return callback(null, GetHabit);
+    }).catch((GetHabit)=>{
+     return callback(GetHabit, null);
+    })
+}
+
+function markAsBad(call, callback) {
+  new MarkAsBadRequest(call.request)
     .execute()
     .then((GetHabit)=>{
      return callback(null, GetHabit);
@@ -90,7 +101,8 @@ server.addService(habitsProto.HabitsService.service, {
   deleteHabit,
   getHabitById,
   updateHabit,
-  markHabit
+  markAsGood,
+  markAsBad
 });
 
 const host = config.get("server.host");
@@ -100,3 +112,4 @@ server.bind(address, grpc.ServerCredentials.createInsecure());
 console.log(`GPRC server listening on ${address}`);
 
 module.exports = server;
+
