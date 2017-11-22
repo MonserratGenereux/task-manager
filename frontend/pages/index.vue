@@ -59,7 +59,7 @@ export default{
   methods: {
     getUser: function () {
       let userid = Vue.localStorage.get('user-id')
-      axios.get('http://localhost:3000/accounts/' + userid)
+      axios.get('http://192.168.100.13:3000/accounts/' + userid)
         .then((response) => {
           this.user = response.data
         })

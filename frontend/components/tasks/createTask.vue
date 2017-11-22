@@ -127,15 +127,16 @@ export default{
         alert('Please enter all fields')
       } else {
         var api = 'http://192.168.100.13:3000/tasks'
+        var config = {
+          headers: {'user-id': userId}
+        }
         var task = {
+          'user_id': userId,
           'title': this.create.name,
           'description': this.create.description,
           'due_timestamp': dueDate,
           'reminder_timestamp': reminder,
           'created_timestamp': today
-        }
-        var config = {
-          headers: {'user-id': userId}
         }
         axios.post(api, {task}, config)
           .then((response) => {

@@ -1,8 +1,8 @@
 <template>
-    <div class="card" v-if="!info.completed" :class="{redBackground: color.true}">
+    <div class="card" v-if="!info.is_completed" :class="{redBackground: color.true}">
     <div class="card-content white-text">
-      <span class="card-title">{{info.name}}</span>
-      <p>Due date: {{info.dueDate}}</p>
+      <span class="card-title">{{info.title}}</span>
+      <p>Due date: {{info.description}}</p>
     </div>
     <div class="card-action" href="javascript: reload()">
       <a class="btn-floating btn-large waves-effect waves-light green" @click="completed()">
@@ -37,20 +37,15 @@ export default {
     },
     completed: function (id) {
       let userId = Vue.localStorage.get('user-id')
-      var data = {
-        '_id': this.info._id,
-        'id': this.info.userId,
-        'name': this.info.name,
-        'description': this.info.description,
-        'color': this.info.color
-      }
       var config = {
         headers: {'user-id': userId}
       }
-      axios.post('http://192.168.100.13:3000/tasks/complete/' + this.info._id, {data}, config)
+      axios.post('http://192.168.100.13:3000/tasks/complete/' + this.info.id, {}, config)
         .then((response) => {
-          this.setColor(response.data.task.color)
-          this.$parent.$emit('color')
+          console.log('respuesta', response)
+          this.setColor(response.data.display_color)
+          this.is_completed = true
+          this.$parent.$emit('completed')
         })
         .catch((error) => {
           console.log(error)

@@ -78,7 +78,6 @@ export default{
         var config = {
           headers: {'user-id': userId}
         }
-        console.log(config)
         axios.post(api, {habit}, config)
           .then((response) => {
             location.reload()

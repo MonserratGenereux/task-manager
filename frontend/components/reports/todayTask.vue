@@ -1,8 +1,8 @@
 <template>
   <div class="card-panel teal">
-    <span class="white-text">Name: {{info.name}}
+    <span class="white-text">Name: {{info.title}}
     </span>
-    <span class="white-text points">Completed: {{info.completed}}
+    <span class="white-text points">Completed: {{info.isCompleted}}
     </span>
         </div>
 </template>
