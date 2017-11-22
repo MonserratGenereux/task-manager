@@ -20,25 +20,31 @@ import com.tasks.proto.TasksMicroservice.TaskID;
 import com.tasks.proto.TasksMicroservice.Tasks;
 import com.tasks.proto.TasksMicroservice.UserID;
 import com.tasks.proto.TasksMicroservice.Task.Builder;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 
 public class TasksDatabaseSQL implements TasksDatabase {
-
-
-	private static final String DBCLASS = "org.postgresql.Driver";
-	private static final String DBNAME = "jdbc:postgresql://ec2-107-22-187-21.compute-1.amazonaws.com:5432/d3e0g09587p7pp?sslmode=require";
-	private static final String DBUSER = "spcmdvvcotnkki";
-	private static final String PASSWORD = "291382d189839207a4e3633c2d2691fc4709cbcb2a6b700928b17e4a2983f375";
+	private Config config;
+	
 	private Connection conn = null;
-	private static final String DEFAULT_DISPLAY_COLOR = "default";
-	private static final String URGENT_DISPLAY_COLOR = "red";
+	private String default_display_color;
+	private String urgent_display_color; 
 
 	public TasksDatabaseSQL() {
+		config = ConfigFactory.load();
+		final String db_class = config.getString("database.class");
+		final String db_uri = config.getString("database.uri");
+		final String db_user = config.getString("database.user");
+		final String password = config.getString("database.password");
+		default_display_color = config.getString("color.default");
+		urgent_display_color = config.getString("color.urgent");
+		
 		try {
-			Class.forName(DBCLASS);
-			String url = DBNAME;
+			Class.forName(db_class);
+			String url = db_uri;
 			Properties info = new Properties();
-			info.setProperty("user", DBUSER);
-			info.setProperty("password", PASSWORD);
+			info.setProperty("user", db_user);
+			info.setProperty("password",password);
 			info.setProperty("ssl", "true");
 
 			conn = DriverManager.getConnection(url, info);
@@ -140,9 +146,9 @@ public class TasksDatabaseSQL implements TasksDatabase {
 
 	public String getDisplayColor(long dueTime) {
 		// Should display red
-		String displayColor = DEFAULT_DISPLAY_COLOR;
+		String displayColor = default_display_color;
 		if (areOnSameDay(System.currentTimeMillis(), dueTime)) {
-			displayColor = URGENT_DISPLAY_COLOR;
+			displayColor = urgent_display_color;
 		}
 		return displayColor;
 	}
