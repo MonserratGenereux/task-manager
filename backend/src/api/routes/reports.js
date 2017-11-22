@@ -75,10 +75,11 @@ router.get('/', (req, res) => {
  *         description: invalid user
  */
 router.get('/:userId', (req, res) => {
-  const id = new reports.AccountID({id: req.params.userId});
+  const accountID = new reports.AccountID();
+  accountID.setId(req.params.userId)
   Promise.all([
-    reportsClient.getHabitsUserReport(id),
-    reportsClient.getTasksUserReport(id),
+    reportsClient.getHabitsUserReport(accountID),
+    reportsClient.getTasksUserReport(accountID),
   ])
   .then(reportResults => {
     res.status(HttpStatus.OK).send({

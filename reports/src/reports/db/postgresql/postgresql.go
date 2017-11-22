@@ -121,7 +121,7 @@ func (rd *ReportsDatabase) GetHabitsUserReport(userID int64) (*reports.HabitsUse
 			fmt.Errorf("Could not begin transaction for habits report: %s", err.Error())
 	}
 
-	goodHabits, err := getUserBadHabits(tx, id)
+	goodHabits, err := getUserGoodHabits(tx, id)
 	if err != nil {
 		return nil,
 			fmt.Errorf("Could not fetch user good habits: %s", err.Error())
