@@ -24,17 +24,17 @@
     methods: {
       fillData () {
         // axios
-        axios.get('http://localhost:3000/reports', {
+        axios.get('http://192.168.100.13:3000/reports', {
           params: {
           }
         })
           .then((response) => {
             this.datacollection = {
-              labels: ['Delayed', 'Completed'],
+              labels: ['Completed', 'Before Time', 'Delayed'],
               datasets: [
                 {
-                  backgroundColor: ['rgba(255, 76, 76, 0.5)', 'rgba(0, 153, 229, 0.5)'],
-                  data: [response.data.tasks.available, response.data.tasks.completed]
+                  backgroundColor: ['rgba(255, 76, 76, 0.5)', 'rgba(0, 153, 229, 0.5)', 'rgba(10, 59, 40, 0.5)'],
+                  data: [response.data.tasks.completedTasks.ontime, response.data.tasks.completedTasks.beforetime, response.data.tasks.completedTasks.delayed]
                 }
               ]
             }

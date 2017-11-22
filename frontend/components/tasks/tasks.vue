@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import axios from 'axios'
 import Task from '~/components/tasks/task'
 import reminder from '~/components/tasks/reminder'
@@ -24,14 +23,16 @@ export default {
     reminder
   },
   mounted () {
+    this.$on('color', function () {
+      this.getTasks()
+    })
     this.getTasks()
   },
   methods: {
     getTasks: function () {
-      let userid = Vue.localStorage.get('userid')
-      axios.get('http://localhost:3000/tasks/' + userid)
+      axios.get('http://192.168.100.13:3000/tasks/')
         .then((response) => {
-          this.tasks = response.data
+          this.tasks = response.data.tasks
           this.setNotifications(response.data)
         })
         .catch((error) => {

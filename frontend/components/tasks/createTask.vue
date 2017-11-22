@@ -126,7 +126,7 @@ export default{
       if (!this.create.name || !this.create.description || !this.create.dueDate || !this.dueDate.hours || !this.reminder.hours || !this.reminder.days) {
         alert('Please enter all fields')
       } else {
-        var api = 'http://localhost:3000/tasks'
+        var api = 'http://192.168.100.13:3000/tasks'
         var task = {
           'title': this.create.name,
           'description': this.create.description,

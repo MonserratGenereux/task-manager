@@ -7,7 +7,7 @@
       </div>
       <div class="card-action">
         <a v-if="this.info.good== true" class="btn-floating btn-large waves-effect waves-light green" v-on:click="success(info._id)" ><i class="material-icons">add</i></a>
-        <a v-if="this.info.bad== true"class="btn-floating btn-large waves-effect waves-light red" @click="failure(info._id)" style="margin-left: 249px;"><i class="material-icons">remove</i></a>
+        <a v-if="this.info.bad== true"class="btn-floating btn-large waves-effect waves-light red" v-on:click="failure(info._id)" style="margin-left: 249px;"><i class="material-icons">remove</i></a>
       </div>
     </div>
   </section>
@@ -49,8 +49,11 @@ export default {
       var config = {
         headers: {'user-id': userId}
       }
-      axios.post('http://localhost:3000/habits/good/' + this.info._id, {data}, config)
+      axios.post('http://192.168.100.13:3000/habits/good/' + this.info._id, {data}, config)
         .then((response) => {
+          this.setColor(response.data.habit.color)
+          this.score = response.data.habit.score
+          this.$parent.$emit('click')
         })
         .catch((error) => {
           console.log(error)
@@ -72,9 +75,11 @@ export default {
       var config = {
         headers: {'user-id': userId}
       }
-      axios.post('http://localhost:3000/habits/bad/' + this.info._id, data, config)
+      axios.post('http://192.168.100.13:3000/habits/bad/' + this.info._id, data, config)
         .then((response) => {
-          console.log(response)
+          this.setColor(response.data.habit.color)
+          this.score = response.data.habit.score
+          this.$parent.$emit('click')
         })
         .catch((error) => {
           console.log(error)

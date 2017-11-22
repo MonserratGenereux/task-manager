@@ -22,10 +22,10 @@ export default {
   },
   methods: {
     getDelayedTasks: function () {
-      axios.get('http://localhost:3000/report/user')
+      axios.get('http://192.168.100.13:3000/report/user')
         .then((response) => {
           console.log(response.data)
-          this.delayedtasks = response.data.tasks
+          this.delayedtasks = response.data.tasks.delayedList
         })
         .catch((error) => {
           console.log(error)

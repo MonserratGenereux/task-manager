@@ -4,7 +4,7 @@
       <span class="card-title">{{info.name}}</span>
       <p>Due date: {{info.dueDate}}</p>
     </div>
-    <div class="card-action">
+    <div class="card-action" href="javascript: reload()">
       <a class="btn-floating btn-large waves-effect waves-light green" @click="completed()">
         <i class="material-icons">check</i>
       </a>
@@ -47,10 +47,10 @@ export default {
       var config = {
         headers: {'user-id': userId}
       }
-      axios.post('http://localhost:3000/tasks/complete/' + this.info._id, {data}, config)
+      axios.post('http://192.168.100.13:3000/tasks/complete/' + this.info._id, {data}, config)
         .then((response) => {
-          console.log('Respuesta', response)
-          location.reload()
+          this.setColor(response.data.task.color)
+          this.$parent.$emit('color')
         })
         .catch((error) => {
           console.log(error)

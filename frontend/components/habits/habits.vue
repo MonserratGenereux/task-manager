@@ -20,6 +20,9 @@ export default {
     Habit
   },
   mounted () {
+    this.$on('click', function () {
+      this.getHabits()
+    })
     this.getHabits()
   },
   methods: {
@@ -28,7 +31,7 @@ export default {
       var config = {
         headers: {'user-id': userId}
       }
-      axios.get('http://localhost:3000/habits', config)
+      axios.get('http://192.168.100.13:3000/habits', config)
         .then((response) => {
           this.habits = response.data.habits
         })

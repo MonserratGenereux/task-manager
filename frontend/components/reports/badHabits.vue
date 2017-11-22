@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 import badHabit from '~/components/reports/badHabit'
 export default {
@@ -22,10 +23,11 @@ export default {
   },
   methods: {
     getBadHabits: function () {
-      axios.get('http://localhost:3000/report/user')
+      let userid = Vue.localStorage.get('user-id')
+      axios.get('http://192.168.100.13:3000/reports/' + userid)
         .then((response) => {
           console.log(response.data)
-          this.badHabits = response.data.habits
+          this.badHabits = response.data.habits.badHabitsList
         })
         .catch((error) => {
           console.log(error)

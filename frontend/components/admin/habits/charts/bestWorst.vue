@@ -31,7 +31,7 @@ export default {
       this.active = data
     },
     getHabits: function () {
-      axios.get('http://localhost:3000/reports', {
+      axios.get('http://192.168.100.13:3000/reports', {
       })
         .then((response) => {
           this.bestName = response.data.habits.best.name

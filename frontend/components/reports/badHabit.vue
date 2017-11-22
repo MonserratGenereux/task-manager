@@ -19,7 +19,7 @@ export default {
 
 <style>
 .points{
-  text-align: right;
+  padding-left: 700px;
 }
 .teal{
   background-color: rgb(205,89, 90,0.4) !important;

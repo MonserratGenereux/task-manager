@@ -37,7 +37,7 @@ export default{
   props: ['info'],
   methods: {
     loginAction: function () {
-      var api = 'http://localhost:3000/accounts/' + this.login.username
+      var api = 'http://192.168.100.13:3000/accounts/' + this.login.username
       var data = {
         'username': this.login.username,
         'password': this.login.password
@@ -46,9 +46,10 @@ export default{
         .then((response) => {
           if (!response.data.exists) {
             alert('The account does not exists')
-            Vue.localStorage.set('user-id', response.data.account.id)
-            window.location = '/'
+            return
           }
+          Vue.localStorage.set('user-id', response.data.account.id)
+          window.location = '/'
         })
         .catch((error) => {
           console.log(error)

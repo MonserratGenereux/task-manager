@@ -23,10 +23,10 @@ export default {
   },
   methods: {
     getTodayTasks: function () {
-      axios.get('http://localhost:3000/report/user')
+      axios.get('http://192.168.100.13:3000/report/user')
         .then((response) => {
           console.log(response.data)
-          this.todayTaks = response.data.tasks
+          this.todayTaks = response.data.tasks.duetodayList
         })
         .catch((error) => {
           console.log(error)
