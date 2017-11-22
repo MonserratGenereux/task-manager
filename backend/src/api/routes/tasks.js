@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const HttpStatus = require('http-status-codes');
-
+var client = require('./../../clients/tasks.js');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -33,18 +33,14 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *           $ref: "#/definitions/GetTasksResponse"
  */
 router.get('/', (req, res) => {
-    req.hea
-    if (req.get('user-id')) {
-        client.getTasks({ userId: req.get('user-id') }, function(err, TasksResponse) {
-            if (err) {
-                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-            } else {
-                res.status(HttpStatus.OK).send(HabitsResponse);
-            }
-        });
-    } else {
-        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-    }
+  client.getTasks({id: req.get('user-id')})
+  .then(tasks => {
+    res.status(HttpStatus.OK).send(tasks);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -71,19 +67,15 @@ router.get('/', (req, res) => {
  *       400:
  *         description: invalid request
  */
-router.get('/', (req, res) => {
-    req.hea
-    if (req.get('user-id')) {
-        client.getTasks({ userId: req.get('user-id') }, function(err, TasksResponse) {
-            if (err) {
-                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-            } else {
-                res.status(HttpStatus.OK).send(TasksResponse);
-            }
-        });
-    } else {
-        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-    }
+router.get('/:taskId', (req, res) => {
+  client.getTaskById({id: req.params.taskId})
+  .then(task => {
+    res.status(HttpStatus.OK).send(task);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -118,19 +110,15 @@ router.get('/', (req, res) => {
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
-router.get('/', (req, res) => {
-    req.hea
-    if (req.get('user-id')) {
-        client.getTasks({ userId: req.get('user-id') }, function(err, TasksResponse) {
-            if (err) {
-                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-            } else {
-                res.status(HttpStatus.OK).send(TasksResponse);
-            }
-        });
-    } else {
-        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-    }
+router.post('/', (req, res) => {
+  client.createTask(req.body.task)
+  .then(statusResponse => {
+    res.status(HttpStatus.OK).send(statusResponse);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -166,19 +154,14 @@ router.get('/', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.patch('/', (req, res) => {
-    if (req.get('user-id') && req.body.task) {
-        req.body.task.userId = req.get('user-id');
-        console.log("REQ", req.body.task);
-        client.updateTask(req.body.task, function(err, StatusResponse) {
-            if (err) {
-                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-            } else {
-                res.status(HttpStatus.OK).send(StatusResponse);
-            }
-        });
-    } else {
-        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-    }
+  client.updateTask(req.body.task)
+  .then(statusResponse => {
+    res.status(HttpStatus.OK).send(statusResponse);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -213,17 +196,14 @@ router.patch('/', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.delete('/:taskId', (req, res) => {
-    if (req.get('user-id') && req.params.habitId) {
-        client.deleteTask({ _id: req.params.taskId, userId: req.get('user-id') }, function(err, GetHabitResponse) {
-            if (err) {
-                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-            } else {
-                res.status(HttpStatus.OK).send(GetTasksResponse);
-            }
-        });
-    } else {
-        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-    }
+  client.deleteTask({id: req.params.taskId})
+  .then(statusResponse => {
+    res.status(HttpStatus.OK).send(statusResponse);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -260,7 +240,14 @@ router.delete('/:taskId', (req, res) => {
  *       
  */
 router.post('/complete/:taskId', (req, res) => {
-    res.status(HttpStatus.OK).send('ok');
+  client.deleteTask({id: req.params.taskId})
+  .then(task => {
+    res.status(HttpStatus.OK).send(task);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 module.exports = router;
