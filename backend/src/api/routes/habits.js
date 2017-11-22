@@ -122,8 +122,7 @@ router.get('/:habitId', (req, res) => {
  *         description: Invalid Request
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
- */
-/**
+ *
  * @swagger
  * /habits:
  *   patch:
@@ -154,8 +153,7 @@ router.get('/:habitId', (req, res) => {
  *         description: Invalid Request
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
- */
-/**
+ *
  * @swagger
  * /habits:
  *   delete:
@@ -185,8 +183,7 @@ router.get('/:habitId', (req, res) => {
  *         description: Invalid Request
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
- */
-/**
+ *
  * @swagger
  * /habits/good/{habitId}:
  *   post:
@@ -216,8 +213,7 @@ router.get('/:habitId', (req, res) => {
  *         description: server error
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
- */
-/**
+ *
  * @swagger
  * /habits/bad/{habitId}:
  *   post:
