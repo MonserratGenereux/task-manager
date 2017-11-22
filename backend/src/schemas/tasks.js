@@ -8,7 +8,7 @@ module.exports = {
             description: { type: 'string' },
             created_timestamp: { type: 'integer' },
             due_timestamp: { type: 'integer' },
-            reminder_timestamp: { type: 'integer' },
+            reminder_timestamp: { type: 'integer' }, //array of integers
             display_color: { type: 'integer' },
             is_completed: { type: 'boolean' },
             reminder_display: { type: 'boolean' }
@@ -22,8 +22,7 @@ module.exports = {
             description: { type: 'string' },
             created_timestamp: { type: 'integer' },
             due_timestamp: { type: 'integer' },
-            reminder_timestamp: { type: 'integer' },
-            reminder_display: { type: 'boolean' }
+            reminder_timestamp: { type: 'integer' } //array of integers
         },
         additionalProperties: false
     },
