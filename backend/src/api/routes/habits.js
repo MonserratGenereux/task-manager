@@ -123,8 +123,6 @@ router.get('/:habitId', (req, res) => {
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
-router.post('/', (req, res) => {});
-
 /**
  * @swagger
  * /habits:
@@ -157,8 +155,6 @@ router.post('/', (req, res) => {});
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
-router.patch('/', (req, res) => {});
-
 /**
  * @swagger
  * /habits:
@@ -190,8 +186,6 @@ router.patch('/', (req, res) => {});
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
-router.delete('/:habitId', (req, res) => {});
-
 /**
  * @swagger
  * /habits/good/{habitId}:
@@ -223,7 +217,6 @@ router.delete('/:habitId', (req, res) => {});
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
-router.post('/good/:habitId', (req, res) => {});
 /**
  * @swagger
  * /habits/bad/{habitId}:
@@ -255,5 +248,3 @@ router.post('/good/:habitId', (req, res) => {});
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
-router.post('/bad/:habitId', (req, res) => {});
-module.exports = router;
