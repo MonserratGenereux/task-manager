@@ -27,7 +27,6 @@ func (e *HabitEvent) Handle() error {
 	err := proto.Unmarshal(e.body, habit)
 	if err != nil {
 		log.Println("unmarshaling error: ", err)
-		// log.Fatal("unmarshaling error: ", err)
 	}
 
 	log.Printf(
