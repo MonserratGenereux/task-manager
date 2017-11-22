@@ -31,6 +31,7 @@ class MarkAsBadRequest extends Request{
           habit.save()
             .then((ok)=>{
               this.updateResponse(true,  habit_new.getCopy(),'');
+              new Habit(habit).publishChanges();
               return accept(this.response.generate());
             })
             .catch((err)=>{

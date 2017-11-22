@@ -32,7 +32,7 @@ class CreateRequest extends Request{
         this.db_schema.create(this.habit.getCopy())
           .then((habit)=>{
             this.updateResponse(true, habit._id.toString(), '');
-            this.habit.publishChanges();
+            new Habit(habit).publishChanges();
             accept(this.response.generate());
           })
           .catch((err)=>{
