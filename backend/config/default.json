@@ -18,15 +18,15 @@
       "address": "localhost:3002",
       "connection_ttl_seconds": 10
     },
-    "reports" : {
-      "protocol": "grpc",
-      "proto_file": "reports/reports.proto",
-      "address": "localhost:3003",
-      "connection_ttl_seconds": 10
-    },
     "tasks" : {
       "protocol": "grpc",
       "proto_file": "tasks/tasks.proto",
+      "address": "localhost:3003",
+      "connection_ttl_seconds": 10
+    },
+    "reports" : {
+      "protocol": "grpc",
+      "proto_file": "reports/reports.proto",
       "address": "localhost:3004",
       "connection_ttl_seconds": 10
     }
