@@ -26,7 +26,7 @@ func (eh *TaskEvent) Handle() error {
 	task := &tasks.Task{}
 	err := proto.Unmarshal(eh.body, task)
 	if err != nil {
-		log.Fatal("unmarshaling error: ", err)
+		log.Println("unmarshaling error: ", err)
 	}
 
 	log.Printf(
@@ -35,6 +35,5 @@ func (eh *TaskEvent) Handle() error {
 		eh.body,
 	)
 
-	log.Println(task)
-	return nil
+	return reportsDB.SaveTask(task)
 }

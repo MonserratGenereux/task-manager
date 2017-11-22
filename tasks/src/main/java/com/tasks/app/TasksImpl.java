@@ -9,15 +9,18 @@ import com.tasks.proto.TasksMicroservice.TaskID;
 import com.tasks.proto.TasksMicroservice.Tasks;
 import com.tasks.proto.TasksMicroservice.UserID;
 import com.tasks.proto.TasksServiceGrpc;
+import com.tasks.app.events.publisher.TaskPublisher;
 
 import io.grpc.stub.StreamObserver;
 
 public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 
 	private TasksDatabase db;
+	private TaskPublisher publisher;
 
-	public TasksImpl(TasksDatabase db) {
+	public TasksImpl(TasksDatabase db, TaskPublisher publisher) {
 		this.db = db;
+		this.publisher = publisher;
 	}
 
 	@Override
@@ -40,6 +43,7 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 		try {
 			db.createTask(task);
 			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
+			publisher.publish(task);
 		} catch (Exception e) {
 			responseObserver.onError(e);
 		}
@@ -68,11 +72,11 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 		try {
 			db.deleteTask(taskID);
 			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
+			publisher.publish(db.getTaskById(taskID));
 		} catch (Exception e) {
 			responseObserver.onError(e);
 		}
 		responseObserver.onCompleted();
-
 	}
 
 	@Override
@@ -80,10 +84,12 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 		try {
 			db.updateTask(task);
 			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
+			publisher.publish(task);
 		} catch (Exception e) {
 			responseObserver.onError(e);
 		}
 		responseObserver.onCompleted();
+		
 	}
 
 	@Override
@@ -91,6 +97,7 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 		try {
 			Task task = db.completeTask(taskID);
 			responseObserver.onNext(task);
+			publisher.publish(db.getTaskById(taskID));
 		} catch (Exception e) {
 			responseObserver.onError(e);
 		}
