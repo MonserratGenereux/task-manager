@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const c = require('./../constants.js')
 var stage = new BlueStage(c.COLORS.BLUE);
 
-describe("OrangeStage class", ()=>{
+describe("BlueStage class", ()=>{
   context("when it's an EASY Habit (0)", ()=>{
     it("should increase score by ...", ()=>{
       expect(stage.getIncreaseForGood("0")).to.equal(1);
