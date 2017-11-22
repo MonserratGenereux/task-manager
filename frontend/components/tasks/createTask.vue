@@ -147,7 +147,6 @@ export default{
             console.log(error)
           })
         console.log(task)
-        alert('Task creado exitosamente')
         this.$modal.hide('tasks')
         this.$emit('load', 'task')
       }
