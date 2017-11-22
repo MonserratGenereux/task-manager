@@ -47,6 +47,7 @@ router.get('/', (req, res) => {
         res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
     }
 });
+
 /**
  * @swagger
  * /habits/{habitId}:
@@ -89,6 +90,7 @@ router.get('/:habitId', (req, res) => {
         res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
     }
 });
+
 /**
  * @swagger
  * /habits:
@@ -121,25 +123,6 @@ router.get('/:habitId', (req, res) => {
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
-
-
-router.post('/', (req, res) => {
-    console.log("req.body", req.body);
-    if (req.get('user-id') && req.body.habit) {
-        req.body.habit.userId = req.get('user-id');
-        client.createHabit(req.body.habit, function(err, StatusResponse) {
-            if (err) {
-                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-            } else {
-                res.status(HttpStatus.OK).send(StatusResponse);
-            }
-        });
-    } else {
-        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-    }
-});
-
-
 /**
  * @swagger
  * /habits:
@@ -234,21 +217,6 @@ router.post('/', (req, res) => {
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
-
-
-router.post('/good/:habitId', (req, res) => {
-    if (req.get('user-id') && req.params.habitId) {
-        client.MarkAsGood({ _id: req.params.habitId, userId: req.get('user-id') }, function(err, GetHabitResponse) {
-            if (err) {
-                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-            } else {
-                res.status(HttpStatus.OK).send(GetHabitResponse);
-            }
-        });
-    } else {
-        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-    }
-});
 /**
  * @swagger
  * /habits/bad/{habitId}:
@@ -280,22 +248,3 @@ router.post('/good/:habitId', (req, res) => {
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
-
-
-
-
-router.post('/bad/:habitId', (req, res) => {
-    if (req.get('user-id') && req.params.habitId) {
-        client.MarkAsBad({ _id: req.params.habitId, userId: req.get('user-id') }, function(err, GetHabitResponse) {
-            if (err) {
-                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-            } else {
-                res.status(HttpStatus.OK).send(GetHabitResponse);
-            }
-        });
-    } else {
-        res.status(HttpStatus.BAD_REQUEST).send('Invalid Request');
-    }
-});
-
-module.exports = router;
