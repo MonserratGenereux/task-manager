@@ -1,33 +1,38 @@
+const config = require('config');
+const grpc = require('grpc');
+const promisify = require('grpc-promisify');
 const path = require('path');
-var PROTO_PATH = path.join(__dirname, '/../../../shared/proto/habits/habit.proto');
+const fs = require('fs');
 
-var grpc = require('grpc');
-var habits_proto = grpc.load(PROTO_PATH).habits;
+const Logger = require('../util/logger');
+const logger = Logger(config.get('logger'));
 
-function main() {
-  var client = new habits_proto.Habits('localhost:50051',
-                                       grpc.credentials.createInsecure());
+const habitConfig = config.get('services.habits');
 
-  client.getHabits({input:''}, function(err, response) {
-    console.log('getHabit:', response);
-  });
+const protoPath = config.get('proto_path');
+const protoFile = path.isAbsolute(protoPath) ?
+                path.join(protoPath, habitConfig.proto_file) :
+                path.join(__dirname, protoPath, habitConfig.proto_file);
 
-  client.createHabit({name: 'Juanchito', type: 1, difficulty: 2}, function(err, response) {
-    console.log('createHabit:', response);
-  });
-
-  client.deleteHabit({id: '1'}, function(err, response) {
-    console.log('deleteHabit:', response);
-  });
-
-  client.getHabitById({id: '2'}, function(err, response) {
-    console.log('getHabitById:', response);
-  });
-
-  client.updateHabit({id: '3'}, function(err, response) {
-    console.log('updateHabit:', response);
-  });
-
+if (!fs.statSync(protoFile).isFile()) {
+  throw new Error(`Provided proto file ${protoFile} does not exist`);
 }
 
-main();
+const habitProto = grpc.load(protoFile).habits;
+
+const client = new habitProto.HabitsService(
+  habitConfig.address,
+  grpc.credentials.createInsecure());
+
+const deadline = new Date();
+const ttl = habitConfig.connection_ttl_seconds;
+deadline.setSeconds(deadline.getSeconds() + ttl);
+client.waitForReady(deadline, (err) => {
+  if (err)
+    throw new Error(`Habits grpc service at ${habitConfig.address} is not available: ${err}`);
+  logger.info(`Started habits grpc client on server ${habitConfig.address}`);
+})
+
+promisify(client);
+
+module.exports = client;

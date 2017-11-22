@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const HttpStatus = require('http-status-codes');
-
+var client = require('./../../clients/tasks.js');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -17,19 +17,34 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
  *         type: string
  *     responses:
  *       200:
- *         description: list of tasks
+ *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/GetTasksResponse"
  *       400:
- *         description: invalid username
+ *         description: invalid request
+ *         schema:
+ *           $ref: "#/definitions/GetTasksResponse"
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  if (!req.get('user-id')) {
+    res.status(HttpStatus.BAD_REQUEST).send('user-id header is required');
+    return;
+  }
+  client.getTasks({id: req.get('user-id')})
+  .then(tasks => {
+    res.status(HttpStatus.OK).send(tasks);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -43,53 +58,28 @@ router.get('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
  *         type: string
  *     responses:
  *       200:
- *         description: single task
+ *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/tasks"
  *       400:
- *         description: invalid task
+ *         description: invalid request
  */
 router.get('/:taskId', (req, res) => {
-  res.status(HttpStatus.OK).send([
-    {
-      'id': 'el id',
-      'name': 'el nombre1',
-      'completed': true,
-      'dueDate': '12/12/2017',
-      'reminder_flag':false,
-      'display_color': false
-
-    },
-    {
-      'id': 'el id',
-      'name': 'el nombre2',
-      'completed': false,
-      'dueDate': '12/12/2017',
-      'reminder_flag':true,
-      'display_color': true
-    },
-    {
-      'id': 'el id',
-      'name': 'el nombre3',
-      'completed': true,
-      'dueDate': '12/12/2017',
-      'reminder_flag':false,
-      'display_color': false
-    },
-    {
-      'id': 'el id',
-      'name': 'el nombre4',
-      'completed': false,
-      'dueDate': '12/12/2017',
-      'reminder_flag':true,
-      'display_color': true
-    }
-  ]);
+  client.getTaskById({id: req.params.taskId})
+  .then(task => {
+    res.status(HttpStatus.OK).send(task);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -103,7 +93,7 @@ router.get('/:taskId', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -112,15 +102,31 @@ router.get('/:taskId', (req, res) => {
  *         description: info of the newly create task
  *         in: body
  *         required: true
- *         type: object
+ *         schema:
+ *           $ref: "#/definitions/TaskCreate"
  *     responses:
  *       200:
- *         description: single task
+ *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  *       400:
- *         description: invalid username
+ *         description: Invalid Request
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  if (!req.body.task) {
+    res.status(HttpStatus.BAD_REQUEST).send('task is required in the body');
+    return;
+  }
+  client.createTask(req.body.task)
+  .then(statusResponse => {
+    res.status(HttpStatus.OK).send(statusResponse);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -134,7 +140,7 @@ router.post('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -143,15 +149,31 @@ router.post('/', (req, res) => {
  *         description: info of the task to be modified
  *         in: body
  *         required: true
- *         type: object
+ *         schema:
+ *           $ref: "#/definitions/TaskUpdate"
  *     responses:
  *       200:
- *         description: single task
+ *         description: task created
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  *       400:
- *         description: invalid username
+ *         description: Invalid Request
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  */
 router.patch('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  if (!req.body.task) {
+    res.status(HttpStatus.BAD_REQUEST).send('task is required in the body');
+    return;
+  }
+  client.updateTask(req.body.task)
+  .then(statusResponse => {
+    res.status(HttpStatus.OK).send(statusResponse);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -165,7 +187,7 @@ router.patch('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -177,12 +199,23 @@ router.patch('/', (req, res) => {
  *         type: string
  *     responses:
  *       200:
- *         description: single task
+ *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  *       400:
- *         description: invalid username
+ *         description: Invalid Request
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
  */
-router.delete('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+router.delete('/:taskId', (req, res) => {
+  client.deleteTask({id: req.params.taskId})
+  .then(statusResponse => {
+    res.status(HttpStatus.OK).send(statusResponse);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
@@ -196,7 +229,7 @@ router.delete('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -208,12 +241,25 @@ router.delete('/', (req, res) => {
  *         type: string
  *     responses:
  *       200:
- *         description: single task
+ *         description: OK
+ *         schema:
+ *           $ref: "#/definitions/tasks"
  *       400:
- *         description: invalid username
+ *         description: server error
+ *         schema:
+ *           $ref: "#/definitions/StatusResponse"
+ *          
+ *       
  */
 router.post('/complete/:taskId', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  client.completeTask({id: req.params.taskId})
+  .then(task => {
+    res.status(HttpStatus.OK).send(task);
+  })
+  .catch( err => {
+    console.error(err);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 module.exports = router;

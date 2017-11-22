@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package reports;
+
+import "habits/habits.proto";
+import "tasks/tasks.proto";
+
+option go_package = "pb/reports";
+
+// The Reports service definition.
+service ReportsService {
+
+  rpc GetHabitsReport (Empty) returns (HabitsReport) {}
+
+  rpc GetHabitsUserReport (AccountID) returns (HabitsUserReport) {}
+
+  rpc GetTasksReport (Empty) returns (TasksReport) {}
+
+  rpc GetTasksUserReport (AccountID) returns (TasksUserReport) {}
+}
+
+message Empty {}
+
+message AccountID {
+  // Unique account id in the Task Manager system.
+  int64 id = 1;
+}
+
+message HabitsReport {
+  message RangeCount {
+    string color = 1;
+    int64 count = 2;
+  }
+
+  repeated RangeCount range_counts = 1;
+  habits.Habit worst = 2;
+  habits.Habit best = 3;
+}
+
+message HabitsUserReport {
+  repeated habits.Habit good_habits = 1;
+  repeated habits.Habit bad_habits = 2;
+}
+
+message TasksUserReport {
+  repeated tasks.Task delayed = 1;
+  repeated tasks.Task dueToday = 2;
+}
+
+message TasksReport {
+
+  message CompletedTasks {
+    int64 onTime = 1;
+    int64 beforeTime = 2;
+    int64 delayed = 3;
+  }
+
+  message AvailableTasks {
+    int64 remaining = 1;
+    int64 forToday = 2;
+    int64 delayed= 3;
+  }
+
+  CompletedTasks completed_tasks = 1;
+  AvailableTasks available_tasks = 2;
+}

@@ -19,25 +19,25 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.7.0)",
-    comments = "Source: task.proto")
+    comments = "Source: tasks/tasks.proto")
 public final class TasksServiceGrpc {
 
   private TasksServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "com.tasks.proto.TasksService";
+  public static final String SERVICE_NAME = "tasks.TasksService";
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<com.tasks.proto.TasksMicroservice.UserID,
-      com.tasks.proto.TasksMicroservice.Tasks> METHOD_GET_TASKS =
-      io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.UserID, com.tasks.proto.TasksMicroservice.Tasks>newBuilder()
+      com.tasks.proto.TasksMicroservice.GetTasksResponse> METHOD_GET_TASKS =
+      io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.UserID, com.tasks.proto.TasksMicroservice.GetTasksResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "GetTasks"))
+              "tasks.TasksService", "GetTasks"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.UserID.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.tasks.proto.TasksMicroservice.Tasks.getDefaultInstance()))
+              com.tasks.proto.TasksMicroservice.GetTasksResponse.getDefaultInstance()))
           .setSchemaDescriptor(new TasksServiceMethodDescriptorSupplier("GetTasks"))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -46,7 +46,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.StatusResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "CreateTask"))
+              "tasks.TasksService", "CreateTask"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.Task.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -59,7 +59,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.TaskID, com.tasks.proto.TasksMicroservice.StatusResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "DeleteTask"))
+              "tasks.TasksService", "DeleteTask"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.TaskID.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -68,15 +68,15 @@ public final class TasksServiceGrpc {
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<com.tasks.proto.TasksMicroservice.TaskID,
-      com.tasks.proto.TasksMicroservice.Task> METHOD_GET_TASK_BY_ID =
-      io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.TaskID, com.tasks.proto.TasksMicroservice.Task>newBuilder()
+      com.tasks.proto.TasksMicroservice.GetTaskResponse> METHOD_GET_TASK_BY_ID =
+      io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.TaskID, com.tasks.proto.TasksMicroservice.GetTaskResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "GetTaskById"))
+              "tasks.TasksService", "GetTaskById"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.TaskID.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.tasks.proto.TasksMicroservice.Task.getDefaultInstance()))
+              com.tasks.proto.TasksMicroservice.GetTaskResponse.getDefaultInstance()))
           .setSchemaDescriptor(new TasksServiceMethodDescriptorSupplier("GetTaskById"))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -85,7 +85,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.StatusResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "UpdateTask"))
+              "tasks.TasksService", "UpdateTask"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.Task.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -98,7 +98,7 @@ public final class TasksServiceGrpc {
       io.grpc.MethodDescriptor.<com.tasks.proto.TasksMicroservice.TaskID, com.tasks.proto.TasksMicroservice.Task>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "com.tasks.proto.TasksService", "CompleteTask"))
+              "tasks.TasksService", "CompleteTask"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.tasks.proto.TasksMicroservice.TaskID.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -139,7 +139,7 @@ public final class TasksServiceGrpc {
      * </pre>
      */
     public void getTasks(com.tasks.proto.TasksMicroservice.UserID request,
-        io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.Tasks> responseObserver) {
+        io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.GetTasksResponse> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_GET_TASKS, responseObserver);
     }
 
@@ -169,7 +169,7 @@ public final class TasksServiceGrpc {
      * </pre>
      */
     public void getTaskById(com.tasks.proto.TasksMicroservice.TaskID request,
-        io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.Task> responseObserver) {
+        io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.GetTaskResponse> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_GET_TASK_BY_ID, responseObserver);
     }
 
@@ -200,7 +200,7 @@ public final class TasksServiceGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 com.tasks.proto.TasksMicroservice.UserID,
-                com.tasks.proto.TasksMicroservice.Tasks>(
+                com.tasks.proto.TasksMicroservice.GetTasksResponse>(
                   this, METHODID_GET_TASKS)))
           .addMethod(
             METHOD_CREATE_TASK,
@@ -221,7 +221,7 @@ public final class TasksServiceGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 com.tasks.proto.TasksMicroservice.TaskID,
-                com.tasks.proto.TasksMicroservice.Task>(
+                com.tasks.proto.TasksMicroservice.GetTaskResponse>(
                   this, METHODID_GET_TASK_BY_ID)))
           .addMethod(
             METHOD_UPDATE_TASK,
@@ -265,7 +265,7 @@ public final class TasksServiceGrpc {
      * </pre>
      */
     public void getTasks(com.tasks.proto.TasksMicroservice.UserID request,
-        io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.Tasks> responseObserver) {
+        io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.GetTasksResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_GET_TASKS, getCallOptions()), request, responseObserver);
     }
@@ -298,7 +298,7 @@ public final class TasksServiceGrpc {
      * </pre>
      */
     public void getTaskById(com.tasks.proto.TasksMicroservice.TaskID request,
-        io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.Task> responseObserver) {
+        io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.GetTaskResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_GET_TASK_BY_ID, getCallOptions()), request, responseObserver);
     }
@@ -349,7 +349,7 @@ public final class TasksServiceGrpc {
      * Get a list of tasks from the User ID
      * </pre>
      */
-    public com.tasks.proto.TasksMicroservice.Tasks getTasks(com.tasks.proto.TasksMicroservice.UserID request) {
+    public com.tasks.proto.TasksMicroservice.GetTasksResponse getTasks(com.tasks.proto.TasksMicroservice.UserID request) {
       return blockingUnaryCall(
           getChannel(), METHOD_GET_TASKS, getCallOptions(), request);
     }
@@ -379,7 +379,7 @@ public final class TasksServiceGrpc {
      * Get a specific task based on the task ID
      * </pre>
      */
-    public com.tasks.proto.TasksMicroservice.Task getTaskById(com.tasks.proto.TasksMicroservice.TaskID request) {
+    public com.tasks.proto.TasksMicroservice.GetTaskResponse getTaskById(com.tasks.proto.TasksMicroservice.TaskID request) {
       return blockingUnaryCall(
           getChannel(), METHOD_GET_TASK_BY_ID, getCallOptions(), request);
     }
@@ -428,7 +428,7 @@ public final class TasksServiceGrpc {
      * Get a list of tasks from the User ID
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.tasks.proto.TasksMicroservice.Tasks> getTasks(
+    public com.google.common.util.concurrent.ListenableFuture<com.tasks.proto.TasksMicroservice.GetTasksResponse> getTasks(
         com.tasks.proto.TasksMicroservice.UserID request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_GET_TASKS, getCallOptions()), request);
@@ -461,7 +461,7 @@ public final class TasksServiceGrpc {
      * Get a specific task based on the task ID
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.tasks.proto.TasksMicroservice.Task> getTaskById(
+    public com.google.common.util.concurrent.ListenableFuture<com.tasks.proto.TasksMicroservice.GetTaskResponse> getTaskById(
         com.tasks.proto.TasksMicroservice.TaskID request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_GET_TASK_BY_ID, getCallOptions()), request);
@@ -516,7 +516,7 @@ public final class TasksServiceGrpc {
       switch (methodId) {
         case METHODID_GET_TASKS:
           serviceImpl.getTasks((com.tasks.proto.TasksMicroservice.UserID) request,
-              (io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.Tasks>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.GetTasksResponse>) responseObserver);
           break;
         case METHODID_CREATE_TASK:
           serviceImpl.createTask((com.tasks.proto.TasksMicroservice.Task) request,
@@ -528,7 +528,7 @@ public final class TasksServiceGrpc {
           break;
         case METHODID_GET_TASK_BY_ID:
           serviceImpl.getTaskById((com.tasks.proto.TasksMicroservice.TaskID) request,
-              (io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.Task>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.tasks.proto.TasksMicroservice.GetTaskResponse>) responseObserver);
           break;
         case METHODID_UPDATE_TASK:
           serviceImpl.updateTask((com.tasks.proto.TasksMicroservice.Task) request,

@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const HttpStatus = require('http-status-codes');
 
+const reportsClient = require('../../clients/reports');
+const reports = require('../../../proto/reports/reports_pb');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -13,11 +15,11 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *     tags:
  *       - "reports"
  *     summary: Fetch reports
- *     description: Returns a report of the tasks and habit of the user
+ *     description: Returns a report of the tasks and habit of all the users
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: userId
+ *       - name: user-id
  *         description: id of the user
  *         in: header
  *         required: true
@@ -31,41 +33,24 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         description: invalid username
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send({
-  "habits": {
-    "countGreen": 12,
-    "countRed": 30,
-    "countBlue": 40,
-    "countYellow": 50,
-    "countOrange": 10,
-    "best": {
-      "id": "id",
-      "name": "name",
-      "type": 0,
-      "difficulty": 0,
-      "score": 10
-    },
-    "worst": {
-      "id": "is worsr",
-      "name": "feo",
-      "type": 0,
-      "difficulty": 0,
-      "score": -20
-    }
-  },
-  "tasks": {
-    "completed": 10,
-    "delayed": 20,
-    "onTime": 30,
-    "beforeTime": 40,
-    "available": 20
-  }
-});
+  Promise.all([
+    reportsClient.getHabitsReport(new reports.Empty()),
+    reportsClient.getTasksReport(new reports.Empty()),
+  ])
+  .then(reportResults => {
+    res.status(HttpStatus.OK).send({
+      habits: reportResults[0].toObject(),
+      tasks: reportResults[1].toObject(),
+    });
+  })
+  .catch( err => {
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
  * @swagger
- * /report/user:
+ * /reports/{userId}:
  *   get:
  *     tags:
  *       - "reports"
@@ -78,7 +63,7 @@ router.get('/', (req, res) => {
  *     parameters:
  *       - name: userId
  *         description: id of the user
- *         in: header
+ *         in: path
  *         required: true
  *         type: string
  *     responses:
@@ -89,7 +74,22 @@ router.get('/', (req, res) => {
  *       400:
  *         description: invalid user
  */
-router.get('/task', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+router.get('/:userId', (req, res) => {
+  const accountID = new reports.AccountID();
+  accountID.setId(req.params.userId)
+  accountID.toObject()
+  Promise.all([
+    reportsClient.getHabitsUserReport(accountID),
+    reportsClient.getTasksUserReport(accountID),
+  ])
+  .then(reportResults => {
+    res.status(HttpStatus.OK).send({
+      habits: reportResults[0].toObject(),
+      tasks: reportResults[1].toObject(),
+    });
+  })
+  .catch( err => {
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 module.exports = router;

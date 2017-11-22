@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package habits;
+
+option go_package = "pb/habits";
+
+service HabitsService {
+  //Retrieve all habits from user
+  rpc GetHabits (UserId) returns (GetHabitsResponse) {}
+
+  //Gets an habit by ID
+  rpc GetHabitById (HabitId) returns (GetHabitResponse) {}
+
+  //Deletes a habit by id
+  rpc DeleteHabit (HabitId) returns (StatusResponse) {}
+
+  //Creates new Habit, id not needed
+  rpc CreateHabit (HabitCreate) returns (StatusResponse) {}
+
+  // Updates all fields in the given habit.
+  rpc UpdateHabit (HabitUpdate) returns (StatusResponse) {}
+
+  // Set as good a habit by id
+  rpc MarkAsBad (UserMarkUpdate) returns (GetHabitResponse) {}
+
+  // Set as bad a habit by id
+  rpc MarkAsGood (UserMarkUpdate) returns (GetHabitResponse) {}
+
+}
+
+message Habit {
+  //Unique in system
+  string _id = 1;
+  string userId = 2;
+
+  //Attributes needed for Habits
+  string name = 3;
+  string  description = 4;
+  bool  good = 5;
+  bool  bad = 6;
+  string  difficulty = 7;
+  float   score = 8;
+  string  color = 9;
+}
+
+message HabitUpdate {
+  string _id = 1;
+  string userId = 2;
+  string name = 3;
+  string  description = 4;
+  bool  good = 5;
+  bool  bad = 6;
+  string  difficulty = 7;
+}
+
+message HabitCreate {
+  string userId = 1;
+  string name = 2;
+  string  description = 3;
+  bool  good = 4;
+  bool  bad = 5;
+  string  difficulty = 6;
+}
+
+message StatusResponse {
+  bool succeded = 1;
+  string habitId = 2;
+  string error = 3;
+}
+
+message GetHabitsResponse {
+    bool succeded = 1;
+    repeated Habit habits = 2;
+    string error = 3;
+}
+
+message GetHabitResponse {
+    bool succeded = 1;
+    Habit habit = 2;
+    string error = 3;
+}
+
+message HabitId {
+    string _id = 1;
+    string userId = 2;
+}
+
+message UserId {
+    string userId = 1;
+}
+
+message UserUpdate {
+    string _id = 1;
+    string userId = 2;
+    bool  bad = 3;
+    bool  good = 4;
+}
+
+message UserMarkUpdate {
+    string _id = 1;
+    string userId = 2;
+}
