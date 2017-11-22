@@ -77,6 +77,7 @@ router.get('/', (req, res) => {
 router.get('/:userId', (req, res) => {
   const accountID = new reports.AccountID();
   accountID.setId(req.params.userId)
+  accountID.toObject()
   Promise.all([
     reportsClient.getHabitsUserReport(accountID),
     reportsClient.getTasksUserReport(accountID),

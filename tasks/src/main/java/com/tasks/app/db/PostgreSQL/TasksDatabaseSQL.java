@@ -79,7 +79,7 @@ public class TasksDatabaseSQL implements TasksDatabase {
 		try {
 			task.getReminderTimestampList();
 			PreparedStatement preparedStatement = conn.prepareStatement(
-					"" + "INSERT INTO TASKS (ID, USER_ID, TITLE, DESCRIPTION, CREATED, DUE, COMPLETED, DISPLAY_COLOR, IS_COMPLETED)"
+					"" + "INSERT INTO TASKS (ID, USER_ID, TITLE, DESCRIPTION, CREATED, DUE, COMPLETED, IS_COMPLETED)"
 							+ "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?) RETURNING ID");
 
 			preparedStatement.setLong(1, task.getUserId());
@@ -162,33 +162,12 @@ public class TasksDatabaseSQL implements TasksDatabase {
 			Long idTask = (long) taskID.getId();
 			statementTask.setLong(1, idTask);
 			ResultSet selectedTask = statementTask.executeQuery();
-			selectedTask.next();
+			
+			if(!selectedTask.next()){
+				return null;
+			}
 
-			long id = selectedTask.getInt("ID");
-			long userID = selectedTask.getInt("USER_ID");
-			String title = selectedTask.getString("TITLE");
-			String description = selectedTask.getString("DESCRIPTION");
-			long createdTime = selectedTask.getTimestamp("CREATED").getTime();
-			long dueTime = selectedTask.getTimestamp("DUE").getTime();
-			long completedTime = selectedTask.getTimestamp("COMPLETED").getTime();
-			boolean isCompleted = selectedTask.getBoolean("IS_COMPLETED");
-
-			statementTask.close();
-
-			Builder taskBuilder = Task.newBuilder().setId(id).setUserId(userID).setTitle(title)
-					.setDescription(description).setCreatedTimestamp(createdTime).setDueTimestamp(dueTime)
-					.setCompletedTimestamp(completedTime).setIsCompleted(isCompleted);
-
-			List<Long> reminders = getRemindersList(idTask);
-			taskBuilder.addAllReminderTimestamp(reminders);
-
-			final boolean shouldRemindToday = getShouldRemindToday(isCompleted, reminders);
-			taskBuilder.setReminderFlag(shouldRemindToday);
-
-			String displayColor = getDisplayColor(dueTime);
-			taskBuilder.setDisplayColor(displayColor);
-
-			task = taskBuilder.build();
+			task = scanTaskFromRow(selectedTask);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -225,15 +204,12 @@ public class TasksDatabaseSQL implements TasksDatabase {
 	public Tasks getTasks(UserID userID) throws Exception {
 		Tasks tasks = null;
 		try {
-			PreparedStatement statementTask = conn.prepareStatement("SELECT ID FROM TASKS WHERE USER_ID = ?");
+			PreparedStatement statementTask = conn.prepareStatement("SELECT * FROM TASKS WHERE USER_ID = ?");
 			statementTask.setLong(1, userID.getId());
-			ResultSet selectedIds = statementTask.executeQuery();
+			ResultSet selectedTasks = statementTask.executeQuery();
 			List<Task> tasksList = new ArrayList<>();
-			while (selectedIds.next()) {
-				int id = selectedIds.getInt(1);
-				TaskID taskID = TaskID.newBuilder().setId(id).build();
-				Task task = getTaskById(taskID);
-				tasksList.add(task);
+			while (selectedTasks.next()) {
+				tasksList.add(scanTaskFromRow(selectedTasks));
 			}
 			tasks = Tasks.newBuilder().addAllTasks(tasksList).build();
 		} catch (SQLException e) {
@@ -297,6 +273,32 @@ public class TasksDatabaseSQL implements TasksDatabase {
 		updateTask(updatedTask);
 
 		return updatedTask;
+	}
+	
+	private Task scanTaskFromRow(ResultSet selectedRow) throws Exception {
+		long id = selectedRow.getInt("ID");
+		long userIDs = selectedRow.getInt("USER_ID");
+		String title = selectedRow.getString("TITLE");
+		String description = selectedRow.getString("DESCRIPTION");
+		long createdTime = selectedRow.getTimestamp("CREATED").getTime();
+		long dueTime = selectedRow.getTimestamp("DUE").getTime();
+		long completedTime = selectedRow.getTimestamp("COMPLETED").getTime();
+		boolean isCompleted = selectedRow.getBoolean("IS_COMPLETED");
+
+		Builder taskBuilder = Task.newBuilder().setId(id).setUserId(userIDs).setTitle(title)
+				.setDescription(description).setCreatedTimestamp(createdTime).setDueTimestamp(dueTime)
+				.setCompletedTimestamp(completedTime).setIsCompleted(isCompleted);
+
+		List<Long> reminders = getRemindersList(id);
+		taskBuilder.addAllReminderTimestamp(reminders);
+
+		final boolean shouldRemindToday = getShouldRemindToday(isCompleted, reminders);
+		taskBuilder.setReminderFlag(shouldRemindToday);
+
+		String displayColor = getDisplayColor(dueTime);
+		taskBuilder.setDisplayColor(displayColor);
+
+		return taskBuilder.build();
 	}
 
 	private static boolean areOnSameDay(Long timestamp1, Long timestamp2) {
