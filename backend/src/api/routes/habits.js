@@ -122,7 +122,6 @@ router.get('/:habitId', (req, res) => {
  *         description: Invalid Request
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
- */
 /**
  * @swagger
  * /habits:
