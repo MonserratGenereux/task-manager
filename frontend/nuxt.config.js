@@ -23,7 +23,9 @@ module.exports = {
   plugins: [
     {src: '~/plugins/materialize.js', ssr: false},
     {src: '~/plugins/modals.js', ssr: false},
-    {src: '~/plugins/vueCharts.js', ssr: false}
+    {src: '~/plugins/vueCharts.js', ssr: false},
+    {src: '~/plugins/notifications.js', ssr: false},
+    {src: '~/plugins/localStorage.js', ssr: false}
   ],
   /*
   ** Customize the progress bar color

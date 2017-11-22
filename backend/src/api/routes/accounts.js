@@ -32,6 +32,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *       400:
  *         description: invalid username
  */
+
 router.get('/:username', (req, res) => {
   accountsClient.getAccountByUsername({username: req.params.username})
   .then(account => {

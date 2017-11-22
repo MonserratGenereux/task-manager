@@ -56,5 +56,6 @@ h3{
 }
 li{
   cursor: pointer;
+  color: black !important;
 }
 </style>

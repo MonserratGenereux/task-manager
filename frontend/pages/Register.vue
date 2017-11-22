@@ -1,13 +1,12 @@
 <template>
   <v-row>
-    <h1>Task Manager</h1>
     <h2>Register</h2>
     <v-grid s12 m6 l6 >
 
       <div class="input-field">
           <i class="material-icons prefix">person</i>
-          <input id="icon_prefix" type="text" class="validate" v-model="login.name">
-          <label for="icon_prefix">Name</label>
+          <input id="icon_prefix" type="text" class="validate" v-model="login.username">
+          <label for="icon_prefix">User Name</label>
         </div>
 
         <div class="input-field">
@@ -49,17 +48,20 @@ export default{
   },
   methods: {
     loginAction: function () {
-      var api = 'http://localhost:3000/docs/#/account/post_account'
+      var api = 'http://192.168.100.13:3000/accounts'
       var data = {
-        'name': this.login.name,
-        'email': this.login.email,
-        'password': this.login.password,
-        'birthday': this.login.birthday
+        'account': {
+          'username': this.login.username,
+          'email': this.login.email,
+          'password': this.login.password
+          // 'birthday': this.login.birthday
+        }
       }
       axios.post(api, data)
         .then((response) => {
           console.log(response)
-          window.location = '/dashboard'
+          console.log(data)
+          window.location = '/login'
         })
         .catch((error) => {
           console.log(error)

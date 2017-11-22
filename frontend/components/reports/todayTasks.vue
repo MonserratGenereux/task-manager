@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 
 import todayTask from '~/components/reports/todayTask'
@@ -23,14 +24,11 @@ export default {
   },
   methods: {
     getTodayTasks: function () {
-      axios.get('https://jsonplaceholder.typicode.com/posts', {
-        params: {
-          userId: 1
-        }
-      })
+      let userid = Vue.localStorage.get('user-id')
+      axios.get('http://192.168.100.13:3000/reports/' + userid)
         .then((response) => {
           console.log(response.data)
-          this.todayTaks = response.data
+          this.todayTaks = response.data.tasks.duetodayList
         })
         .catch((error) => {
           console.log(error)

@@ -1,14 +1,7 @@
 <template lang="html">
   <section class="row">
     <div class="col l3">
-      <ul>
-          <p><strong>Best Habit:</strong></p>
-          <p>Name:</p>
-          <p>Points:</p>
-          <p><strong>Worst Habit:</strong></p>
-          <p>Name:</p>
-          <p>Points:</p>
-    </ul>
+      <bestWorst/>
     </div>
     <div class="col l9">
       <h3>Habits Per Range</h3>
@@ -19,16 +12,17 @@
 
 <script>
 import range from '~/components/admin/habits/charts/range'
+import bestWorst from '~/components/admin/habits/charts/bestWorst'
 export default {
   components: {
-    range
+    range,
+    bestWorst
   },
   data () {
     return {
       active: 'range'
     }
   },
-  props: ['info'],
   methods: {
     showChart: function (data) {
       this.active = data

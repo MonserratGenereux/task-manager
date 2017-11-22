@@ -19,10 +19,10 @@
     </div>
 
     <!-- Modals -->
-    <modal name="habits" transition="pop-out" :width="modalWidth" :height="400">
+    <modal name="habits" transition="pop-out" :width="800" :height="400">
       <createHabit/>
     </modal>
-    <modal name="tasks" transition="pop-out" :width="modalWidth" :height="400">
+    <modal name="tasks" transition="pop-out" :width="1000" :height="365">
       <createTask/>
     </modal>
   </section>

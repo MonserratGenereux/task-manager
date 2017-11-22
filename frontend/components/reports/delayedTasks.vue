@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 import delayedTasks from '~/components/reports/delayedTask'
 export default {
@@ -22,14 +23,11 @@ export default {
   },
   methods: {
     getDelayedTasks: function () {
-      axios.get('https://jsonplaceholder.typicode.com/posts', {
-        params: {
-          userId: 1
-        }
-      })
+      let userid = Vue.localStorage.get('user-id')
+      axios.get('http://192.168.100.13:3000/reports/' + userid)
         .then((response) => {
           console.log(response.data)
-          this.delayedtasks = response.data
+          this.delayedtasks = response.data.tasks.delayedList
         })
         .catch((error) => {
           console.log(error)

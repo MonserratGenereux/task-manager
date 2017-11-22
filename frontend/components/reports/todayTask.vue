@@ -1,8 +1,8 @@
 <template>
   <div class="card-panel teal">
-    <span class="white-text">{{info.title}}
+    <span class="white-text">Name: {{info.title}}
     </span>
-    <span class="white-text points">Puntaje:{{info.id}}
+    <span class="white-text points">Completed: {{info.isCompleted}}
     </span>
         </div>
 </template>
@@ -19,6 +19,9 @@ export default {
 
 <style>
 .points{
-  padding-left: 540px;
+  text-align: right;
+}
+.teal{
+  background-color: rgb(205,89, 90,0.4) !important;
 }
 </style>

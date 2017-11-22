@@ -13,6 +13,9 @@
       <li>
         <nuxt-link to="/login"><v-icon>lock</v-icon></nuxt-link>
       </li>
+      <li>
+        <nuxt-link to="/reports"><v-icon>show_chart</v-icon></nuxt-link>
+      </li>
     </ul>
     </div>
   </v-nav>
@@ -20,6 +23,6 @@
 </template>
 <style>
 .nav-wrapper {
-        background-color: rgb(38, 165, 153) !important;
+        background-color: rgb(205,89, 90) !important;
     }
 </style>

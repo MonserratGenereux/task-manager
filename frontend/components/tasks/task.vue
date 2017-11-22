@@ -1,33 +1,55 @@
 <template>
-  <div class="card">
+    <div class="card" v-if="!info.is_completed" :class="{redBackground: color.true}">
     <div class="card-content white-text">
-      <span class="card-title">Task {{info.nombre}}</span>
-      <p>Points: {{info.puntos}}</p>
+      <span class="card-title">{{info.title}}</span>
+      <p>Due date: {{info.description}}</p>
     </div>
-    <div class="card-action">
-      <a class="btn-floating btn-large waves-effect waves-light green" @click="success()">
-        <i class="material-icons">exposure_plus_1</i>
-      </a>
-      <a class="btn-floating btn-large waves-effect waves-light red" id="negative" @click="failure()">
-        <i class="material-icons">exposure_neg_1</i>
+    <div class="card-action" href="javascript: reload()">
+      <a class="btn-floating btn-large waves-effect waves-light green" @click="completed()">
+        <i class="material-icons">check</i>
       </a>
     </div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
 export default {
   data () {
     return {
+      red: false
     }
   },
+
   props: ['info'],
+  created () {
+    this.setColor(this.info.display_color)
+  },
   methods: {
-    success: function () {
-      alert('te amo mil')
+    setColor: function (color) {
+      this.color = {}
+      if (color) {
+        this.color[color] = true
+      } else {
+        this.color[''] = true
+      }
     },
-    failure: function () {
-      alert('que menso')
+    completed: function (id) {
+      let userId = Vue.localStorage.get('user-id')
+      var config = {
+        headers: {'user-id': userId}
+      }
+      axios.post('http://192.168.100.13:3000/tasks/complete/' + this.info.id, {}, config)
+        .then((response) => {
+          console.log('respuesta', response)
+          this.setColor(response.data.display_color)
+          this.is_completed = true
+          this.$parent.$emit('completed')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
@@ -43,7 +65,7 @@ export default {
 }
 .card{
   width: 400px;
-  background-color: rgb(32,145,135,0.5) !important;
+  background-color: rgb(205,89, 90,0.4) !important;
 }
 .right{
   border-right: black;
@@ -56,5 +78,8 @@ export default {
 }
 p{
   text-align: right;
+}
+.redBackground{
+  background-color: rgba(255, 76, 76, 0.5) !important;
 }
 </style>

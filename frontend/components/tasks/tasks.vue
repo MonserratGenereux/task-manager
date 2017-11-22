@@ -1,64 +1,65 @@
 <template>
   <section>
     <h5>Tasks</h5>
-    <Task v-for="task in tasks"  v-bind:info="task" :key="task.nombre"/>
+    <Task v-for="task in tasks"  v-bind:info="task" :key="task.id"/>
+    <reminder v-for="task in reminder_flag" v-bind:info="task" :key="task.id"/>
+    </div>
   </section>
 </template>
 
 <script>
-import Task from '~/components/tasks/task'
-export default {
-  data () {
-    return {
-      tasks: []
-    }
-  },
-  components: {
-    Task
-  },
-  mounted () {
-    this.getTasks()
-  },
-  methods: {
-    getTasks: function () {
-      // cosa de axios
-      this.tasks = [{'nombre': 'one', 'puntos': '23'}, {'nombre': 'dos', 'puntos': '32'}, {'nombre': 'tres', 'puntos': '42'}]
-    }
-  }
-}
-</script>
-<script>
+import Vue from 'vue'
 import axios from 'axios'
 import Task from '~/components/tasks/task'
+import reminder from '~/components/tasks/reminder'
 export default {
   data () {
     return {
-      tasks: ['']
+      tasks: [''],
+      reminder_flag: ['']
     }
   },
   components: {
-    Task
+    Task,
+    reminder
   },
   mounted () {
+    this.$on('completed', function () {
+      this.getTasks()
+    })
     this.getTasks()
   },
   methods: {
     getTasks: function () {
-      axios.get('https://jsonplaceholder.typicode.com/posts', {
-        params: {
-          userId: 1
-        }
-      })
+      let userId = Vue.localStorage.get('user-id')
+      var config = {
+        headers: {'user-id': userId}
+      }
+      axios.get('http://192.168.100.13:3000/tasks/', config)
         .then((response) => {
-          console.log('Respuesta', this.habits = response.data)
+          console.log(response)
+          this.tasks = response.data.tasks
+          this.setNotifications(response.data)
         })
         .catch((error) => {
           console.log(error)
         })
+    },
+    setNotifications: function (object) {
+      let reminderObject = []
+      for (var index in object) {
+        if (object[index].reminder_flag) {
+          reminderObject.push(object[index])
+        }
+      }
+      this.reminder_flag = reminderObject
     }
   }
 }
 </script>
 
 <style lang="css">
+.btn{
+  background-color: rgb(205,89, 90,0.4) !important;
+}
 </style>
