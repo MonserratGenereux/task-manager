@@ -123,6 +123,25 @@ router.get('/:habitId', (req, res) => {
  *         schema:
  *           $ref: "#/definitions/StatusResponse"
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * @swagger
  * /habits:
