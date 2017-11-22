@@ -27,6 +27,7 @@ services:
     environment:
       - ACCOUNTS_ADDRESS=accounts:${ACCOUNTS_SERVER_PORT}
       - HABITS_ADDRESS=habits:${HABITS_SERVER_PORT}
+      - REPORTS_ADDRESS=reports:${REPORTS_SERVER_PORT}
     env_file:
     - .env
     volumes:
