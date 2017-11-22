@@ -226,8 +226,9 @@ public class TasksDatabaseSQL implements TasksDatabase {
 		for (Long taskReminder : taskReminders) {
 			statementUpdateReminder.setTimestamp(1, new Timestamp(taskReminder));
 			statementUpdateReminder.setLong(2, idTask);
+			statementUpdateReminder.executeUpdate();
 		}
-		statementUpdateReminder.executeQuery();
+		
 	}
 
 	@Override
@@ -237,7 +238,7 @@ public class TasksDatabaseSQL implements TasksDatabase {
 		long idTask = task.getId();
 
 		PreparedStatement statementUpdateTask = conn.prepareStatement(
-				"UPDATE TASKS SET USER_ID = ?,  TITLE = ?, DESCRIPTION = ?, CREATED = ?, DUE = ?, COMPLETED = ?, DISPLAY_COLOR = ?, IS_COMPLETED = ? WHERE ID = ?");
+				"UPDATE TASKS SET USER_ID = ?,  TITLE = ?, DESCRIPTION = ?, CREATED = ?, DUE = ?, COMPLETED = ?, IS_COMPLETED = ? WHERE ID = ?");
 
 		statementUpdateTask.setLong(1, task.getUserId());
 		statementUpdateTask.setString(2, task.getTitle());
@@ -245,18 +246,9 @@ public class TasksDatabaseSQL implements TasksDatabase {
 		statementUpdateTask.setTimestamp(4, new Timestamp(task.getCreatedTimestamp()));
 		statementUpdateTask.setTimestamp(5, new Timestamp(task.getDueTimestamp()));
 		statementUpdateTask.setTimestamp(6, new Timestamp(task.getCompletedTimestamp()));
-		statementUpdateTask.setString(7, task.getDisplayColor());
-		statementUpdateTask.setBoolean(8, task.getIsCompleted());
-		statementUpdateTask.setLong(9, idTask);
-
-		ResultSet updateReminders = statementUpdateTask.executeQuery();
-		updateReminders.next();
-		int rowsUpdated = updateReminders.getInt(1);
-
-		if (rowsUpdated == 0) {
-			throw new RuntimeErrorException(new Error(), "No rows updated");
-		}
-
+		statementUpdateTask.setBoolean(7, task.getIsCompleted());
+		statementUpdateTask.setLong(8, idTask);
+		statementUpdateTask.executeUpdate();
 	}
 
 	@Override

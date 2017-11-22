@@ -31,10 +31,11 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 			GetTasksResponse getTasksResponse = GetTasksResponse.newBuilder().setSucceded(true)
 					.addAllTasks(tasks.getTasksList()).build();
 			responseObserver.onNext(getTasksResponse);
+			responseObserver.onCompleted();
 		} catch (Exception e) {
 			responseObserver.onError(e);
+			e.printStackTrace();
 		}
-		responseObserver.onCompleted();
 	}
 
 	@Override
@@ -43,11 +44,12 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 		try {
 			db.createTask(task);
 			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
+			responseObserver.onCompleted();
 			publisher.publish(task);
 		} catch (Exception e) {
 			responseObserver.onError(e);
+			e.printStackTrace();
 		}
-		responseObserver.onCompleted();
 	}
 
 	@Override
@@ -61,10 +63,11 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 				getTaskResponse = GetTaskResponse.newBuilder().setTask(task).setSucceded(true).build();
 			}
 			responseObserver.onNext(getTaskResponse);
+			responseObserver.onCompleted();
 		} catch (Exception e) {
 			responseObserver.onError(e);
+			e.printStackTrace();
 		}
-		responseObserver.onCompleted();
 	}
 
 	@Override
@@ -72,11 +75,12 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 		try {
 			db.deleteTask(taskID);
 			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
+			responseObserver.onCompleted();
 			publisher.publish(db.getTaskById(taskID));
 		} catch (Exception e) {
 			responseObserver.onError(e);
+			e.printStackTrace();
 		}
-		responseObserver.onCompleted();
 	}
 
 	@Override
@@ -84,12 +88,12 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 		try {
 			db.updateTask(task);
 			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
+			responseObserver.onCompleted();
 			publisher.publish(task);
 		} catch (Exception e) {
 			responseObserver.onError(e);
+			e.printStackTrace();
 		}
-		responseObserver.onCompleted();
-		
 	}
 
 	@Override
@@ -98,10 +102,11 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 			Task task = db.completeTask(taskID);
 			responseObserver.onNext(task);
 			publisher.publish(db.getTaskById(taskID));
+			responseObserver.onCompleted();
 		} catch (Exception e) {
 			responseObserver.onError(e);
+			e.printStackTrace();
 		}
-		responseObserver.onCompleted();
 	}
 
 }

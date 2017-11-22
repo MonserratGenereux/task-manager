@@ -252,7 +252,7 @@ router.delete('/:taskId', (req, res) => {
  *       
  */
 router.post('/complete/:taskId', (req, res) => {
-  client.deleteTask({id: req.params.taskId})
+  client.completeTask({id: req.params.taskId})
   .then(task => {
     res.status(HttpStatus.OK).send(task);
   })
