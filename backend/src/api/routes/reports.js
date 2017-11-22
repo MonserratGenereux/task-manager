@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const HttpStatus = require('http-status-codes');
 
+const reportsClient = require('../../clients/reports');
+const reports = require('../../../proto/reports/reports_pb');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -13,7 +15,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *     tags:
  *       - "reports"
  *     summary: Fetch reports
- *     description: Returns a report of the tasks and habit of the user
+ *     description: Returns a report of the tasks and habit of all the users
  *     produces:
  *       - application/json
  *     parameters:
@@ -31,12 +33,24 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *         description: invalid username
  */
 router.get('/', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+  Promise.all([
+    reportsClient.getHabitsReport(new reports.Empty()),
+    reportsClient.getTasksReport(new reports.Empty()),
+  ])
+  .then(reportResults => {
+    res.status(HttpStatus.OK).send({
+      habits: reportResults[0].toObject(),
+      tasks: reportResults[1].toObject(),
+    });
+  })
+  .catch( err => {
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 
 /**
  * @swagger
- * /report/user:
+ * /reports/{userId}:
  *   get:
  *     tags:
  *       - "reports"
@@ -47,9 +61,9 @@ router.get('/', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: user-id
+ *       - name: userId
  *         description: id of the user
- *         in: header
+ *         in: path
  *         required: true
  *         type: string
  *     responses:
@@ -60,7 +74,20 @@ router.get('/', (req, res) => {
  *       400:
  *         description: invalid user
  */
-router.get('/task', (req, res) => {
-  res.status(HttpStatus.OK).send('ok');
+router.get('/:userId', (req, res) => {
+  const id = new reports.AccountID({id: req.params.userId});
+  Promise.all([
+    reportsClient.getHabitsUserReport(id),
+    reportsClient.getTasksUserReport(id),
+  ])
+  .then(reportResults => {
+    res.status(HttpStatus.OK).send({
+      habits: reportResults[0].toObject(),
+      tasks: reportResults[1].toObject(),
+    });
+  })
+  .catch( err => {
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+  });
 });
 module.exports = router;
