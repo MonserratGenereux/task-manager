@@ -3341,7 +3341,6 @@ public final class TasksMicroservice {
       if (id_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, id_);
-
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3622,7 +3621,6 @@ public final class TasksMicroservice {
       public Builder clearId() {
         
         id_ = 0L;
-        
         onChanged();
         return this;
       }
@@ -3675,6 +3673,1744 @@ public final class TasksMicroservice {
 
   }
 
+  public interface GetTasksResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:tasks.GetTasksResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>bool succeded = 1;</code>
+     */
+    boolean getSucceded();
+
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    java.util.List<com.tasks.proto.TasksMicroservice.Task> 
+        getTasksList();
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    com.tasks.proto.TasksMicroservice.Task getTasks(int index);
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    int getTasksCount();
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    java.util.List<? extends com.tasks.proto.TasksMicroservice.TaskOrBuilder> 
+        getTasksOrBuilderList();
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    com.tasks.proto.TasksMicroservice.TaskOrBuilder getTasksOrBuilder(
+        int index);
+
+    /**
+     * <code>string error = 3;</code>
+     */
+    java.lang.String getError();
+    /**
+     * <code>string error = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getErrorBytes();
+  }
+  /**
+   * Protobuf type {@code tasks.GetTasksResponse}
+   */
+  public  static final class GetTasksResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:tasks.GetTasksResponse)
+      GetTasksResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use GetTasksResponse.newBuilder() to construct.
+    private GetTasksResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private GetTasksResponse() {
+      succeded_ = false;
+      tasks_ = java.util.Collections.emptyList();
+      error_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetTasksResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              succeded_ = input.readBool();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                tasks_ = new java.util.ArrayList<com.tasks.proto.TasksMicroservice.Task>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              tasks_.add(
+                  input.readMessage(com.tasks.proto.TasksMicroservice.Task.parser(), extensionRegistry));
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              error_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          tasks_ = java.util.Collections.unmodifiableList(tasks_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTasksResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTasksResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.tasks.proto.TasksMicroservice.GetTasksResponse.class, com.tasks.proto.TasksMicroservice.GetTasksResponse.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int SUCCEDED_FIELD_NUMBER = 1;
+    private boolean succeded_;
+    /**
+     * <code>bool succeded = 1;</code>
+     */
+    public boolean getSucceded() {
+      return succeded_;
+    }
+
+    public static final int TASKS_FIELD_NUMBER = 2;
+    private java.util.List<com.tasks.proto.TasksMicroservice.Task> tasks_;
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    public java.util.List<com.tasks.proto.TasksMicroservice.Task> getTasksList() {
+      return tasks_;
+    }
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    public java.util.List<? extends com.tasks.proto.TasksMicroservice.TaskOrBuilder> 
+        getTasksOrBuilderList() {
+      return tasks_;
+    }
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    public int getTasksCount() {
+      return tasks_.size();
+    }
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    public com.tasks.proto.TasksMicroservice.Task getTasks(int index) {
+      return tasks_.get(index);
+    }
+    /**
+     * <code>repeated .tasks.Task tasks = 2;</code>
+     */
+    public com.tasks.proto.TasksMicroservice.TaskOrBuilder getTasksOrBuilder(
+        int index) {
+      return tasks_.get(index);
+    }
+
+    public static final int ERROR_FIELD_NUMBER = 3;
+    private volatile java.lang.Object error_;
+    /**
+     * <code>string error = 3;</code>
+     */
+    public java.lang.String getError() {
+      java.lang.Object ref = error_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        error_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string error = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getErrorBytes() {
+      java.lang.Object ref = error_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        error_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (succeded_ != false) {
+        output.writeBool(1, succeded_);
+      }
+      for (int i = 0; i < tasks_.size(); i++) {
+        output.writeMessage(2, tasks_.get(i));
+      }
+      if (!getErrorBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, error_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (succeded_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, succeded_);
+      }
+      for (int i = 0; i < tasks_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, tasks_.get(i));
+      }
+      if (!getErrorBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, error_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.tasks.proto.TasksMicroservice.GetTasksResponse)) {
+        return super.equals(obj);
+      }
+      com.tasks.proto.TasksMicroservice.GetTasksResponse other = (com.tasks.proto.TasksMicroservice.GetTasksResponse) obj;
+
+      boolean result = true;
+      result = result && (getSucceded()
+          == other.getSucceded());
+      result = result && getTasksList()
+          .equals(other.getTasksList());
+      result = result && getError()
+          .equals(other.getError());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SUCCEDED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getSucceded());
+      if (getTasksCount() > 0) {
+        hash = (37 * hash) + TASKS_FIELD_NUMBER;
+        hash = (53 * hash) + getTasksList().hashCode();
+      }
+      hash = (37 * hash) + ERROR_FIELD_NUMBER;
+      hash = (53 * hash) + getError().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.tasks.proto.TasksMicroservice.GetTasksResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code tasks.GetTasksResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:tasks.GetTasksResponse)
+        com.tasks.proto.TasksMicroservice.GetTasksResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTasksResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTasksResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.tasks.proto.TasksMicroservice.GetTasksResponse.class, com.tasks.proto.TasksMicroservice.GetTasksResponse.Builder.class);
+      }
+
+      // Construct using com.tasks.proto.TasksMicroservice.GetTasksResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getTasksFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        succeded_ = false;
+
+        if (tasksBuilder_ == null) {
+          tasks_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          tasksBuilder_.clear();
+        }
+        error_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTasksResponse_descriptor;
+      }
+
+      public com.tasks.proto.TasksMicroservice.GetTasksResponse getDefaultInstanceForType() {
+        return com.tasks.proto.TasksMicroservice.GetTasksResponse.getDefaultInstance();
+      }
+
+      public com.tasks.proto.TasksMicroservice.GetTasksResponse build() {
+        com.tasks.proto.TasksMicroservice.GetTasksResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.tasks.proto.TasksMicroservice.GetTasksResponse buildPartial() {
+        com.tasks.proto.TasksMicroservice.GetTasksResponse result = new com.tasks.proto.TasksMicroservice.GetTasksResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.succeded_ = succeded_;
+        if (tasksBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            tasks_ = java.util.Collections.unmodifiableList(tasks_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.tasks_ = tasks_;
+        } else {
+          result.tasks_ = tasksBuilder_.build();
+        }
+        result.error_ = error_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.tasks.proto.TasksMicroservice.GetTasksResponse) {
+          return mergeFrom((com.tasks.proto.TasksMicroservice.GetTasksResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.tasks.proto.TasksMicroservice.GetTasksResponse other) {
+        if (other == com.tasks.proto.TasksMicroservice.GetTasksResponse.getDefaultInstance()) return this;
+        if (other.getSucceded() != false) {
+          setSucceded(other.getSucceded());
+        }
+        if (tasksBuilder_ == null) {
+          if (!other.tasks_.isEmpty()) {
+            if (tasks_.isEmpty()) {
+              tasks_ = other.tasks_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureTasksIsMutable();
+              tasks_.addAll(other.tasks_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.tasks_.isEmpty()) {
+            if (tasksBuilder_.isEmpty()) {
+              tasksBuilder_.dispose();
+              tasksBuilder_ = null;
+              tasks_ = other.tasks_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              tasksBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getTasksFieldBuilder() : null;
+            } else {
+              tasksBuilder_.addAllMessages(other.tasks_);
+            }
+          }
+        }
+        if (!other.getError().isEmpty()) {
+          error_ = other.error_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.tasks.proto.TasksMicroservice.GetTasksResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.tasks.proto.TasksMicroservice.GetTasksResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private boolean succeded_ ;
+      /**
+       * <code>bool succeded = 1;</code>
+       */
+      public boolean getSucceded() {
+        return succeded_;
+      }
+      /**
+       * <code>bool succeded = 1;</code>
+       */
+      public Builder setSucceded(boolean value) {
+        
+        succeded_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool succeded = 1;</code>
+       */
+      public Builder clearSucceded() {
+        
+        succeded_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.tasks.proto.TasksMicroservice.Task> tasks_ =
+        java.util.Collections.emptyList();
+      private void ensureTasksIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          tasks_ = new java.util.ArrayList<com.tasks.proto.TasksMicroservice.Task>(tasks_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.Task.Builder, com.tasks.proto.TasksMicroservice.TaskOrBuilder> tasksBuilder_;
+
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public java.util.List<com.tasks.proto.TasksMicroservice.Task> getTasksList() {
+        if (tasksBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(tasks_);
+        } else {
+          return tasksBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public int getTasksCount() {
+        if (tasksBuilder_ == null) {
+          return tasks_.size();
+        } else {
+          return tasksBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public com.tasks.proto.TasksMicroservice.Task getTasks(int index) {
+        if (tasksBuilder_ == null) {
+          return tasks_.get(index);
+        } else {
+          return tasksBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public Builder setTasks(
+          int index, com.tasks.proto.TasksMicroservice.Task value) {
+        if (tasksBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTasksIsMutable();
+          tasks_.set(index, value);
+          onChanged();
+        } else {
+          tasksBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public Builder setTasks(
+          int index, com.tasks.proto.TasksMicroservice.Task.Builder builderForValue) {
+        if (tasksBuilder_ == null) {
+          ensureTasksIsMutable();
+          tasks_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          tasksBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public Builder addTasks(com.tasks.proto.TasksMicroservice.Task value) {
+        if (tasksBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTasksIsMutable();
+          tasks_.add(value);
+          onChanged();
+        } else {
+          tasksBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public Builder addTasks(
+          int index, com.tasks.proto.TasksMicroservice.Task value) {
+        if (tasksBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTasksIsMutable();
+          tasks_.add(index, value);
+          onChanged();
+        } else {
+          tasksBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public Builder addTasks(
+          com.tasks.proto.TasksMicroservice.Task.Builder builderForValue) {
+        if (tasksBuilder_ == null) {
+          ensureTasksIsMutable();
+          tasks_.add(builderForValue.build());
+          onChanged();
+        } else {
+          tasksBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public Builder addTasks(
+          int index, com.tasks.proto.TasksMicroservice.Task.Builder builderForValue) {
+        if (tasksBuilder_ == null) {
+          ensureTasksIsMutable();
+          tasks_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          tasksBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public Builder addAllTasks(
+          java.lang.Iterable<? extends com.tasks.proto.TasksMicroservice.Task> values) {
+        if (tasksBuilder_ == null) {
+          ensureTasksIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, tasks_);
+          onChanged();
+        } else {
+          tasksBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public Builder clearTasks() {
+        if (tasksBuilder_ == null) {
+          tasks_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          tasksBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public Builder removeTasks(int index) {
+        if (tasksBuilder_ == null) {
+          ensureTasksIsMutable();
+          tasks_.remove(index);
+          onChanged();
+        } else {
+          tasksBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public com.tasks.proto.TasksMicroservice.Task.Builder getTasksBuilder(
+          int index) {
+        return getTasksFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public com.tasks.proto.TasksMicroservice.TaskOrBuilder getTasksOrBuilder(
+          int index) {
+        if (tasksBuilder_ == null) {
+          return tasks_.get(index);  } else {
+          return tasksBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public java.util.List<? extends com.tasks.proto.TasksMicroservice.TaskOrBuilder> 
+           getTasksOrBuilderList() {
+        if (tasksBuilder_ != null) {
+          return tasksBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(tasks_);
+        }
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public com.tasks.proto.TasksMicroservice.Task.Builder addTasksBuilder() {
+        return getTasksFieldBuilder().addBuilder(
+            com.tasks.proto.TasksMicroservice.Task.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public com.tasks.proto.TasksMicroservice.Task.Builder addTasksBuilder(
+          int index) {
+        return getTasksFieldBuilder().addBuilder(
+            index, com.tasks.proto.TasksMicroservice.Task.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .tasks.Task tasks = 2;</code>
+       */
+      public java.util.List<com.tasks.proto.TasksMicroservice.Task.Builder> 
+           getTasksBuilderList() {
+        return getTasksFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.Task.Builder, com.tasks.proto.TasksMicroservice.TaskOrBuilder> 
+          getTasksFieldBuilder() {
+        if (tasksBuilder_ == null) {
+          tasksBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.Task.Builder, com.tasks.proto.TasksMicroservice.TaskOrBuilder>(
+                  tasks_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          tasks_ = null;
+        }
+        return tasksBuilder_;
+      }
+
+      private java.lang.Object error_ = "";
+      /**
+       * <code>string error = 3;</code>
+       */
+      public java.lang.String getError() {
+        java.lang.Object ref = error_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          error_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string error = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getErrorBytes() {
+        java.lang.Object ref = error_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          error_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string error = 3;</code>
+       */
+      public Builder setError(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        error_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string error = 3;</code>
+       */
+      public Builder clearError() {
+        
+        error_ = getDefaultInstance().getError();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string error = 3;</code>
+       */
+      public Builder setErrorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        error_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:tasks.GetTasksResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:tasks.GetTasksResponse)
+    private static final com.tasks.proto.TasksMicroservice.GetTasksResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.tasks.proto.TasksMicroservice.GetTasksResponse();
+    }
+
+    public static com.tasks.proto.TasksMicroservice.GetTasksResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<GetTasksResponse>
+        PARSER = new com.google.protobuf.AbstractParser<GetTasksResponse>() {
+      public GetTasksResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new GetTasksResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<GetTasksResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetTasksResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public com.tasks.proto.TasksMicroservice.GetTasksResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface GetTaskResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:tasks.GetTaskResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>bool succeded = 1;</code>
+     */
+    boolean getSucceded();
+
+    /**
+     * <code>.tasks.Task task = 2;</code>
+     */
+    boolean hasTask();
+    /**
+     * <code>.tasks.Task task = 2;</code>
+     */
+    com.tasks.proto.TasksMicroservice.Task getTask();
+    /**
+     * <code>.tasks.Task task = 2;</code>
+     */
+    com.tasks.proto.TasksMicroservice.TaskOrBuilder getTaskOrBuilder();
+
+    /**
+     * <code>string error = 3;</code>
+     */
+    java.lang.String getError();
+    /**
+     * <code>string error = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getErrorBytes();
+  }
+  /**
+   * Protobuf type {@code tasks.GetTaskResponse}
+   */
+  public  static final class GetTaskResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:tasks.GetTaskResponse)
+      GetTaskResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use GetTaskResponse.newBuilder() to construct.
+    private GetTaskResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private GetTaskResponse() {
+      succeded_ = false;
+      error_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetTaskResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              succeded_ = input.readBool();
+              break;
+            }
+            case 18: {
+              com.tasks.proto.TasksMicroservice.Task.Builder subBuilder = null;
+              if (task_ != null) {
+                subBuilder = task_.toBuilder();
+              }
+              task_ = input.readMessage(com.tasks.proto.TasksMicroservice.Task.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(task_);
+                task_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              error_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTaskResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTaskResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.tasks.proto.TasksMicroservice.GetTaskResponse.class, com.tasks.proto.TasksMicroservice.GetTaskResponse.Builder.class);
+    }
+
+    public static final int SUCCEDED_FIELD_NUMBER = 1;
+    private boolean succeded_;
+    /**
+     * <code>bool succeded = 1;</code>
+     */
+    public boolean getSucceded() {
+      return succeded_;
+    }
+
+    public static final int TASK_FIELD_NUMBER = 2;
+    private com.tasks.proto.TasksMicroservice.Task task_;
+    /**
+     * <code>.tasks.Task task = 2;</code>
+     */
+    public boolean hasTask() {
+      return task_ != null;
+    }
+    /**
+     * <code>.tasks.Task task = 2;</code>
+     */
+    public com.tasks.proto.TasksMicroservice.Task getTask() {
+      return task_ == null ? com.tasks.proto.TasksMicroservice.Task.getDefaultInstance() : task_;
+    }
+    /**
+     * <code>.tasks.Task task = 2;</code>
+     */
+    public com.tasks.proto.TasksMicroservice.TaskOrBuilder getTaskOrBuilder() {
+      return getTask();
+    }
+
+    public static final int ERROR_FIELD_NUMBER = 3;
+    private volatile java.lang.Object error_;
+    /**
+     * <code>string error = 3;</code>
+     */
+    public java.lang.String getError() {
+      java.lang.Object ref = error_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        error_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string error = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getErrorBytes() {
+      java.lang.Object ref = error_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        error_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (succeded_ != false) {
+        output.writeBool(1, succeded_);
+      }
+      if (task_ != null) {
+        output.writeMessage(2, getTask());
+      }
+      if (!getErrorBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, error_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (succeded_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, succeded_);
+      }
+      if (task_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getTask());
+      }
+      if (!getErrorBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, error_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.tasks.proto.TasksMicroservice.GetTaskResponse)) {
+        return super.equals(obj);
+      }
+      com.tasks.proto.TasksMicroservice.GetTaskResponse other = (com.tasks.proto.TasksMicroservice.GetTaskResponse) obj;
+
+      boolean result = true;
+      result = result && (getSucceded()
+          == other.getSucceded());
+      result = result && (hasTask() == other.hasTask());
+      if (hasTask()) {
+        result = result && getTask()
+            .equals(other.getTask());
+      }
+      result = result && getError()
+          .equals(other.getError());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SUCCEDED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getSucceded());
+      if (hasTask()) {
+        hash = (37 * hash) + TASK_FIELD_NUMBER;
+        hash = (53 * hash) + getTask().hashCode();
+      }
+      hash = (37 * hash) + ERROR_FIELD_NUMBER;
+      hash = (53 * hash) + getError().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.tasks.proto.TasksMicroservice.GetTaskResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code tasks.GetTaskResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:tasks.GetTaskResponse)
+        com.tasks.proto.TasksMicroservice.GetTaskResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTaskResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTaskResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.tasks.proto.TasksMicroservice.GetTaskResponse.class, com.tasks.proto.TasksMicroservice.GetTaskResponse.Builder.class);
+      }
+
+      // Construct using com.tasks.proto.TasksMicroservice.GetTaskResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        succeded_ = false;
+
+        if (taskBuilder_ == null) {
+          task_ = null;
+        } else {
+          task_ = null;
+          taskBuilder_ = null;
+        }
+        error_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.tasks.proto.TasksMicroservice.internal_static_tasks_GetTaskResponse_descriptor;
+      }
+
+      public com.tasks.proto.TasksMicroservice.GetTaskResponse getDefaultInstanceForType() {
+        return com.tasks.proto.TasksMicroservice.GetTaskResponse.getDefaultInstance();
+      }
+
+      public com.tasks.proto.TasksMicroservice.GetTaskResponse build() {
+        com.tasks.proto.TasksMicroservice.GetTaskResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.tasks.proto.TasksMicroservice.GetTaskResponse buildPartial() {
+        com.tasks.proto.TasksMicroservice.GetTaskResponse result = new com.tasks.proto.TasksMicroservice.GetTaskResponse(this);
+        result.succeded_ = succeded_;
+        if (taskBuilder_ == null) {
+          result.task_ = task_;
+        } else {
+          result.task_ = taskBuilder_.build();
+        }
+        result.error_ = error_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.tasks.proto.TasksMicroservice.GetTaskResponse) {
+          return mergeFrom((com.tasks.proto.TasksMicroservice.GetTaskResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.tasks.proto.TasksMicroservice.GetTaskResponse other) {
+        if (other == com.tasks.proto.TasksMicroservice.GetTaskResponse.getDefaultInstance()) return this;
+        if (other.getSucceded() != false) {
+          setSucceded(other.getSucceded());
+        }
+        if (other.hasTask()) {
+          mergeTask(other.getTask());
+        }
+        if (!other.getError().isEmpty()) {
+          error_ = other.error_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.tasks.proto.TasksMicroservice.GetTaskResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.tasks.proto.TasksMicroservice.GetTaskResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private boolean succeded_ ;
+      /**
+       * <code>bool succeded = 1;</code>
+       */
+      public boolean getSucceded() {
+        return succeded_;
+      }
+      /**
+       * <code>bool succeded = 1;</code>
+       */
+      public Builder setSucceded(boolean value) {
+        
+        succeded_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool succeded = 1;</code>
+       */
+      public Builder clearSucceded() {
+        
+        succeded_ = false;
+        onChanged();
+        return this;
+      }
+
+      private com.tasks.proto.TasksMicroservice.Task task_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.Task.Builder, com.tasks.proto.TasksMicroservice.TaskOrBuilder> taskBuilder_;
+      /**
+       * <code>.tasks.Task task = 2;</code>
+       */
+      public boolean hasTask() {
+        return taskBuilder_ != null || task_ != null;
+      }
+      /**
+       * <code>.tasks.Task task = 2;</code>
+       */
+      public com.tasks.proto.TasksMicroservice.Task getTask() {
+        if (taskBuilder_ == null) {
+          return task_ == null ? com.tasks.proto.TasksMicroservice.Task.getDefaultInstance() : task_;
+        } else {
+          return taskBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.tasks.Task task = 2;</code>
+       */
+      public Builder setTask(com.tasks.proto.TasksMicroservice.Task value) {
+        if (taskBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          task_ = value;
+          onChanged();
+        } else {
+          taskBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.tasks.Task task = 2;</code>
+       */
+      public Builder setTask(
+          com.tasks.proto.TasksMicroservice.Task.Builder builderForValue) {
+        if (taskBuilder_ == null) {
+          task_ = builderForValue.build();
+          onChanged();
+        } else {
+          taskBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.tasks.Task task = 2;</code>
+       */
+      public Builder mergeTask(com.tasks.proto.TasksMicroservice.Task value) {
+        if (taskBuilder_ == null) {
+          if (task_ != null) {
+            task_ =
+              com.tasks.proto.TasksMicroservice.Task.newBuilder(task_).mergeFrom(value).buildPartial();
+          } else {
+            task_ = value;
+          }
+          onChanged();
+        } else {
+          taskBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.tasks.Task task = 2;</code>
+       */
+      public Builder clearTask() {
+        if (taskBuilder_ == null) {
+          task_ = null;
+          onChanged();
+        } else {
+          task_ = null;
+          taskBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.tasks.Task task = 2;</code>
+       */
+      public com.tasks.proto.TasksMicroservice.Task.Builder getTaskBuilder() {
+        
+        onChanged();
+        return getTaskFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.tasks.Task task = 2;</code>
+       */
+      public com.tasks.proto.TasksMicroservice.TaskOrBuilder getTaskOrBuilder() {
+        if (taskBuilder_ != null) {
+          return taskBuilder_.getMessageOrBuilder();
+        } else {
+          return task_ == null ?
+              com.tasks.proto.TasksMicroservice.Task.getDefaultInstance() : task_;
+        }
+      }
+      /**
+       * <code>.tasks.Task task = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.Task.Builder, com.tasks.proto.TasksMicroservice.TaskOrBuilder> 
+          getTaskFieldBuilder() {
+        if (taskBuilder_ == null) {
+          taskBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.tasks.proto.TasksMicroservice.Task, com.tasks.proto.TasksMicroservice.Task.Builder, com.tasks.proto.TasksMicroservice.TaskOrBuilder>(
+                  getTask(),
+                  getParentForChildren(),
+                  isClean());
+          task_ = null;
+        }
+        return taskBuilder_;
+      }
+
+      private java.lang.Object error_ = "";
+      /**
+       * <code>string error = 3;</code>
+       */
+      public java.lang.String getError() {
+        java.lang.Object ref = error_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          error_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string error = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getErrorBytes() {
+        java.lang.Object ref = error_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          error_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string error = 3;</code>
+       */
+      public Builder setError(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        error_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string error = 3;</code>
+       */
+      public Builder clearError() {
+        
+        error_ = getDefaultInstance().getError();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string error = 3;</code>
+       */
+      public Builder setErrorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        error_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:tasks.GetTaskResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:tasks.GetTaskResponse)
+    private static final com.tasks.proto.TasksMicroservice.GetTaskResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.tasks.proto.TasksMicroservice.GetTaskResponse();
+    }
+
+    public static com.tasks.proto.TasksMicroservice.GetTaskResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<GetTaskResponse>
+        PARSER = new com.google.protobuf.AbstractParser<GetTaskResponse>() {
+      public GetTaskResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new GetTaskResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<GetTaskResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetTaskResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public com.tasks.proto.TasksMicroservice.GetTaskResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_tasks_Task_descriptor;
   private static final 
@@ -3700,6 +5436,16 @@ public final class TasksMicroservice {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_tasks_TaskID_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tasks_GetTasksResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tasks_GetTasksResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tasks_GetTaskResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tasks_GetTaskResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3709,26 +5455,30 @@ public final class TasksMicroservice {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021tasks/tasks.proto\022\005tasks\"\337\001\n\004Task\022\n\n\002i" +
+      "\n\021tasks/tasks.proto\022\005tasks\"\366\001\n\004Task\022\n\n\002i" +
       "d\030\001 \001(\003\022\017\n\007user_id\030\002 \001(\003\022\r\n\005title\030\003 \001(\t\022" +
       "\023\n\013description\030\004 \001(\t\022\031\n\021created_timestam" +
       "p\030\005 \001(\003\022\025\n\rdue_timestamp\030\006 \001(\003\022\033\n\023comple" +
       "ted_timestamp\030\007 \001(\003\022\032\n\022reminder_timestam" +
       "p\030\010 \003(\003\022\025\n\rdisplay_color\030\t \001(\t\022\024\n\014is_com" +
-      "pleted\030\n \001(\010\"2\n\016StatusResponse\022\021\n\tsuccee" +
-      "ded\030\001 \001(\010\022\r\n\005error\030\002 \001(\t\"#\n\005Tasks\022\032\n\005tas" +
-      "ks\030\001 \003(\0132\013.tasks.Task\"\024\n\006UserID\022\n\n\002id\030\001 " +
-      "\001(\003\"\024\n\006TaskID\022\n\n\002id\030\001 \001(\0032\262\002\n\014TasksServi",
-      "ce\022)\n\010GetTasks\022\r.tasks.UserID\032\014.tasks.Ta" +
-      "sks\"\000\0222\n\nCreateTask\022\013.tasks.Task\032\025.tasks" +
-      ".StatusResponse\"\000\0224\n\nDeleteTask\022\r.tasks." +
-      "TaskID\032\025.tasks.StatusResponse\"\000\022+\n\013GetTa" +
-      "skById\022\r.tasks.TaskID\032\013.tasks.Task\"\000\0222\n\n" +
-      "UpdateTask\022\013.tasks.Task\032\025.tasks.StatusRe" +
-      "sponse\"\000\022,\n\014CompleteTask\022\r.tasks.TaskID\032" +
-      "\013.tasks.Task\"\000B.\n\017com.tasks.protoB\021Tasks" +
-      "MicroserviceZ\010pb/tasksb\006proto3"
-
+      "pleted\030\n \001(\010\022\025\n\rreminder_flag\030\013 \001(\010\"2\n\016S" +
+      "tatusResponse\022\021\n\tsucceeded\030\001 \001(\010\022\r\n\005erro" +
+      "r\030\002 \001(\t\"#\n\005Tasks\022\032\n\005tasks\030\001 \003(\0132\013.tasks." +
+      "Task\"\024\n\006UserID\022\n\n\002id\030\001 \001(\003\"\024\n\006TaskID\022\n\n\002",
+      "id\030\001 \001(\003\"O\n\020GetTasksResponse\022\020\n\010succeded" +
+      "\030\001 \001(\010\022\032\n\005tasks\030\002 \003(\0132\013.tasks.Task\022\r\n\005er" +
+      "ror\030\003 \001(\t\"M\n\017GetTaskResponse\022\020\n\010succeded" +
+      "\030\001 \001(\010\022\031\n\004task\030\002 \001(\0132\013.tasks.Task\022\r\n\005err" +
+      "or\030\003 \001(\t2\310\002\n\014TasksService\0224\n\010GetTasks\022\r." +
+      "tasks.UserID\032\027.tasks.GetTasksResponse\"\000\022" +
+      "2\n\nCreateTask\022\013.tasks.Task\032\025.tasks.Statu" +
+      "sResponse\"\000\0224\n\nDeleteTask\022\r.tasks.TaskID" +
+      "\032\025.tasks.StatusResponse\"\000\0226\n\013GetTaskById" +
+      "\022\r.tasks.TaskID\032\026.tasks.GetTaskResponse\"",
+      "\000\0222\n\nUpdateTask\022\013.tasks.Task\032\025.tasks.Sta" +
+      "tusResponse\"\000\022,\n\014CompleteTask\022\r.tasks.Ta" +
+      "skID\032\013.tasks.Task\"\000B.\n\017com.tasks.protoB\021" +
+      "TasksMicroserviceZ\010pb/tasksb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3747,9 +5497,8 @@ public final class TasksMicroservice {
     internal_static_tasks_Task_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tasks_Task_descriptor,
-        new java.lang.String[] { "Id", "UserId", "Title", "Description", "CreatedTimestamp", "DueTimestamp", "CompletedTimestamp", "ReminderTimestamp", "DisplayColor", "IsCompleted", });
+        new java.lang.String[] { "Id", "UserId", "Title", "Description", "CreatedTimestamp", "DueTimestamp", "CompletedTimestamp", "ReminderTimestamp", "DisplayColor", "IsCompleted", "ReminderFlag", });
     internal_static_tasks_StatusResponse_descriptor =
-
       getDescriptor().getMessageTypes().get(1);
     internal_static_tasks_StatusResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
@@ -3773,6 +5522,18 @@ public final class TasksMicroservice {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tasks_TaskID_descriptor,
         new java.lang.String[] { "Id", });
+    internal_static_tasks_GetTasksResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_tasks_GetTasksResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tasks_GetTasksResponse_descriptor,
+        new java.lang.String[] { "Succeded", "Tasks", "Error", });
+    internal_static_tasks_GetTaskResponse_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_tasks_GetTaskResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tasks_GetTaskResponse_descriptor,
+        new java.lang.String[] { "Succeded", "Task", "Error", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

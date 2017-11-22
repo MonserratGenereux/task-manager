@@ -8,7 +8,7 @@ option go_package = "pb/tasks";
 
 service TasksService {
   // Get a list of tasks from the User ID
-  rpc GetTasks (UserID) returns (Tasks){}
+  rpc GetTasks (UserID) returns (GetTasksResponse){}
 
   // Create a task based on the User ID
   rpc CreateTask (Task) returns (StatusResponse){}
@@ -17,7 +17,7 @@ service TasksService {
   rpc DeleteTask (TaskID) returns (StatusResponse){}
 
   // Get a specific task based on the task ID
-  rpc GetTaskById (TaskID) returns (Task){}
+  rpc GetTaskById (TaskID) returns (GetTaskResponse){}
 
   // Update a specific task based on the task ID
   rpc UpdateTask (Task) returns (StatusResponse){}
@@ -55,4 +55,16 @@ message UserID {
 
 message TaskID {
   int64 id = 1;
+}
+
+message GetTasksResponse {
+    bool succeded = 1;
+    repeated Task tasks = 2;
+    string error = 3;
+}
+
+message GetTaskResponse {
+    bool succeded = 1;
+    Task task = 2;
+    string error = 3;
 }

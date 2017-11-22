@@ -1,17 +1,15 @@
 package com.tasks.app;
 
-import io.grpc.BindableService;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.logging.Logger;
+
 import com.tasks.app.db.PostgreSQL.TasksDatabaseSQL;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
 import io.grpc.Server;
 import io.grpc.netty.NettyServerBuilder;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.logging.Logger;
 
 public class App {
 	private static final Logger logger = Logger.getLogger(App.class.getName());

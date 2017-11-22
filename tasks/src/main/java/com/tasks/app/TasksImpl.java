@@ -1,6 +1,8 @@
 package com.tasks.app;
 
 import com.tasks.app.db.TasksDatabase;
+import com.tasks.proto.TasksMicroservice.GetTaskResponse;
+import com.tasks.proto.TasksMicroservice.GetTasksResponse;
 import com.tasks.proto.TasksMicroservice.StatusResponse;
 import com.tasks.proto.TasksMicroservice.Task;
 import com.tasks.proto.TasksMicroservice.TaskID;
@@ -19,10 +21,13 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 	}
 
 	@Override
-	public void getTasks(UserID userID, StreamObserver<Tasks> responseObserver) {
+	public void getTasks(UserID userID, StreamObserver<GetTasksResponse> responseObserver) {
 		try {
 			Tasks tasks = db.getTasks(userID);
-			responseObserver.onNext(tasks);
+			
+			GetTasksResponse getTasksResponse = GetTasksResponse.newBuilder().setSucceded(true)
+					.addAllTasks(tasks.getTasksList()).build();
+			responseObserver.onNext(getTasksResponse);
 		} catch (Exception e) {
 			responseObserver.onError(e);
 		}
@@ -31,6 +36,7 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 
 	@Override
 	public void createTask(Task task, StreamObserver<StatusResponse> responseObserver) {
+		System.out.println(task);
 		try {
 			db.createTask(task);
 			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
@@ -41,10 +47,16 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 	}
 
 	@Override
-	public void getTaskById(TaskID taskID, StreamObserver<Task> responseObserver) {
+	public void getTaskById(TaskID taskID, StreamObserver<GetTaskResponse> responseObserver) {
 		try {
 			Task task = db.getTaskById(taskID);
-			responseObserver.onNext(task);
+			GetTaskResponse getTaskResponse;
+			if (task == null) {
+				getTaskResponse = GetTaskResponse.newBuilder().setError("No task found").setSucceded(false).build();
+			} else {
+				getTaskResponse = GetTaskResponse.newBuilder().setTask(task).setSucceded(true).build();
+			}
+			responseObserver.onNext(getTaskResponse);
 		} catch (Exception e) {
 			responseObserver.onError(e);
 		}
