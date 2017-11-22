@@ -33,6 +33,10 @@ router.use(bodyParser.urlencoded({ extended: true }));
  *           $ref: "#/definitions/GetTasksResponse"
  */
 router.get('/', (req, res) => {
+  if (!req.get('user-id')) {
+    res.status(HttpStatus.BAD_REQUEST).send('user-id header is required');
+    return;
+  }
   client.getTasks({id: req.get('user-id')})
   .then(tasks => {
     res.status(HttpStatus.OK).send(tasks);
@@ -111,6 +115,10 @@ router.get('/:taskId', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.post('/', (req, res) => {
+  if (!req.body.task) {
+    res.status(HttpStatus.BAD_REQUEST).send('task is required in the body');
+    return;
+  }
   client.createTask(req.body.task)
   .then(statusResponse => {
     res.status(HttpStatus.OK).send(statusResponse);
@@ -154,6 +162,10 @@ router.post('/', (req, res) => {
  *           $ref: "#/definitions/StatusResponse"
  */
 router.patch('/', (req, res) => {
+  if (!req.body.task) {
+    res.status(HttpStatus.BAD_REQUEST).send('task is required in the body');
+    return;
+  }
   client.updateTask(req.body.task)
   .then(statusResponse => {
     res.status(HttpStatus.OK).send(statusResponse);
