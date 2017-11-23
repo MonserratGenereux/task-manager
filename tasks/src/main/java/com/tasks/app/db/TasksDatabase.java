@@ -9,7 +9,7 @@ import com.tasks.proto.TasksMicroservice.UserID;
 
 public interface TasksDatabase {
 	public Tasks getTasks(UserID userID) throws Exception;
-	public void createTask(Task task);
+	public Long createTask(Task task);
 	public Task getTaskById(TaskID taskID) throws Exception;
 	public void deleteTask(TaskID taskID) throws Exception;
 	public void updateTask(Task task) throws Exception;

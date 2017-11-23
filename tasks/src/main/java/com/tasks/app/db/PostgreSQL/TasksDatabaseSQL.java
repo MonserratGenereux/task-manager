@@ -75,7 +75,7 @@ public class TasksDatabaseSQL implements TasksDatabase {
 	}
 
 	@Override
-	public void createTask(Task task) {
+	public Long createTask(Task task) {
 		try {
 			task.getReminderTimestampList();
 			PreparedStatement preparedStatement = conn.prepareStatement(
@@ -96,11 +96,14 @@ public class TasksDatabaseSQL implements TasksDatabase {
 
 			addTaskReminder(task.getReminderTimestampList(), id);
 			System.out.println("Records created successfully");
-
+			
+			return id;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return null;
 	}
 
 	public void addTaskReminder(List<Long> taskReminders, long taskID) throws SQLException {

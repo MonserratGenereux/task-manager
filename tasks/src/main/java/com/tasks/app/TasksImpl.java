@@ -42,10 +42,10 @@ public class TasksImpl extends TasksServiceGrpc.TasksServiceImplBase {
 	public void createTask(Task task, StreamObserver<StatusResponse> responseObserver) {
 		System.out.println("Create task: " + task);
 		try {
-			db.createTask(task);
+			Long id = db.createTask(task);
 			responseObserver.onNext(StatusResponse.newBuilder().setError("").setSucceeded(true).build());
 			responseObserver.onCompleted();
-			publisher.publish(task);
+			publisher.publish(task.toBuilder().setId(id).build());
 		} catch (Exception e) {
 			responseObserver.onError(e);
 			e.printStackTrace();
