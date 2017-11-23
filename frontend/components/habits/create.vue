@@ -67,7 +67,7 @@ export default{
       if (!this.create.name || !this.create.description || !this.create.difficulty || (!this.create.good && !this.create.bad)) {
         alert('Please enter all fields')
       } else {
-        var api = 'http://192.168.100.13:3000/habits'
+        var api = 'http://10.43.91.223:3000/habits'
         var habit = {
           'name': this.create.name,
           'description': this.create.description,

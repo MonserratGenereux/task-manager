@@ -1,8 +1,8 @@
 <template>
-    <div class="card" v-if="!info.is_completed" :class="{redBackground: color.true}">
+    <div class="card" v-if="!info.is_completed" :class="{redBackground: color.red}">
     <div class="card-content white-text">
       <span class="card-title">{{info.title}}</span>
-      <p>Due date: {{info.description}}</p>
+      <p>Due date: {{this.formated}}</p>
     </div>
     <div class="card-action" href="javascript: reload()">
       <a class="btn-floating btn-large waves-effect waves-light green" @click="completed()">
@@ -24,9 +24,24 @@ export default {
 
   props: ['info'],
   created () {
+    this.formated = this.formatDate(new Date(Number(this.info.due_timestamp)))
     this.setColor(this.info.display_color)
   },
   methods: {
+    formatDate: function (date) {
+      var monthNames = [
+        'January', 'February', 'March',
+        'April', 'May', 'June', 'July',
+        'August', 'September', 'October',
+        'November', 'December'
+      ]
+
+      var day = date.getDate()
+      var monthIndex = date.getMonth()
+      var year = date.getFullYear()
+
+      return day + ' ' + monthNames[monthIndex] + ' ' + year
+    },
     setColor: function (color) {
       this.color = {}
       if (color) {
@@ -40,7 +55,7 @@ export default {
       var config = {
         headers: {'user-id': userId}
       }
-      axios.post('http://192.168.100.13:3000/tasks/complete/' + this.info.id, {}, config)
+      axios.post('http://10.43.91.223:3000/tasks/complete/' + this.info.id, {}, config)
         .then((response) => {
           console.log('respuesta', response)
           this.setColor(response.data.display_color)
@@ -65,7 +80,7 @@ export default {
 }
 .card{
   width: 400px;
-  background-color: rgb(205,89, 90,0.4) !important;
+  background-color: rgb(205,89, 90,0.4);
 }
 .right{
   border-right: black;

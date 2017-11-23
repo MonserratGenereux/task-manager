@@ -24,7 +24,7 @@
     methods: {
       fillData () {
         // axios
-        axios.get('http://192.168.100.13:3000/reports', {
+        axios.get('http://10.43.91.223:3000/reports', {
           params: {
           }
         })

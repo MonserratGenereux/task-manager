@@ -1,7 +1,7 @@
 <template>
   <div class="reminder">
     <notifications
-      :duration="5000"
+      :duration="10000"
       :width="500"
       animation-name="v-fade-left"
       position="top left">
@@ -11,7 +11,6 @@
 
 <script>
 export default {
-  name: 'reminder',
   data () {
     return {
       id: 1,
@@ -28,13 +27,16 @@ export default {
       }
     }
   },
-  mounted () {
-    let title = 'This is a Reminder for task'
-    let text = this.info.name
-    let group = 'custom-template'
-    this.$notify({ group, title, text })
-  },
   props: ['info'],
+  mounted () {
+    console.log(this.info)
+    let title = ('This is a Reminder for task ' + this.info.title)
+    let text = 'Due for ' + new Date(Number(this.info.due_timestamp))
+    let group = 'custom-template'
+    console.log('algo', text)
+    this.$notify({ group, title, text })
+    this.$parent.$emit('reminder')
+  },
   methods: {
     clean (group) {
       this.$notify({ group, clean: true })

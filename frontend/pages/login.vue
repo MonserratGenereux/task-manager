@@ -37,7 +37,7 @@ export default{
   props: ['info'],
   methods: {
     loginAction: function () {
-      var api = 'http://192.168.100.13:3000/accounts/' + this.login.username
+      var api = 'http://10.43.91.223:3000/accounts/' + this.login.username
       var data = {
         'username': this.login.username,
         'password': this.login.password

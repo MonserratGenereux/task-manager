@@ -48,7 +48,7 @@ export default{
   },
   methods: {
     loginAction: function () {
-      var api = 'http://192.168.100.13:3000/accounts'
+      var api = 'http://10.43.91.223:3000/accounts'
       var data = {
         'account': {
           'username': this.login.username,

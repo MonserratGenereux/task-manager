@@ -15,8 +15,8 @@ import reminder from '~/components/tasks/reminder'
 export default {
   data () {
     return {
-      tasks: [''],
-      reminder_flag: ['']
+      tasks: [],
+      reminder_flag: []
     }
   },
   components: {
@@ -35,11 +35,11 @@ export default {
       var config = {
         headers: {'user-id': userId}
       }
-      axios.get('http://192.168.100.13:3000/tasks/', config)
+      axios.get('http://10.43.91.223:3000/tasks/', config)
         .then((response) => {
           console.log(response)
           this.tasks = response.data.tasks
-          this.setNotifications(response.data)
+          this.setNotifications(response.data.tasks)
         })
         .catch((error) => {
           console.log(error)

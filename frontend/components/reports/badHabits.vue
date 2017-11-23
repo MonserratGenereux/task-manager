@@ -24,7 +24,7 @@ export default {
   methods: {
     getBadHabits: function () {
       let userid = Vue.localStorage.get('user-id')
-      axios.get('http://192.168.100.13:3000/reports/' + userid)
+      axios.get('http://10.43.91.223:3000/reports/' + userid)
         .then((response) => {
           console.log(response.data)
           this.badHabits = response.data.habits.badHabitsList

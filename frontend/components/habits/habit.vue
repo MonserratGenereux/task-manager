@@ -23,6 +23,7 @@ export default {
   props: ['info'],
   created () {
     this.setColor(this.info.color)
+    console.log('color', this.color)
   },
   methods: {
     setColor: function (color) {
@@ -49,7 +50,7 @@ export default {
       var config = {
         headers: {'user-id': userId}
       }
-      axios.post('http://192.168.100.13:3000/habits/good/' + this.info._id, {data}, config)
+      axios.post('http://10.43.91.223:3000/habits/good/' + this.info._id, {data}, config)
         .then((response) => {
           this.setColor(response.data.habit.color)
           this.score = response.data.habit.score
@@ -75,7 +76,7 @@ export default {
       var config = {
         headers: {'user-id': userId}
       }
-      axios.post('http://192.168.100.13:3000/habits/bad/' + this.info._id, data, config)
+      axios.post('http://10.43.91.223:3000/habits/bad/' + this.info._id, data, config)
         .then((response) => {
           this.setColor(response.data.habit.color)
           this.score = response.data.habit.score
