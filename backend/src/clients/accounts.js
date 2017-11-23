@@ -31,7 +31,8 @@ const ttl = accountConfig.connection_ttl_seconds;
 deadline.setSeconds(deadline.getSeconds() + ttl);
 client.waitForReady(deadline, (err) => {
   if (err) 
-    throw new Error(`Accounts grpc service at ${accountConfig.address} is not available: ${err}`);
+    // throw new Error(`Accounts grpc service at ${accountConfig.address} is not available: ${err}`);
+    console.log(`Accounts grpc service at ${accountConfig.address} is not available: ${err}`)
   logger.info(`Started Accounts grpc client on server ${accountConfig.address}`);
 })
 

@@ -29,7 +29,8 @@ const ttl = habitConfig.connection_ttl_seconds;
 deadline.setSeconds(deadline.getSeconds() + ttl);
 client.waitForReady(deadline, (err) => {
   if (err)
-    throw new Error(`Habits grpc service at ${habitConfig.address} is not available: ${err}`);
+    // throw new Error(`Habits grpc service at ${habitConfig.address} is not available: ${err}`);
+    console.log(`Habits grpc service at ${habitConfig.address} is not available: ${err}`)
   logger.info(`Started habits grpc client on server ${habitConfig.address}`);
 })
 

@@ -29,7 +29,8 @@ const ttl = taskConfig.connection_ttl_seconds;
 deadline.setSeconds(deadline.getSeconds() + ttl);
 client.waitForReady(deadline, (err) => {
   if (err)
-    throw new Error(`Tasks grpc service at ${taskConfig.address} is not available: ${err}`);
+    // throw new Error(`Tasks grpc service at ${taskConfig.address} is not available: ${err}`);
+    console.log(`Tasks grpc service at ${taskConfig.address} is not available: ${err}`)
   logger.info(`Started tasks grpc client on server ${taskConfig.address}`);
 })
 
