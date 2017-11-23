@@ -1,7 +1,5 @@
 package com.tasks.app.db;
 
-import org.postgresql.util.PSQLException;
-
 import com.tasks.proto.TasksMicroservice.Task;
 import com.tasks.proto.TasksMicroservice.TaskID;
 import com.tasks.proto.TasksMicroservice.Tasks;
