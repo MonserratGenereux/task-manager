@@ -12,6 +12,7 @@ type FakeReportsDatabase struct {
 	Tasks  []*tasks.Task
 }
 
+// NewFakeReportsDatabase is a dummy implementation of ReportsDatabase
 func NewFakeReportsDatabase() *FakeReportsDatabase {
 	return &FakeReportsDatabase{
 		Habits: make([]*habits.Habit, 0),
